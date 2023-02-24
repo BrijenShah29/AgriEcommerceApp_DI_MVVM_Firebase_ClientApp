@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:padding="@dimen/_2sdp"
+    android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="@dimen/_170sdp"
+        android:layout_height="@dimen/_300sdp"
+        android:outlineProvider="none"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:padding="@dimen/_4sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_158sdp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/imageSale"
+            android:layout_width="70dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/sale" />
+
+        <Button
+            android:id="@+id/quickAction"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/_13sdp"
+            android:layout_marginTop="@dimen/_155sdp"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_13sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:background="@drawable/fillbutton"
+            android:text="Quick Action"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/wishlistCheckbox"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:button="@drawable/selector_wishlist_item"
+            app:useMaterialThemeColors="false" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/productTitle"
+                android:lines="2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_55sdp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_200sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:text="TextView"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_18sdp"
+                app:autoSizeMaxTextSize="@dimen/_18sdp"
+                app:autoSizeMinTextSize="@dimen/_16sdp"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintEnd_toEndOf="@+id/quickAction"
+                app:layout_constraintStart_toStartOf="@+id/quickAction"
+                app:layout_constraintTop_toBottomOf="@+id/quickAction" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/productTitle"
+            app:layout_constraintStart_toStartOf="@+id/productTitle"
+            app:layout_constraintTop_toBottomOf="@+id/productTitle">
+
+            <View android:id="@+id/dummy"
+                android:layout_height="0dp"
+                android:layout_width="0dp"
+                android:layout_centerInParent="true"/>
+
+            <TextView
+                android:id="@+id/salePrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:gravity="start"
+                android:text="Sale Price"
+                android:layout_alignParentStart="true"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:textColor="@color/red"
+                android:textSize="22sp" />
+
+            <TextView
+                android:id="@+id/normalPrice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginEnd="@dimen/_25sdp"
+                android:fontFamily="@font/roboto_condensed_bold"
+                android:text="Normal Price"
+                android:textSize="22sp" />
+
+
+
+        </RelativeLayout>
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,38 @@
+<resources>
+    <string name="app_name">MAPD726_GroupProject_Team3_AgriApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+
+    <string-array name="VegetableCategories">
+        <item>Okra Seeds</item>
+        <item>Tomato Seeds</item>
+        <item>Chilli Seeds</item>
+        <item>Cauliflower Seeds</item>
+        <item>Eggplant Seeds</item>
+        <item>Bottle Gourd Seeds</item>
+        <item>Bitter Gourd Seeds</item>
+        <item>Broccoli Seeds</item>
+        <item>Cucumber Seeds</item>
+        <item>All Vegetable Seeds</item>
+    </string-array>
+    <string-array name="FruitCategories">
+        <item>Papaya Seeds</item>
+        <item>Watermelon Seeds</item>
+        <item>Mango Seeds</item>
+        <item>Apple Seeds</item>
+        <item>Other Fruit Seeds</item>
+    </string-array>
+    <string-array name="CropProtection">
+        <item>Pesticides</item>
+        <item>Fungicides</item>
+        <item>Herbicides</item>
+    </string-array>
+    <string-array name="CropNutrition">
+        <item>Plant Growth Promoters</item>
+        <item>Fertilizers</item>
+    </string-array>
+
+
+</resources>

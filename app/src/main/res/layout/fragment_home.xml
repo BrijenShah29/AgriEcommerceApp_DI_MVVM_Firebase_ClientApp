@@ -1,0 +1,455 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.HomeFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?android:attr/actionBarSize"
+        android:padding="@dimen/_7sdp"
+        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shop By Category"
+            android:textColor="@color/color_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="See All"
+            android:textColor="@color/black"
+            android:textSize="16sp"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_110sdp"
+        android:id="@+id/categoryRecycler"
+        android:orientation="horizontal"
+        tools:listitem="@layout/layout_category_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="20dp">
+
+        <com.smarteist.autoimageslider.SliderView
+            android:layout_marginTop="5dp"
+            android:id="@+id/imageSlider"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderAutoCycleEnabled="true"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="3dp"
+            app:sliderIndicatorRadius="2dp"
+            android:background="@color/white"
+            app:sliderIndicatorSelectedColor="#5A5A5A"
+            app:sliderIndicatorUnselectedColor="#FFF"
+            app:sliderScrollTimeInSec="2"
+            app:sliderStartAutoCycle="true" />
+
+        </androidx.cardview.widget.CardView>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="Vegetable Seeds"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/color_primary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="3dp"
+        android:text="Explore Vegetable seeds"
+        android:textAlignment="center"
+        android:textColor="@color/color_primary_light"
+        android:fontFamily="sans-serif-black"
+        android:textSize="12sp"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_110sdp"
+        android:id="@+id/subCategoryVegetableRecycler"
+        android:orientation="horizontal"
+        tools:listitem="@layout/layout_category_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explore Our vegetable Seeds Collection"
+            android:textColor="@color/color_secondary"
+            android:textStyle="italic"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="See All"
+            android:textStyle="italic"
+            android:textColor="@color/color_secondary"
+            android:textSize="14sp"/>
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_145sdp"
+        android:id="@+id/VegetableProductsRecycler"
+        android:orientation="horizontal"
+        tools:listitem="@layout/layout_product_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="Fruit Seeds"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/color_primary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="3dp"
+        android:text="Explore Fruit seeds"
+        android:textAlignment="center"
+        android:textColor="@color/color_primary_light"
+        android:fontFamily="sans-serif-black"
+        android:textSize="12sp"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_110sdp"
+        android:id="@+id/subCategoryFruitRecycler"
+        android:orientation="horizontal"
+        tools:listitem="@layout/layout_category_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+    <RelativeLayout
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explore Our vegetable Seeds Collection"
+            android:textColor="@color/color_secondary"
+            android:textStyle="italic"
+            android:textSize="14sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="See All"
+            android:textStyle="italic"
+            android:textColor="@color/color_secondary"
+            android:textSize="14sp"/>
+    </RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_145sdp"
+        android:id="@+id/FruitProductsRecycler"
+        android:orientation="horizontal"
+        tools:listitem="@layout/layout_product_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:gravity="center"
+        android:text="Crop Protection"
+        android:textAlignment="center"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/color_primary"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="3dp"
+        android:text="Explore Crop Protection Collection"
+        android:textAlignment="center"
+        android:textColor="@color/color_primary_light"
+        android:fontFamily="sans-serif-black"
+        android:textSize="12sp"
+        android:textStyle="bold"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_110sdp"
+        android:id="@+id/subCategoryCropProtectionRecycler"
+        android:orientation="horizontal"
+        tools:listitem="@layout/layout_category_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explore our Herbicides "
+            android:textColor="@color/color_secondary"
+            android:textStyle="italic"
+            android:textSize="14sp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_145sdp"
+        android:id="@+id/CropProtectionHerbicidesProductsRecycler"
+        android:orientation="horizontal"
+        tools:listitem="@layout/layout_product_item"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explore our Fungicides "
+            android:textColor="@color/color_secondary"
+            android:textStyle="italic"
+            android:textSize="14sp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_145sdp"
+            android:id="@+id/CropProtectionFungicidesProductsRecycler"
+            android:orientation="horizontal"
+            tools:listitem="@layout/layout_product_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explore our Pesticides "
+            android:textColor="@color/color_secondary"
+            android:textStyle="italic"
+            android:textSize="14sp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_145sdp"
+            android:id="@+id/CropProtectionPesticidesProductsRecycler"
+            android:orientation="horizontal"
+            tools:listitem="@layout/layout_product_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="Crop Nutrition"
+            android:textAlignment="center"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/color_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="3dp"
+            android:text="Explore Crop Nutrition Collection"
+            android:textAlignment="center"
+            android:textColor="@color/color_primary_light"
+            android:fontFamily="sans-serif-black"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_110sdp"
+            android:id="@+id/subCategoryCropNutritionRecycler"
+            android:orientation="horizontal"
+            tools:listitem="@layout/layout_category_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explore our Fertilizers "
+            android:textColor="@color/color_secondary"
+            android:textStyle="italic"
+            android:textSize="14sp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_145sdp"
+            android:id="@+id/CropNutritionFertilizersProductsRecycler"
+            android:orientation="horizontal"
+            tools:listitem="@layout/layout_product_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Explore our Plant Growth Promoters"
+            android:textColor="@color/color_secondary"
+            android:textStyle="italic"
+            android:textSize="14sp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_145sdp"
+            android:id="@+id/CropNutritionGrowthPromotersProductsRecycler"
+            android:orientation="horizontal"
+            tools:listitem="@layout/layout_product_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="Tools &amp; Equipments"
+            android:textAlignment="center"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/color_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="3dp"
+            android:text="Explore Tools and Equipments Collection"
+            android:textAlignment="center"
+            android:textColor="@color/color_primary_light"
+            android:fontFamily="sans-serif-black"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_145sdp"
+            android:id="@+id/ToolsNEquipmentRecycler"
+            android:orientation="horizontal"
+            tools:listitem="@layout/layout_category_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="Pots &amp; Planters"
+            android:textAlignment="center"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/color_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="3dp"
+            android:text="Explore Pots and Planters Collection"
+            android:textAlignment="center"
+            android:textColor="@color/color_primary_light"
+            android:fontFamily="sans-serif-black"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_145sdp"
+            android:id="@+id/PotsNPlantersRecycler"
+            android:orientation="horizontal"
+            tools:listitem="@layout/layout_category_item"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:gravity="center"
+            android:text="Previously Visited"
+            android:textAlignment="center"
+            android:fontFamily="sans-serif-black"
+            android:textColor="@color/color_primary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="3dp"
+            android:text="Explore your Previously visited Products"
+            android:textAlignment="center"
+            android:textColor="@color/color_primary_light"
+            android:fontFamily="sans-serif-black"
+            android:textSize="12sp"
+            android:textStyle="bold"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/previousVisitedProductsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_110sdp"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/layout_category_item" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_100sdp"/>
+
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_wishlistFragment"
+            app:destination="@id/wishlistFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_moreFragment"
+            app:destination="@id/moreFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailedProductFragment"
+            app:destination="@id/detailedProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.CategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_subCategoryFragment"
+            app:destination="@id/subCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wishlistFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.WishlistFragment"
+        android:label="fragment_wishlist"
+        tools:layout="@layout/fragment_wishlist" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/moreFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.MoreFragment"
+        android:label="fragment_more"
+        tools:layout="@layout/fragment_more" />
+    <fragment
+        android:id="@+id/subCategoryFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.SubCategoryFragment"
+        android:label="fragment_sub_category"
+        tools:layout="@layout/fragment_sub_category" >
+        <action
+            android:id="@+id/action_subCategoryFragment_to_productsFragment"
+            app:destination="@id/productsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.ProductsFragment"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" >
+        <action
+            android:id="@+id/action_productsFragment_to_detailedProductFragment"
+            app:destination="@id/detailedProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailedProductFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.DetailedProductFragment"
+        android:label="fragment_detailed_product"
+        tools:layout="@layout/fragment_detailed_product" />
+    <dialog
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.BottomSheetFragment"
+        android:label="BottomSheetFragment" />
+</navigation>

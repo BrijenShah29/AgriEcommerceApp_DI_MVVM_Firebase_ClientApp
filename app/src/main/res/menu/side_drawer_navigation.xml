@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<group android:checkableBehavior="single">
+
+
+    <item android:id="@+id/myAccount_drawer"
+        android:icon="@drawable/account"
+        android:title=" MY ACCOUNT"/>
+</group>
+
+<item android:title="RECOMMENDED PRODUCTS">
+
+<menu>
+    <group android:checkableBehavior="single">
+    <item android:id="@+id/vegetableSeeds_drawer"
+        android:icon="@drawable/vegetable_seeds_drawer"
+        android:title=" VEGETABLE SEEDS"/>
+
+    <item android:id="@+id/cropProtection_drawer"
+        android:icon="@drawable/crop_protection_drawer"
+        android:title=" CROP PROTECTION"/>
+
+    <item android:id="@+id/cropNutrition_drawer"
+        android:icon="@drawable/crop_nutrition_drawer"
+        android:title=" CROP NUTRITION"/>
+    </group>
+</menu>
+
+</item>
+    <item android:title="SELECTION">
+<menu>
+    <group android:checkableBehavior="single">
+    <item android:id="@+id/wishlistDrawer"
+        android:icon="@drawable/wishlist"
+        android:title="WISHLIST"/>
+    </group>
+</menu>
+</item>
+<item android:title="REACH US">
+<menu>
+    <group android:checkableBehavior="single">
+    <item android:id="@+id/contactUs_drawer"
+        android:icon="@drawable/telephone"
+        android:title="CONTACT US"/>
+
+    <item android:id="@+id/aboutUs_drawer"
+        android:title="ABOUT US"
+        android:icon="@drawable/earth"/>
+    </group>
+</menu>
+</item>
+</menu>
