@@ -60,7 +60,17 @@ class HomeFragment : Fragment() {
 
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
+
         getProductsVegetables()
+
+        // GETTING ALL PRODUCTS FROM FIREBASE
+        // INSERTING ALL PRODUCTS INTO ROOM
+       viewModelProducts.firebaseProducts.observe(viewLifecycleOwner, Observer {
+           viewModelProducts.insertProducts(it)
+       })
+
+
+
 
 // GETTING SLIDER IMAGES
         val sliderAdapter  = binding.imageSlider

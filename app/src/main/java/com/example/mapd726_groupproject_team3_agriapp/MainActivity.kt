@@ -1,34 +1,29 @@
 package com.example.mapd726_groupproject_team3_agriapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.PopupMenu
-import android.widget.Switch
 import android.widget.Toast
-import android.widget.Toolbar
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_LOCKED_CLOSED
 import androidx.drawerlayout.widget.DrawerLayout.LOCK_MODE_UNLOCKED
-import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import com.example.mapd726_groupproject_team3_agriapp.Fragments.HomeFragment
+import com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.SearchFragment
 import com.example.mapd726_groupproject_team3_agriapp.databinding.ActivityMainBinding
-import com.google.android.gms.dynamic.SupportFragmentWrapper
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -49,9 +44,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding.bottomBar.setupWithNavController(popupMenu.menu,navController)
 
         // SETTING UP CUSTOM ACTION BAR
-
         binding.searchButton.setOnClickListener {
             Toast.makeText(this, "Icon clicked", Toast.LENGTH_SHORT).show()
+            //navigateToSearchFragment()
+            navController.navigate(R.id.searchFragment)
+        }
+        binding.cartButton.setOnClickListener {
+            navController.popBackStack() // WILL BE CHANGED IN RELEASE 2
+            navController.navigate(R.id.cartFragment)
         }
 
 
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             override fun onDestinationChanged(
                 controller: NavController,
                 destination: NavDestination,
-                arguments: Bundle?
+                arguments: Bundle?,
             ) {
                 title = when(destination.id){
                     R.id.cartFragment -> "My Cart"
@@ -85,6 +85,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         binding.bottomBar.visibility = View.VISIBLE
                         binding.mainDrawer.setDrawerLockMode(LOCK_MODE_UNLOCKED)
                         toggle.isDrawerIndicatorEnabled = true
+                        binding.appBarTitle.text = "Shopping Cart"
+                        binding.appBarTitle.visibility = View.VISIBLE
+                        binding.searchButton.visibility = View.GONE
+                        binding.cartButton.visibility = View.GONE
+
                      //   binding.appBar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
 
 
@@ -93,6 +98,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         binding.bottomBar.visibility = View.VISIBLE
                         binding.mainDrawer.setDrawerLockMode(LOCK_MODE_UNLOCKED)
                         toggle.isDrawerIndicatorEnabled = true
+                        binding.appBarTitle.visibility = View.GONE
+                        binding.searchButton.visibility = View.VISIBLE
+                        binding.cartButton.visibility = View.VISIBLE
                     //    binding.appBar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
 
 
@@ -102,6 +110,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         binding.bottomBar.visibility = View.VISIBLE
                         binding.mainDrawer.setDrawerLockMode(LOCK_MODE_UNLOCKED)
                         toggle.isDrawerIndicatorEnabled = true
+                        binding.appBarTitle.visibility = View.GONE
+                        binding.searchButton.visibility = View.VISIBLE
+                        binding.cartButton.visibility = View.VISIBLE
                      //   binding.appBar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
 
 
@@ -111,6 +122,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         binding.bottomBar.visibility = View.VISIBLE
                         binding.mainDrawer.setDrawerLockMode(LOCK_MODE_UNLOCKED)
                         toggle.isDrawerIndicatorEnabled = true
+                        binding.appBarTitle.text = "Wishlist"
+                        binding.appBarTitle.visibility = View.VISIBLE
+                        binding.searchButton.visibility = View.VISIBLE
+                        binding.cartButton.visibility = View.VISIBLE
                      //   binding.appBar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
 
 
@@ -119,6 +134,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         binding.bottomBar.visibility = View.VISIBLE
                         binding.mainDrawer.setDrawerLockMode(LOCK_MODE_UNLOCKED)
                         toggle.isDrawerIndicatorEnabled = true
+                        binding.appBarTitle.visibility = View.GONE
+                        binding.searchButton.visibility = View.VISIBLE
+                        binding.cartButton.visibility = View.VISIBLE
+
                      //   binding.appBar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
 
 
@@ -128,13 +147,50 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         binding.bottomBar.visibility = View.VISIBLE
                         binding.mainDrawer.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
                         toggle.isDrawerIndicatorEnabled = false
+                        binding.appBarTitle.visibility = View.GONE
                         binding.appBar.setNavigationIcon(R.drawable.back_button)
+                        binding.searchButton.visibility = View.VISIBLE
+                        binding.cartButton.visibility = View.VISIBLE
 
+                    }
+                    R.id.searchFragment ->
+                    {
+                        binding.bottomBar.visibility = View.INVISIBLE
+                        binding.mainDrawer.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
+                        toggle.isDrawerIndicatorEnabled = false
+                        binding.appBar.setNavigationIcon(R.drawable.back_button)
+                        binding.appBarTitle.text = "Search"
+                        binding.appBarTitle.visibility = View.VISIBLE
+                        binding.searchButton.visibility = View.GONE
+                        binding.cartButton.visibility = View.GONE
+
+                    }
+                    R.id.productsFragment ->
+                    {
+                        binding.bottomBar.visibility = View.INVISIBLE
+                        binding.mainDrawer.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
+                        toggle.isDrawerIndicatorEnabled = false
+                        binding.appBar.setNavigationIcon(R.drawable.back_button)
+                        binding.appBarTitle.text = "Products"
+                        binding.appBarTitle.visibility = View.VISIBLE
+                        binding.searchButton.visibility = View.VISIBLE
+                        binding.cartButton.visibility = View.VISIBLE
+                    }
+                    R.id.detailedProductFragment->
+                    {
+                        binding.bottomBar.visibility = View.GONE
+                        binding.mainDrawer.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
+                        toggle.isDrawerIndicatorEnabled = false
+                        binding.searchButton.visibility =View.VISIBLE
+                        binding.cartButton.visibility = View.VISIBLE
+                        binding.appBar.setNavigationIcon(R.drawable.back_button)
                     }
                     else -> {
                         binding.bottomBar.visibility = View.GONE
                         binding.mainDrawer.setDrawerLockMode(LOCK_MODE_LOCKED_CLOSED)
                         toggle.isDrawerIndicatorEnabled = false
+                        binding.searchButton.visibility =View.GONE
+                        binding.cartButton.visibility = View.GONE
                         binding.appBar.setNavigationIcon(R.drawable.back_button)
 
 
@@ -165,8 +221,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
 
+
+
     fun getActionBarDrawerToggle(
-        drawerLayout: DrawerLayout, toolbar: androidx.appcompat.widget.Toolbar): ActionBarDrawerToggle {
+        drawerLayout: DrawerLayout, toolbar: androidx.appcompat.widget.Toolbar,
+    ): ActionBarDrawerToggle {
         val toggle = ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close)
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
@@ -243,6 +302,22 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
          }
 
    }
+
+    private fun navigateToSearchFragment() {
+        val searchFragment = SearchFragment()
+        show(R.id.homeFragment, searchFragment)
+    }
+
+    private fun show(oldFragment: Int, newFragment: Fragment) {
+        //val drawerLayout = drawer_layout as DrawerLayout
+      val fragmentManager = supportFragmentManager
+
+
+ //   fragmentManager.beginTransaction().replace(R.id.,newFragment).addToBackStack(null).commit()
+
+         // .beginTransaction().remove(this).replace(com.example.mapd726_groupproject_team3_agriapp.R.id.fragmentContainer, newFrame).addToBackStack(null).commit()
+        //drawerLayout.closeDrawer(GravityCompat.START)
+    }
 
 }
 

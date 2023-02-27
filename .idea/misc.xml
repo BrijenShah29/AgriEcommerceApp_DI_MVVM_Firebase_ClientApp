@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1475" />
         <entry key="app/src/main/res/drawable/ic_baseline_expand_more_24.xml" value="0.1495" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1475" />
+        <entry key="app/src/main/res/drawable/ic_baseline_search_off_24.xml" value="0.103" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1475" />
         <entry key="app/src/main/res/drawable/minus_img.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/rounded_dialog.xml" value="0.1625396728515625" />
@@ -42,6 +43,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.14203084832904883" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/fragment_products.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_sub_category.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_wishlist.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/image_slider_item.xml" value="0.22916666666666666" />

@@ -44,6 +44,11 @@ interface AgroDao {
     @Query("SELECT * FROM cartProductTable")
     fun getCartProducts() : Flow<List<CartModel>>
 
+
+    //TO GET PRODUCTS FROM SEARCH
+    @Query("SELECT * FROM products WHERE productName LIKE :searchQuery OR productSubCategory LIKE :searchQuery")
+    fun searchDatabase(searchQuery : String) : Flow<List<ProductModel>>
+
     // TO DELETE PRODUCT FROM CART
     @Delete
    suspend fun deleteProduct(cartModel: CartModel)

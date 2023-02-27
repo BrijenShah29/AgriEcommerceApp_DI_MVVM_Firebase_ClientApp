@@ -19,14 +19,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val firebaseRepository: FirebaseRepository, private val productRepository: ProductRepository) : ViewModel()
 {
 
+
 //INSERTING ALL PRODUCTS INTO ROOM DB AT INITIALIZATION
-    init {
-            productRepository.insertAllProductsIntoDB("Products")
-
-
-
-    }
-
 
 
         // GETTING DATA OF SLIDER FROM REPOSITORY

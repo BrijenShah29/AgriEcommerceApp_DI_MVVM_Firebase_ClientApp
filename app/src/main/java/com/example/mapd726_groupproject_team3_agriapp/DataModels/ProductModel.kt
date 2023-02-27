@@ -11,14 +11,14 @@ import java.io.Serializable
 @Entity(tableName = "products")
 @Parcelize
 data class ProductModel(
-    @PrimaryKey(autoGenerate = true)
-    val id : Int? = 0,
     val productName : String? = "",
     val productDescription : String? ="",
     val productCoverImg : String? ="",
     val productCategory: String? ="",
     val productSubCategory : String? ="",
-    val productId : String?="",
+    @PrimaryKey
+    @NotNull
+    val productId : String = "",
     val productPrice : String? = "",
     val discountRate : String? = "",
     val stock : String? = "",

@@ -1,6 +1,7 @@
-package com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters
+package com.example.mapd726_groupproject_team3_agriapp.Adapter.SearchAdapter
 
 import android.app.Activity
+import android.content.ClipData
 import android.content.Context
 import android.os.Bundle
 import android.text.SpannableString
@@ -9,27 +10,22 @@ import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
-import com.example.mapd726_groupproject_team3_agriapp.Fragments.HomeFragment
 import com.example.mapd726_groupproject_team3_agriapp.R
 import com.example.mapd726_groupproject_team3_agriapp.databinding.LayoutProductItemBinding
 import dagger.hilt.android.internal.managers.FragmentComponentManager
 
-class ProductAdapter(val context: Context): ListAdapter<ProductModel,ProductAdapter.ProductViewHolder>(
-    diffUtil()) {
+class SearchAdapter(val context: Context) : ListAdapter<ProductModel,SearchAdapter.SearchViewHolder>(Diffutil()) {
 
+    inner class SearchViewHolder(val binding : LayoutProductItemBinding) : RecyclerView.ViewHolder(binding.root)
+    {
 
-    inner class ProductViewHolder(val binding: LayoutProductItemBinding) :
-        RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductModel, context: Context) {
             binding.productTitle.text = item.productName
             binding.salePrice.text = "$ " + item.productSpecialPrice
@@ -55,35 +51,35 @@ class ProductAdapter(val context: Context): ListAdapter<ProductModel,ProductAdap
 
 
 
-            }
-
         }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
-
-        val binding = LayoutProductItemBinding.inflate(LayoutInflater.from(context), parent, false)
-        return ProductViewHolder(binding)
 
     }
 
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchViewHolder {
+        val binding = LayoutProductItemBinding.inflate(LayoutInflater.from(context),parent,false)
+        return SearchViewHolder(binding)
+
+    }
+
+
+    override fun onBindViewHolder(holder: SearchViewHolder, position: Int) {
         val item = getItem(position)
 
         holder.bind(item, context)
 
-       holder.itemView.setOnClickListener {
+        holder.itemView.setOnClickListener {
 
             //Redirect to the product detail fragment
 
             val bundle = Bundle()
             bundle.putParcelable("product",item)
-           // bundle.putString("productID",item.productId)
+            // bundle.putString("productID",item.productId)
             val sender = (FragmentComponentManager.findActivity(holder.itemView.context) as Activity as FragmentActivity).supportFragmentManager
             sender.setFragmentResult("dataFromHome",bundle)
 
 
-            Navigation.findNavController(holder.itemView).navigate(R.id.action_homeFragment_to_detailedProductFragment,bundle)
+            Navigation.findNavController(holder.itemView).navigate(R.id.detailedProductFragment,bundle)
 
             // Add to Room Database for Previous Product history
 
@@ -91,13 +87,14 @@ class ProductAdapter(val context: Context): ListAdapter<ProductModel,ProductAdap
 
         }
 
+
     }
 
 
-    class diffUtil() : DiffUtil.ItemCallback<ProductModel>() {
+    class Diffutil : DiffUtil.ItemCallback<ProductModel>(){
 
         override fun areItemsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
-          return  oldItem.productId == newItem.productId
+            return oldItem.productId == newItem.productId
         }
 
 
@@ -105,7 +102,7 @@ class ProductAdapter(val context: Context): ListAdapter<ProductModel,ProductAdap
             return oldItem == newItem
         }
 
-
     }
+
 
 }

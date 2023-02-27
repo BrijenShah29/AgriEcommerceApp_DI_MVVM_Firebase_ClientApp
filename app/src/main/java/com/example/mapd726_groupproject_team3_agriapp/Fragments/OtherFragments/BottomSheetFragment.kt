@@ -24,6 +24,7 @@ import com.example.mapd726_groupproject_team3_agriapp.Repository.ProductReposito
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.ProductsViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -66,9 +67,11 @@ class BottomSheetFragment : BottomSheetDialogFragment(){
             val quantity = 1
             val data = CartModel(product!!.productName,product.productCoverImg,product.productCategory,product.productSubCategory,product.productId!!,product.productPrice,product.discountRate,product.onSale,product.productSpecialPrice,product.productScale,quantity,product.productSpecialPrice!!.toDouble())
             viewModel.insertCartProducts(data)
-
+            Snackbar.make(it,"Product Added to Cart Successfully !!",Snackbar.LENGTH_SHORT).show()
             dismissAllowingStateLoss()
-            fm.beginTransaction().remove(this).replace(com.example.mapd726_groupproject_team3_agriapp.R.id.fragmentContainer, newFrame).addToBackStack(null).commit()
+
+
+           // fm.beginTransaction().remove(this).replace(com.example.mapd726_groupproject_team3_agriapp.R.id.fragmentContainer, newFrame).addToBackStack(null).commit()
         }
 
 

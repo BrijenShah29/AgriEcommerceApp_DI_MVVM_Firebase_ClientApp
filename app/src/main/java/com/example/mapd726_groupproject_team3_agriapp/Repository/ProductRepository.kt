@@ -17,9 +17,8 @@ class ProductRepository @Inject constructor( val db : FirebaseFirestore, val agr
 
 
 
-    fun insertAllProductsIntoDB(collectionPath: String)
-    {
-        var list = ArrayList<ProductModel>()
+    fun getAllProductsForDB(collectionPath: String): MutableLiveData<List<ProductModel>> {
+        var list = MutableLiveData<List<ProductModel>>()
         val productList = ArrayList<ProductModel>()
             db.collection(collectionPath).get().addOnSuccessListener {
 
@@ -27,26 +26,16 @@ class ProductRepository @Inject constructor( val db : FirebaseFirestore, val agr
                     val firebaseData = doc.toObject(ProductModel::class.java)
                     productList?.add(firebaseData!!)
                 }
-                list = productList
+                list.value = productList
             }
-
-        GlobalScope.launch {
-
-            agroDao.insertProducts(list as List<ProductModel>)
-
-        }
-
-
-        //var list = MutableLiveData<ArrayList<ProductModel>>()
-
-
-
-
+        return list!!
     }
 
-    suspend fun getAllProducts() = agroDao.getProducts()
+    suspend fun insertProducts(productModel: List<ProductModel>) = agroDao.insertProducts(productModel)
 
-    suspend fun getProductsBySubCategory(productSubCategory: String) = agroDao.getProductsBySubCategory(productSubCategory)
+     fun getAllProducts() = agroDao.getProducts()
+
+    fun getProductsBySubCategory(productSubCategory: String) = agroDao.getProductsBySubCategory(productSubCategory)
 
     fun getProductsByCategory(productCategory: String) = agroDao.getProductsByCategory(productCategory)
 
@@ -65,6 +54,10 @@ class ProductRepository @Inject constructor( val db : FirebaseFirestore, val agr
     // FINDING IF PRODUCT ALREADY EXISTS
 
     suspend fun isExist(id : String) = agroDao.isExist(id)
+
+    // GETTING PRODUCTS FROM SEARCH QUERY
+    fun searchDatabase(searchQuery:String) = agroDao.searchDatabase(searchQuery)
+
 
 
 }

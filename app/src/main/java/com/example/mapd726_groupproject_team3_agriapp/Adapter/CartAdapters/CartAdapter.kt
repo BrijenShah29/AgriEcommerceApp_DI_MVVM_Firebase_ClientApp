@@ -74,10 +74,6 @@ class CartAdapter(var context: Context, val viewModel: ProductsViewModel) : List
 
     }
 
-    private fun deleteProduct() {
-
-    }
-
     class Diffutil() : DiffUtil.ItemCallback<CartModel>() {
 
         override fun areItemsTheSame(oldItem: CartModel, newItem: CartModel): Boolean {

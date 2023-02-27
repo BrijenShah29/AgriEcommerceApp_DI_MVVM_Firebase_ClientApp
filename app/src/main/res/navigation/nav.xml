@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_homeFragment_to_detailedProductFragment"
             app:destination="@id/detailedProductFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -37,12 +40,19 @@
         <action
             android:id="@+id/action_categoryFragment_to_subCategoryFragment"
             app:destination="@id/subCategoryFragment" />
+        <action
+            android:id="@+id/action_categoryFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/wishlistFragment"
         android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.WishlistFragment"
         android:label="fragment_wishlist"
-        tools:layout="@layout/fragment_wishlist" />
+        tools:layout="@layout/fragment_wishlist" >
+        <action
+            android:id="@+id/action_wishlistFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.CartFragment"
@@ -61,6 +71,9 @@
         <action
             android:id="@+id/action_subCategoryFragment_to_productsFragment"
             app:destination="@id/productsFragment" />
+        <action
+            android:id="@+id/action_subCategoryFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/productsFragment"
@@ -70,6 +83,9 @@
         <action
             android:id="@+id/action_productsFragment_to_detailedProductFragment"
             app:destination="@id/detailedProductFragment" />
+        <action
+            android:id="@+id/action_productsFragment_to_searchFragment"
+            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailedProductFragment"
@@ -80,4 +96,9 @@
         android:id="@+id/bottomSheetFragment"
         android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.BottomSheetFragment"
         android:label="BottomSheetFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
 </navigation>

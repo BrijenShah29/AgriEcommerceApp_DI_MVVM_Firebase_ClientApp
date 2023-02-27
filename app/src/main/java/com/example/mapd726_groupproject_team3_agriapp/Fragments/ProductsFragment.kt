@@ -40,6 +40,7 @@ class ProductsFragment : Fragment() {
         // supportActionBar?.setDisplayShowHomeEnabled(true)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
         val productAdapter = CategoryProductAdapter(requireContext())
         binding.categoryRecycler.adapter = productAdapter
         binding.categoryRecycler.layoutManager = GridLayoutManager(requireContext(),2)
