@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.mapd726_groupproject_team3_agriapp.Fragments.HomeFragment
 import com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.SearchFragment
@@ -47,10 +48,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         binding.searchButton.setOnClickListener {
             Toast.makeText(this, "Icon clicked", Toast.LENGTH_SHORT).show()
             //navigateToSearchFragment()
-            navController.navigate(R.id.searchFragment)
+          // val currentFragment = navController.currentDestination
+           // val fragmentManager = supportFragmentManager
+
+
+
+           navController.navigate(R.id.searchFragment)
         }
         binding.cartButton.setOnClickListener {
-            navController.popBackStack() // WILL BE CHANGED IN RELEASE 2
+            //navController.popBackStack() // WILL BE CHANGED IN RELEASE 2
             navController.navigate(R.id.cartFragment)
         }
 
@@ -126,6 +132,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                         binding.appBarTitle.visibility = View.VISIBLE
                         binding.searchButton.visibility = View.VISIBLE
                         binding.cartButton.visibility = View.VISIBLE
+
                      //   binding.appBar.setNavigationIcon(R.drawable.ic_baseline_menu_24)
 
 
@@ -310,10 +317,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     private fun show(oldFragment: Int, newFragment: Fragment) {
         //val drawerLayout = drawer_layout as DrawerLayout
-      val fragmentManager = supportFragmentManager
-
-
- //   fragmentManager.beginTransaction().replace(R.id.,newFragment).addToBackStack(null).commit()
 
          // .beginTransaction().remove(this).replace(com.example.mapd726_groupproject_team3_agriapp.R.id.fragmentContainer, newFrame).addToBackStack(null).commit()
         //drawerLayout.closeDrawer(GravityCompat.START)

@@ -95,7 +95,11 @@
     <dialog
         android:id="@+id/bottomSheetFragment"
         android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.BottomSheetFragment"
-        android:label="BottomSheetFragment" />
+        android:label="BottomSheetFragment" >
+        <action
+            android:id="@+id/action_bottomSheetFragment_to_detailedProductFragment"
+            app:destination="@id/detailedProductFragment" />
+    </dialog>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.SearchFragment"

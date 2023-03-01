@@ -12,13 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.R
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentSubCategoryBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import com.squareup.picasso.Picasso
 
 
 class SubCategoryFragment : Fragment() {
@@ -51,15 +49,8 @@ class SubCategoryFragment : Fragment() {
           //  val intent = Intent(requireContext(), ProductsActivity :: class.java)
             //intent.putExtra("products",list[i].toString())
             //this.startActivity(intent)
-            val bundle = Bundle()
-            bundle.putString("products",list[i].toString())
-            bundle.putString("field","productCategory")
+            navigateToProductFragment(i)
 
-            val sender = (requireContext() as FragmentActivity).supportFragmentManager
-            sender.setFragmentResult("productSubCategory",bundle)
-
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_subCategoryFragment_to_productsFragment,bundle)
 
 
         }
@@ -72,6 +63,19 @@ class SubCategoryFragment : Fragment() {
         return binding.root
     }
 
+    private fun navigateToProductFragment(i: Int) {
+
+        val bundle = Bundle()
+        bundle.putString("products",list[i].toString())
+        bundle.putString("field","productCategory")
+
+        val sender = (requireContext() as FragmentActivity).supportFragmentManager
+        sender.setFragmentResult("productSubCategory",bundle)
+
+        Navigation.findNavController(binding.root)
+            .navigate(R.id.action_subCategoryFragment_to_productsFragment,bundle)
+    }
+
     private fun getCategoriesByRootCategoryFromFirebase(rootCategory: Any) {
 
         Firebase.firestore.collection("Categories").whereEqualTo("Root",rootCategory)
@@ -82,9 +86,8 @@ class SubCategoryFragment : Fragment() {
                     list?.add(firebaseData!!.Category!!)
                     //Log.d("Fetched category", firebaseData.Category.toString())
                 }
-
-                binding.listItem.adapter = ArrayAdapter(requireContext(),R.layout.item_text_list_layout, list)
-
+                    binding.listItem.adapter =
+                        ArrayAdapter(requireContext(), R.layout.item_text_list_layout, list)
 
             }
 

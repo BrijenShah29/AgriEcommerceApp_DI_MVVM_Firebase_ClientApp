@@ -243,8 +243,6 @@
                             android:textColor="@color/black"
                             android:elevation="0dp"
                             android:textSize="@dimen/_14sdp"
-                            app:autoSizeMaxTextSize="@dimen/_18sdp"
-                            app:autoSizeMinTextSize="@dimen/_16sdp"
                             app:autoSizeTextType="uniform" />
 
                     </androidx.cardview.widget.CardView>
