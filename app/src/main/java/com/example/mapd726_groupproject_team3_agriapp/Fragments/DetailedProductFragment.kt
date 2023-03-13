@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
@@ -36,6 +37,7 @@ class DetailedProductFragment : Fragment() {
     lateinit var binding : FragmentDetailedProductBinding
     lateinit var bottomSheetFragment: BottomSheetFragment
     var quantity : Int = 1
+    var allowRefresh = true
 
 
     private val viewModel by viewModels<ProductsViewModel>()
@@ -50,6 +52,7 @@ class DetailedProductFragment : Fragment() {
         binding = FragmentDetailedProductBinding.inflate(layoutInflater)
 
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
         val product = requireArguments().getParcelable<ProductModel>("product")
 
@@ -177,6 +180,26 @@ class DetailedProductFragment : Fragment() {
         Snackbar.make(view,"Product Added to Cart Successfully !!", Snackbar.LENGTH_SHORT).show()
       // val sender = (FragmentComponentManager.findActivity(requireContext()) as Activity as FragmentActivity).supportFragmentManager
 
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        //(FragmentComponentManager.findActivity(requireContext()) as Activity as FragmentActivity).supportFragmentManager.beginTransaction().remove(DetailedProductFragment()).add(R.id.fragmentContainer,DetailedProductFragment()).commit()
+          //  .remove(DetailedProductFragment()).attach(this).commit()
+        (FragmentComponentManager.findActivity(requireContext()) as Activity as FragmentActivity).supportFragmentManager.beginTransaction().detach(DetailedProductFragment()).attach(this).commit()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+       // (FragmentComponentManager.findActivity(requireContext()) as Activity as FragmentActivity).supportFragmentManager.beginTransaction().detach(DetailedProductFragment()).attach(this).commit()
+
+        if (allowRefresh)
+        {
+            allowRefresh = false
+            (FragmentComponentManager.findActivity(requireContext()) as Activity as FragmentActivity).supportFragmentManager.beginTransaction().detach(DetailedProductFragment()).attach(this).commit()
+        }
 
     }
 

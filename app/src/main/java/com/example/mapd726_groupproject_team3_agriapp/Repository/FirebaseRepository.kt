@@ -21,15 +21,61 @@ import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import org.jetbrains.annotations.NotNull
 import javax.inject.Inject
 
 class FirebaseRepository @Inject constructor(val auth : FirebaseAuth, val db : FirebaseFirestore, val storage : FirebaseStorage, val agroDao: AgroDao) {
 
+init {
+
+    // GETTING PRODUCTS FROM FIREBASE AND FIRING INSERT QUERY IN INIT
+    val productsList = ArrayList<ProductModel>()
+    db.collection("Products").get().addOnSuccessListener {
+        for (doc in it.documents) {
+            val firebaseData = doc.toObject(ProductModel::class.java)
+            productsList?.add(firebaseData!!)
+        }
+        if(productsList.size > 1 || productsList.isNotEmpty()){
+
+            GlobalScope.launch(Dispatchers.IO) {
+                delay(2000)
+                agroDao.insertProducts(productsList)
+            }
+        }
+
+    }
+
+    // GETTING SUB CATEGORIES FROM FIREBASE AND INSERTING IT IN ROOM AT INIT
+
+    val subCategoryList = ArrayList<SubCategoryModel>()
+    db.collection("SubCategories").get().addOnSuccessListener {
+        for (doc in it.documents) {
+            val firebaseData = doc.toObject(SubCategoryModel::class.java)
+            subCategoryList?.add(firebaseData!!)
+        }
+        if(subCategoryList.size > 1 || subCategoryList.isNotEmpty()){
+
+            GlobalScope.launch(Dispatchers.IO) {
+                delay(2000)
+                agroDao.insertSubCategories(subCategoryList)
+            }
+        }
+
+    }
 
 
-    suspend fun getSliderImages(collectionPath: String, imageList: ArrayList<Slider>): MutableLiveData<ArrayList<Slider>> {
-        val images = MutableLiveData<ArrayList<Slider>>()
+}
+
+// GETTING SLIDER IMAGES FROM FIREBASE
+
+    private val sliders = MutableLiveData<ArrayList<Slider>>()
+    private val listSliders : LiveData<ArrayList<Slider>>
+        get() = sliders
+    fun getSliderImages(collectionPath: String, imageList: ArrayList<Slider>): LiveData<ArrayList<Slider>> {
         db.collection(collectionPath).get()
             .addOnSuccessListener {
                 imageList.clear()
@@ -38,16 +84,22 @@ class FirebaseRepository @Inject constructor(val auth : FirebaseAuth, val db : F
                     imageList.add(firebaseData!!)
                     Log.d("Fetched Images", imageList.toString())
                 }
-                images.value = imageList
+                sliders.value = imageList
             }
-        return images
+        return listSliders
 
     }
 
-    suspend fun getCategoriesFromFirebase(collectionPath: String, categoryList: ArrayList<CategoryModel>?): MutableLiveData<ArrayList<CategoryModel>> {
-         val categories = MutableLiveData<ArrayList<CategoryModel>>()
-        db.collection(collectionPath)
-            .get().addOnSuccessListener {
+
+
+    //GETTING CATEGORIES FROM FIREBASE, PARSING THEM AS LIVE DATA
+
+    private val categories = MutableLiveData<ArrayList<CategoryModel>>()
+    private val listCategories : LiveData<ArrayList<CategoryModel>>
+        get() = categories
+
+     fun getCategoriesFromFirebase(collectionPath: String, categoryList: ArrayList<CategoryModel>?): LiveData<ArrayList<CategoryModel>> {
+        db.collection(collectionPath).get().addOnSuccessListener {
                 categoryList?.clear()
                 for (doc in it.documents) {
                     val firebaseData = doc.toObject(CategoryModel::class.java)
@@ -56,31 +108,66 @@ class FirebaseRepository @Inject constructor(val auth : FirebaseAuth, val db : F
                 }
                 categories.value = categoryList!!
             }
-        return categories
+        return listCategories
     }
 
+    // USER SIGNOUT
+    fun signOut()
+    {
+        auth.signOut()
+    }
 
-   suspend fun getProductsFromFirebase(collectionPath: String, field: String, productCategory: String, productList : ArrayList<ProductModel>?) : MutableLiveData<ArrayList<ProductModel>>{
-       val list = MutableLiveData<ArrayList<ProductModel>>()
-        db.collection(collectionPath).whereEqualTo(field, productCategory)
-            .get().addOnSuccessListener {
-                productList?.clear()
-                for (doc in it.documents) {
-                    val firebaseData = doc.toObject(ProductModel::class.java)
-                    productList?.add(firebaseData!!)
-                }
+}
 
-                list.value = productList!!
 
+
+
+
+
+
+
+/*
+    private var _list = MutableLiveData<List<SubCategoryModel>>()
+    val list : LiveData<List<SubCategoryModel>>
+        get() = _list
+    fun getAllSubCategoriesFromFirebase(collectionPath : String): LiveData<List<SubCategoryModel>> {
+        val productList = ArrayList<SubCategoryModel>()
+        db.collection(collectionPath).get().addOnSuccessListener {
+            for (doc in it.documents) {
+                val firebaseData = doc.toObject(SubCategoryModel::class.java)
+                productList?.add(firebaseData!!)
             }
+            _list.value = productList
+        }
         return list
 
+    }
 
+    private var _productList = MutableLiveData<List<ProductModel>>()
+    val productList : LiveData<List<ProductModel>>
+        get() = _productList
+    fun getAllProductsForDB(collectionPath: String): LiveData<List<ProductModel>> {
+
+        val productsList = ArrayList<ProductModel>()
+        db.collection(collectionPath).get().addOnSuccessListener {
+            for (doc in it.documents) {
+                val firebaseData = doc.toObject(ProductModel::class.java)
+                productsList?.add(firebaseData!!)
+            }
+            _productList.value = productsList
+        }
+        return productList
     }
 
 
-    suspend fun getSubCategoriesFromFirebase(collectionPath: String, field: String,  productCategory: String, subCategoryList: ArrayList<SubCategoryModel>) : MutableLiveData<ArrayList<SubCategoryModel>> {
-        val subCategory = MutableLiveData<ArrayList<SubCategoryModel>>()
+    //GETTING SUB-CATEGORIES FROM FIREBASE, PARSING THEM AS LIVE DATA
+
+
+    private val subCategory = MutableLiveData<ArrayList<SubCategoryModel>>()
+    private val listSubCategory : LiveData<ArrayList<SubCategoryModel>>
+        get() = subCategory
+    fun getSubCategoriesFromFirebase(collectionPath: String, field: String,  productCategory: String, subCategoryList: ArrayList<SubCategoryModel>) : LiveData<ArrayList<SubCategoryModel>> {
+
         db.collection(collectionPath).whereEqualTo(field, productCategory)
             .get().addOnSuccessListener {
                 subCategoryList?.clear()
@@ -92,17 +179,35 @@ class FirebaseRepository @Inject constructor(val auth : FirebaseAuth, val db : F
                 subCategory.value = subCategoryList
             }
 
-        return subCategory
+        return listSubCategory
     }
 
-    suspend fun getSingleProductFromFirebase(collectionPath: String, productID: String) :MutableLiveData<ProductModel> {
-        var product = MutableLiveData<ProductModel>()
-        db.collection(collectionPath).document(productID)
+
+
+
+    //GETTING PRODUCTS FROM FIREBASE, PARSING THEM AS LIVE DATA
+   private val products = MutableLiveData<ArrayList<ProductModel>>()
+    private val listProducts : LiveData<ArrayList<ProductModel>>
+        get() = products
+
+    fun getProductsFromFirebase(collectionPath: String, field: String, productCategory: String, productList : ArrayList<ProductModel>?) : LiveData<ArrayList<ProductModel>> {
+
+        db.collection(collectionPath).whereEqualTo(field, productCategory)
             .get().addOnSuccessListener {
-                product.value = it.toObject(ProductModel::class.java)
+                productList?.clear()
+                for (doc in it.documents) {
+                    val firebaseData = doc.toObject(ProductModel::class.java)
+                    productList?.add(firebaseData!!)
+                }
+                products.value = productList!!
             }
-        return product
+        return listProducts
+
 
     }
 
-}
+
+
+ */
+
+

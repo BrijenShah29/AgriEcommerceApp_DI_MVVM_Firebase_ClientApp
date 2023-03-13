@@ -3,6 +3,7 @@ package com.example.mapd726_groupproject_team3_agriapp.ViewModel
 import androidx.lifecycle.*
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.SubCategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.Repository.FirebaseRepository
 import com.example.mapd726_groupproject_team3_agriapp.Repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,13 +16,7 @@ import javax.inject.Inject
 class ProductsViewModel @Inject constructor(private val firebaseRepository: FirebaseRepository,  private val productRepository: ProductRepository): ViewModel() {
 
 
-
-
-
-
-
     //GETTING PRODUCTS ON BASIS OF SELECTION OF SUB-CATEGORY (SUB-CATEGORY FRAGMENT)
-
 
 
 // TO CHECK WEATHER THE PRODUCT EXISTS OR NOT
@@ -30,31 +25,12 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
         viewModelScope.launch(Dispatchers.IO) {
             selectedProduct = productRepository.isExist(id)
          }
-
-    }
-
-    // TO GET ALL THE PRODUCTS FROM FIREBASE
-
-    private var _firebaseProducts = productRepository.getAllProductsForDB("Products")
-
-    val firebaseProducts : LiveData<List<ProductModel>>
-        get() = _firebaseProducts
-
-    // TO ADD ALL THE PRODUCTS INTO PRODUCT ROOM
-
-    fun insertProducts(productList : List<ProductModel>){
-
-        viewModelScope.launch(Dispatchers.IO) {
-            delay(2000)
-            productRepository.insertProducts(productList!!)
-        }
     }
 
 
     // TO ADD THE PRODUCT INTO CART ROOM
 
     fun insertCartProducts(cartModel: CartModel) {
-
         viewModelScope.launch {
             productRepository.insertCartProducts(cartModel)
         }
@@ -62,8 +38,7 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
 
     //TO GET ALL THE CART PRODUCTS
 
-    private var _cartProduct = MutableLiveData<List<CartModel>>()
-
+   // private var _cartProduct = MutableLiveData<List<CartModel>>()
     val cartProducts =  productRepository.getCartProducts().asLiveData()
 
     fun deleteProduct(cartModel : CartModel) {
@@ -77,12 +52,50 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
    // private var _searchedProducts = MutableLiveData<List<ProductModel>>()
 
     lateinit var searchedProducts : LiveData<List<ProductModel>>
-
     fun searchDatabase(searchQuery:String){
-
         searchedProducts = productRepository.searchDatabase(searchQuery).asLiveData()
 
     }
+
+    // UPDATING THE CART PRODUCTS
+
+    fun updateCart(quantity : Int,totalAmount : Double, productId : String){
+        viewModelScope.launch(Dispatchers.IO) {
+            productRepository.updateCart(quantity,totalAmount,productId)
+        }
+    }
+
+
+    // fun insertSubCategories(list: List<SubCategoryModel>) {
+
+    //  viewModelScope.launch { if(list.isNotEmpty()){ delay(1000) productRepository.insertSubCategories(list)}}}
+
+
+
+    // TO GET ALL THE PRODUCTS FROM FIREBASE FOR ROOM DB
+
+    //private var _firebaseProducts = productRepository.getAllProductsForDB("Products")
+    // lateinit var firebaseProducts : LiveData<List<ProductModel>>
+    // get() = productRepository.productList
+
+
+
+    // TO ADD ALL THE PRODUCTS INTO PRODUCT ROOM
+
+    fun insertProducts(list: List<ProductModel>) {
+
+        viewModelScope.launch {
+            if(list.isNotEmpty() && list.size > 10) {
+                delay(1000)
+                productRepository.insertProducts(list)
+            }
+        }
+    }
+
+
+
+
+
 
 
 }

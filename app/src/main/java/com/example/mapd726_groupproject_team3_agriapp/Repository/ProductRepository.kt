@@ -1,10 +1,12 @@
 package com.example.mapd726_groupproject_team3_agriapp.Repository
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.SubCategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.RoomDB.AgroDao
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -16,27 +18,23 @@ import javax.inject.Inject
 class ProductRepository @Inject constructor( val db : FirebaseFirestore, val agroDao: AgroDao) {
 
 
-
-    fun getAllProductsForDB(collectionPath: String): MutableLiveData<List<ProductModel>> {
-        var list = MutableLiveData<List<ProductModel>>()
-        val productList = ArrayList<ProductModel>()
-            db.collection(collectionPath).get().addOnSuccessListener {
-
-                for (doc in it.documents) {
-                    val firebaseData = doc.toObject(ProductModel::class.java)
-                    productList?.add(firebaseData!!)
-                }
-                list.value = productList
-            }
-        return list!!
-    }
-
+    //INSERTING PRODUCTS INTO ROOM
     suspend fun insertProducts(productModel: List<ProductModel>) = agroDao.insertProducts(productModel)
+
+
+    //INSERTING SUB-CATEGORIES INTO ROOM
+    suspend fun insertSubCategories(subCategoryModel : List<SubCategoryModel>) = agroDao.insertSubCategories(subCategoryModel)
+
+    //GETTING SUB-CATEGORIES FROM ROOM DB
+    fun getSubCategoryByCategory(category : String) = agroDao.getSubCategoryByCategory(category)
 
      fun getAllProducts() = agroDao.getProducts()
 
+
+    // GETTING PRODUCTS BY SUB-CATEGORY
     fun getProductsBySubCategory(productSubCategory: String) = agroDao.getProductsBySubCategory(productSubCategory)
 
+    //GETTING PRODUCTS BY CATEGORY
     fun getProductsByCategory(productCategory: String) = agroDao.getProductsByCategory(productCategory)
 
 
@@ -57,6 +55,9 @@ class ProductRepository @Inject constructor( val db : FirebaseFirestore, val agr
 
     // GETTING PRODUCTS FROM SEARCH QUERY
     fun searchDatabase(searchQuery:String) = agroDao.searchDatabase(searchQuery)
+
+    //UPDATING THE CART PRODUCTS FROM CART PAGE
+    suspend fun updateCart(quantity : Int,totalAmount : Double , productId : String) = agroDao.updateCart(quantity,totalAmount,productId)
 
 
 

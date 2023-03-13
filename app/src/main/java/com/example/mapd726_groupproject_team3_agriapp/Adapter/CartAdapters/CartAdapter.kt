@@ -4,6 +4,7 @@ import android.content.Context
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.StrikethroughSpan
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,8 @@ class CartAdapter(var context: Context, val viewModel: ProductsViewModel) : List
             {
                 binding.normalPrice.visibility = View.INVISIBLE
             }
+
+
         }
     }
 
@@ -65,11 +68,52 @@ class CartAdapter(var context: Context, val viewModel: ProductsViewModel) : List
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
 
         val item = getItem(position)
+        var quantity : Int = item.productQuantity!!
+        var totalAmount : Double = item.totalAmount!!
         holder.bind(item,context)
 
         holder.binding.deleteProductButton.setOnClickListener {
             viewModel.deleteProduct(item)
             Snackbar.make(it,"Item Removed From Cart !!", Snackbar.LENGTH_LONG).show()
+        }
+        holder.binding.imageMinus.setOnClickListener {
+            Log.d("Product less one","Cart on less product qty clicked")
+            if(quantity <= 1)
+            {
+                quantity = 1
+               // holder.binding.tvCount.text = quantity.toString()
+                totalAmount = item.productSpecialPrice!!.toDouble() * quantity.toDouble()
+                viewModel.updateCart(quantity,totalAmount,item.productId)
+            }
+            else
+            {
+                quantity -= 1
+               // holder.binding.tvCount.text = quantity.toString()
+                totalAmount = item.productSpecialPrice!!.toDouble() * quantity.toDouble()
+                viewModel.updateCart(quantity,totalAmount,item.productId)
+
+            }
+
+        }
+        holder.binding.imageAddOne.setOnClickListener {
+            Log.d("Product more one","Cart on more product qty clicked")
+            if(quantity>=10)
+
+            {
+                quantity = 10
+               // holder.binding.tvCount.text = quantity.toString()
+                totalAmount = item.productSpecialPrice!!.toDouble() * quantity.toDouble()
+                viewModel.updateCart(quantity,totalAmount,item.productId)
+            }
+
+            else
+
+            {
+                quantity+=1
+              //  holder.binding.tvCount.text = quantity.toString()
+                totalAmount = item.productSpecialPrice!!.toDouble() * quantity.toDouble()
+                viewModel.updateCart(quantity,totalAmount,item.productId)
+            }
         }
 
     }

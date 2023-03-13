@@ -19,326 +19,128 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(private val firebaseRepository: FirebaseRepository, private val productRepository: ProductRepository) : ViewModel()
 {
 
+//SIGNOUT USER FROM CURRENT LOGIN
+fun signOut() {
+    firebaseRepository.signOut()
+}
 
 //INSERTING ALL PRODUCTS INTO ROOM DB AT INITIALIZATION
 
 
         // GETTING DATA OF SLIDER FROM REPOSITORY
 
-        private var _sliderImages = MutableLiveData<ArrayList<Slider>>()
-
-        val sliderImages: LiveData<ArrayList<Slider>>
-        get() = _sliderImages
-
+        lateinit var sliderImages: LiveData<ArrayList<Slider>>
         fun getSliderImages(collectionPath: String, imageList: ArrayList<Slider>) {
-
-            viewModelScope.launch {
-                _sliderImages = firebaseRepository.getSliderImages(collectionPath,
-                    imageList) as MutableLiveData<ArrayList<Slider>>
-            }
+            viewModelScope.launch { sliderImages = firebaseRepository.getSliderImages(collectionPath,imageList) }
         }
 
 
         // GETTING ALL CATEGORIES
 
-        private var _categories = MutableLiveData<ArrayList<CategoryModel>>()
-
-        val categories: LiveData<ArrayList<CategoryModel>>
-        get() = _categories
-
+        lateinit var categories: LiveData<ArrayList<CategoryModel>>
         fun getCategories(collectionPath: String, categoryList: ArrayList<CategoryModel>) {
-
-            viewModelScope.launch {
-                _categories = firebaseRepository.getCategoriesFromFirebase(collectionPath,
-                    categoryList) as MutableLiveData<ArrayList<CategoryModel>>
-            }
+                categories = firebaseRepository.getCategoriesFromFirebase(collectionPath, categoryList)
         }
 
-        //GET SUB-CATEGORIES FOR VEGETABLE SEEDS CATEGORY
 
-        private var _vegetableSubCategories = MutableLiveData<ArrayList<SubCategoryModel>>()
 
-        val vegetableSubCategories: LiveData<ArrayList<SubCategoryModel>>
-        get() = _vegetableSubCategories
-        fun getVegetableSubCategories(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            subCategoryList: ArrayList<SubCategoryModel>
-        ) {
-            viewModelScope.launch {
-                _vegetableSubCategories = firebaseRepository.getSubCategoriesFromFirebase(
-                    collectionPath,
-                    field,
-                    productCategory,
-                    subCategoryList) as MutableLiveData<ArrayList<SubCategoryModel>>
+    //GETTING PRODUCTS ON BASIS OF SELECTION OF SUB-CATEGORY (SUB-CATEGORY FRAGMENT) FROM ROOM
 
-            }
+
+   lateinit var selectedCategoryProducts  : LiveData<List<ProductModel>>
+
+
+    fun getSelectedCategoryProducts( productCategory : String){
+        viewModelScope.launch {
+            selectedCategoryProducts = productRepository.getProductsByCategory(productCategory).asLiveData()
         }
+    }
+
+    lateinit var selectedSubCategoryProducts  : LiveData<List<ProductModel>>
+
+    fun getSelectedSubCategoryProducts( productSubCategory : String){
+        viewModelScope.launch {
+            selectedSubCategoryProducts = productRepository.getProductsBySubCategory(productSubCategory).asLiveData()
+        }
+    }
+
+// GETTING PRODUCTS OF ALL VEGETABLE SEEDS PRODUCTS FROM ROOM DB
+
+    lateinit var vegetableProducts: LiveData<List<ProductModel>>
+
+    // GETTING PRODUCTS OF ALL FRUIT SEEDS PRODUCTS FROM ROOM DB
+
+    lateinit var fruitProducts: LiveData<List<ProductModel>>
+
+    // GETTING PRODUCTS OF HERBICIDES PRODUCTS FROM ROOM DB
+
+   lateinit var herbicidesProducts: LiveData<List<ProductModel>>
+
+    // GETTING PRODUCTS OF FUNGICIDES PRODUCTS FROM ROOM DB
+
+   lateinit var fungicidesProducts: LiveData<List<ProductModel>>
+
+    // GETTING PRODUCTS PESTICIDES PRODUCTS FROM ROOM DB
+
+    lateinit var  pesticidesProducts: LiveData<List<ProductModel>>
+
+    // GETTING PRODUCTS FERTILIZERS PRODUCTS FROM ROOM DB
+
+    lateinit var fertilizersProducts: LiveData<List<ProductModel>>
+
+    // GETTING PRODUCTS GROWTH PROMOTERS PRODUCTS FROM ROOM DB
+
+    lateinit var  growthPromotersProducts: LiveData<List<ProductModel>>
+
+    // GETTING PRODUCTS TOOLS & EQUIPMENTS PRODUCTS FROM ROOM DB
+
+    lateinit var toolEquipmentsProducts: LiveData<List<ProductModel>>
+
+    // GETTING PRODUCTS POTS & PLANTERS PRODUCTS FROM ROOM DB
+
+   lateinit var potsPlantersProducts: LiveData<List<ProductModel>>
+
+
+//GET SUB-CATEGORIES FOR VEGETABLE SEEDS CATEGORY FROM ROOM DB
+
+   lateinit var vegetableSubCategories: LiveData<List<SubCategoryModel>>
 
 // GETTING SUB-CATEGORY FOR FRUIT SEEDS CATEGORY
 
-        private var _fruitSubCategories = MutableLiveData<ArrayList<SubCategoryModel>>()
+    lateinit var fruitSubCategories: LiveData<List<SubCategoryModel>>
 
-        val fruitSubCategories: LiveData<ArrayList<SubCategoryModel>>
-        get() = _fruitSubCategories
-        fun getFruitSubCategories(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            subCategoryList: ArrayList<SubCategoryModel>
-        ) {
-            viewModelScope.launch {
-                _fruitSubCategories =
-                    firebaseRepository.getSubCategoriesFromFirebase(collectionPath,
-                        field,
-                        productCategory,
-                        subCategoryList) as MutableLiveData<ArrayList<SubCategoryModel>>
-            }
-        }
+    // GETTING SUB-CATEGORY FOR CROP PROTECTION CATEGORY
 
-// GETTING SUB-CATEGORY FOR CROP PROTECTION CATEGORY
-
-        private var _cropProtectionSubCategories = MutableLiveData<ArrayList<SubCategoryModel>>()
-
-        val cropProtectionSubCategories: LiveData<ArrayList<SubCategoryModel>>
-        get() = _cropProtectionSubCategories
-        fun getCropProtectionSubCategories(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            subCategoryList: ArrayList<SubCategoryModel>
-        ) {
-            viewModelScope.launch {
-                _cropProtectionSubCategories = firebaseRepository.getSubCategoriesFromFirebase(
-                    collectionPath,
-                    field,
-                    productCategory,
-                    subCategoryList) as MutableLiveData<ArrayList<SubCategoryModel>>
-            }
-        }
+   lateinit var cropProtectionSubCategories: LiveData<List<SubCategoryModel>>
 
 
-        // GETTING SUB-CATEGORY FOR CROP NUTRITION CATEGORY
+    // GETTING SUB-CATEGORY FOR CROP NUTRITION CATEGORY
 
-        private var _cropNutritionSubCategories = MutableLiveData<ArrayList<SubCategoryModel>>()
-
-        val cropNutritionSubCategories: LiveData<ArrayList<SubCategoryModel>>
-        get() = _cropNutritionSubCategories
-        fun getCropNutritionSubCategories(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            subCategoryList: ArrayList<SubCategoryModel>
-        ) {
-            viewModelScope.launch{
-                _cropNutritionSubCategories = firebaseRepository.getSubCategoriesFromFirebase(
-                    collectionPath,
-                    field,
-                    productCategory,
-                    subCategoryList) as MutableLiveData<ArrayList<SubCategoryModel>>
-            }
-        }
+  lateinit var cropNutritionSubCategories: LiveData<List<SubCategoryModel>>
 
 
-        // GETTING PRODUCTS OF ALL VEGETABLE SEEDS
+init {
 
-        private var _vegetableProducts = MutableLiveData<ArrayList<ProductModel>>()
+    viewModelScope.launch{
+        vegetableProducts = productRepository.getProductsByCategory("Vegetable Seeds").asLiveData()
+        fruitProducts = productRepository.getProductsByCategory("Fruit Seeds").asLiveData()
+        herbicidesProducts = productRepository.getProductsByCategory("Herbicides").asLiveData()
+        fungicidesProducts = productRepository.getProductsByCategory("Fungicides").asLiveData()
+        pesticidesProducts = productRepository.getProductsByCategory("Pesticides").asLiveData()
+        fertilizersProducts =  productRepository.getProductsByCategory("Fertilizers").asLiveData()
+        growthPromotersProducts = productRepository.getProductsByCategory("Plant Growth Promoters").asLiveData()
+        toolEquipmentsProducts = productRepository.getProductsByCategory("Tools").asLiveData()
+        potsPlantersProducts = productRepository.getProductsByCategory("Pots and Planters").asLiveData()
+    }
 
-        val vegetableProducts: LiveData<ArrayList<ProductModel>>
-            get() = _vegetableProducts
-
-        fun getVegetableProducts(productList: ArrayList<ProductModel>) {
-            viewModelScope.launch {
-
-           // vegetableProducts = productRepository.getProductsByCategory("Vegetable Seeds").asLiveData()
-
-
-                _vegetableProducts = firebaseRepository.getProductsFromFirebase("Products", "productCategory", "Vegetable Seeds", productList) as MutableLiveData<ArrayList<ProductModel>>
-            }
-        }
-
-        // GETTING PRODUCTS OF ALL FRUIT SEEDS
-
-        private var _fruitProducts = MutableLiveData<ArrayList<ProductModel>>()
-        val fruitProducts: LiveData<ArrayList<ProductModel>>
-        get() = _fruitProducts
-
-        fun getFruitProducts(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            productList: ArrayList<ProductModel>
-        ) {
-            viewModelScope.launch{
-                _fruitProducts = firebaseRepository.getProductsFromFirebase(collectionPath,
-                    field,
-                    productCategory,
-                    productList) as MutableLiveData<ArrayList<ProductModel>>
-            }
-        }
-
-        // GETTING PRODUCTS OF HERBICIDES
-
-        private var _herbicidesProducts = MutableLiveData<ArrayList<ProductModel>>()
-
-        val herbicidesProducts: LiveData<ArrayList<ProductModel>>
-        get() = _herbicidesProducts
-        fun getHerbicideProducts(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            productList: ArrayList<ProductModel>
-        ) {
-            viewModelScope.launch {
-                _herbicidesProducts = firebaseRepository.getProductsFromFirebase(collectionPath,
-                    field,
-                    productCategory,
-                    productList) as MutableLiveData<ArrayList<ProductModel>>
-            }
-        }
-
-
-        // GETTING PRODUCTS OF FUNGICIDES
-
-        private var _fungicidesProducts = MutableLiveData<ArrayList<ProductModel>>()
-
-        val fungicidesProducts: LiveData<ArrayList<ProductModel>>
-        get() = _fungicidesProducts
-        fun getFungicidesProducts(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            productList: ArrayList<ProductModel>
-        ) {
-            viewModelScope.launch {
-                _fungicidesProducts = firebaseRepository.getProductsFromFirebase(collectionPath,
-                    field,
-                    productCategory,
-                    productList) as MutableLiveData<ArrayList<ProductModel>>
-            }
-        }
-
-        // GETTING PRODUCTS PESTICIDES
-
-        private var _pesticidesProducts = MutableLiveData<ArrayList<ProductModel>>()
-
-        val pesticidesProducts: LiveData<ArrayList<ProductModel>>
-        get() = _pesticidesProducts
-        fun getPesticidesProducts(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            productList: ArrayList<ProductModel>
-        ) {
-            viewModelScope.launch{
-                _pesticidesProducts = firebaseRepository.getProductsFromFirebase(collectionPath,
-                    field,
-                    productCategory,
-                    productList) as MutableLiveData<ArrayList<ProductModel>>
-            }
-        }
-
-        // GETTING PRODUCTS FERTILIZERS
-
-        private var _fertilizersProducts = MutableLiveData<ArrayList<ProductModel>>()
-
-        val fertilizersProducts: LiveData<ArrayList<ProductModel>>
-        get() = _pesticidesProducts
-        fun getFertilizersProducts(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            productList: ArrayList<ProductModel>
-        ) {
-            viewModelScope.launch {
-                _fertilizersProducts = firebaseRepository.getProductsFromFirebase(collectionPath,
-                    field,
-                    productCategory,
-                    productList) as MutableLiveData<ArrayList<ProductModel>>
-            }
-        }
-
-        // GETTING PRODUCTS GROWTH PROMOTERS
-
-        private var _growthPromotersProducts = MutableLiveData<ArrayList<ProductModel>>()
-
-        val growthPromotersProducts: LiveData<ArrayList<ProductModel>>
-        get() = _growthPromotersProducts
-        fun getGrowthPromotersProducts(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            productList: ArrayList<ProductModel>
-        ) {
-            viewModelScope.launch {
-                _growthPromotersProducts =
-                    firebaseRepository.getProductsFromFirebase(collectionPath,
-                        field,
-                        productCategory,
-                        productList) as MutableLiveData<ArrayList<ProductModel>>
-            }
-        }
-
-        // GETTING PRODUCTS TOOLS & EQUIPMENTS
-
-        private var _toolsEquipmentsProducts = MutableLiveData<ArrayList<ProductModel>>()
-
-        val toolEquipmentsProducts: LiveData<ArrayList<ProductModel>>
-        get() = _toolsEquipmentsProducts
-        fun getToolEquipmentsProducts(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            productList: ArrayList<ProductModel>
-        ) {
-            viewModelScope.launch {
-                _toolsEquipmentsProducts =
-                    firebaseRepository.getProductsFromFirebase(collectionPath,
-                        field,
-                        productCategory,
-                        productList) as MutableLiveData<ArrayList<ProductModel>>
-            }
-        }
-
-        // GETTING PRODUCTS POTS & PLANTERS
-
-        private var _potsPlantersProducts = MutableLiveData<ArrayList<ProductModel>>()
-
-        val potsPlantersProducts: LiveData<ArrayList<ProductModel>>
-        get() = _potsPlantersProducts
-
-        fun getPotsPlantersProducts(
-            collectionPath: String,
-            field: String,
-            productCategory: String,
-            productList: ArrayList<ProductModel>
-        ) {
-            viewModelScope.launch{
-                _potsPlantersProducts = firebaseRepository.getProductsFromFirebase(collectionPath,
-                    field,
-                    productCategory,
-                    productList) as MutableLiveData<ArrayList<ProductModel>>
-            }
-        }
-
-
-    //GETTING PRODUCTS ON BASIS OF SELECTION OF SUB-CATEGORY (SUB-CATEGORY FRAGMENT)
-
-    private var _selectedSubCategoryProducts  = MutableLiveData<ArrayList<ProductModel>>()
-    val selectedSubCategoryProducts  : LiveData<ArrayList<ProductModel>>
-        get() = _selectedSubCategoryProducts
-
-    fun getSelectedSubCategoryProducts(collectionPath : String,field : String, productCategory : String  ,productList : ArrayList<ProductModel>){
-        viewModelScope.launch {
-            _selectedSubCategoryProducts = firebaseRepository.getProductsFromFirebase(collectionPath,field,productCategory,productList) as MutableLiveData<ArrayList<ProductModel>>
-            // firebaseRepository.getProductsFromFirebase(collectionPath, field, productCategory,productList)
-        }
+    viewModelScope.launch {
+        vegetableSubCategories  = productRepository.getSubCategoryByCategory("Vegetable Seeds").asLiveData()
+        fruitSubCategories = productRepository.getSubCategoryByCategory("Fruit Seeds").asLiveData()
+        cropProtectionSubCategories = productRepository.getSubCategoryByCategory("Crop Protection").asLiveData()
+        cropNutritionSubCategories  = productRepository.getSubCategoryByCategory("Crop Nutrition").asLiveData()
 
     }
 
-
-
-
+}
 
 }

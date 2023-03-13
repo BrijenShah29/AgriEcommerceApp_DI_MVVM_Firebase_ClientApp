@@ -28,9 +28,6 @@
         <action
             android:id="@+id/action_homeFragment_to_detailedProductFragment"
             app:destination="@id/detailedProductFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/categoryFragment"
@@ -40,19 +37,12 @@
         <action
             android:id="@+id/action_categoryFragment_to_subCategoryFragment"
             app:destination="@id/subCategoryFragment" />
-        <action
-            android:id="@+id/action_categoryFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/wishlistFragment"
         android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.WishlistFragment"
         android:label="fragment_wishlist"
-        tools:layout="@layout/fragment_wishlist" >
-        <action
-            android:id="@+id/action_wishlistFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_wishlist" />
     <fragment
         android:id="@+id/cartFragment"
         android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.CartFragment"
@@ -71,9 +61,6 @@
         <action
             android:id="@+id/action_subCategoryFragment_to_productsFragment"
             app:destination="@id/productsFragment" />
-        <action
-            android:id="@+id/action_subCategoryFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/productsFragment"
@@ -83,9 +70,6 @@
         <action
             android:id="@+id/action_productsFragment_to_detailedProductFragment"
             app:destination="@id/detailedProductFragment" />
-        <action
-            android:id="@+id/action_productsFragment_to_searchFragment"
-            app:destination="@id/searchFragment" />
     </fragment>
     <fragment
         android:id="@+id/detailedProductFragment"
@@ -105,4 +89,19 @@
         android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/cartFragmentNavigated"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.CartFragmentNavigated"
+        android:label="fragment_cart_navigated"
+        tools:layout="@layout/fragment_cart_navigated" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.ContactUsFragment"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/aboutUsFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.AboutUsFragment"
+        android:label="fragment_about_us"
+        tools:layout="@layout/fragment_about_us" />
 </navigation>

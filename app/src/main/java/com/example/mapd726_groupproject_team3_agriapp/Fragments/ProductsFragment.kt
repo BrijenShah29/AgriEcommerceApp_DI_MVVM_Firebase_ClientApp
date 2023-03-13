@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.ProductsListPageAdapters.CategoryProductAdapter
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.HomeViewModel
-import com.example.mapd726_groupproject_team3_agriapp.ViewModel.ProductsViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentProductsBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -28,6 +27,8 @@ class ProductsFragment : Fragment() {
 
     private val viewModel by viewModels<HomeViewModel>()
 
+    private lateinit var productAdapter : CategoryProductAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -36,30 +37,56 @@ class ProductsFragment : Fragment() {
 
         binding = FragmentProductsBinding.inflate(layoutInflater)
 
-      //  supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        //  supportActionBar?.setDisplayHomeAsUpEnabled(true)
         // supportActionBar?.setDisplayShowHomeEnabled(true)
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        val productAdapter = CategoryProductAdapter(requireContext())
+        productAdapter = CategoryProductAdapter(requireContext())
         binding.categoryRecycler.adapter = productAdapter
-        binding.categoryRecycler.layoutManager = GridLayoutManager(requireContext(),2)
+        binding.categoryRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        val productsList = requireArguments().getString("products")
+        val productCategory = requireArguments().getString("products")
+        val productSubCategory = requireArguments().getString("products")
         val field = requireArguments().getString("field")
 
+            viewModel.getSelectedCategoryProducts(productCategory!!)
+            viewModel.selectedCategoryProducts.observe(viewLifecycleOwner, Observer
+            {
+                Log.d("Fetched products new", it.toString())
+                if(it.isNotEmpty()){
+                    productAdapter.submitList(it)
+                }
+                else
+                {
+                    showProductBySubCategory(productSubCategory)
+                }
+            })
 
-        viewModel.getSelectedSubCategoryProducts("Products",field!!,productsList!!,productListBySubCategory)
-        viewModel.selectedSubCategoryProducts.observe(viewLifecycleOwner, Observer {
-            Log.d("Fetched products new",it.toString())
-            productAdapter.submitList(it)
-        })
+
+
+
+
+
+
 
 
 
 
 
         return binding.root
+    }
+
+    private fun showProductBySubCategory(productSubCategory: String?) {
+
+        if (productSubCategory != null) {
+            Log.d("product page",productSubCategory)
+            viewModel.getSelectedSubCategoryProducts(productSubCategory!!)
+            viewModel.selectedSubCategoryProducts.observe(viewLifecycleOwner, Observer {
+                Log.d("Fetched products new", it.toString())
+                productAdapter.submitList(it)
+            })
+        }
     }
 
 

@@ -33,6 +33,9 @@
         <item>Plant Growth Promoters</item>
         <item>Fertilizers</item>
     </string-array>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="resend_otp"><u>Resend OTP</u></string>
 
 
 </resources>

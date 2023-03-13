@@ -18,10 +18,16 @@
         android:theme="@style/Theme.MAPD726_GroupProject_Team3_AgriApp"
         tools:targetApi="31">
         <activity
-            android:name=".LogInActivity"
-            android:exported="true">
-        </activity>
+            android:name=".Activities.LoginActivity"
+            android:theme="@style/splashScreenTheme"
+            android:exported="true" >
 
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-3940256099942544~3347511713" />
@@ -31,13 +37,9 @@
 
         <activity
             android:name=".MainActivity"
-            android:hardwareAccelerated="true"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="true"
+            android:hardwareAccelerated="true">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

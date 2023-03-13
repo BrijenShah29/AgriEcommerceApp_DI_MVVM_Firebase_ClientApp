@@ -29,8 +29,7 @@ class SubCategoryDisplayAdapter (var context: Context) : ListAdapter<SubCategory
                 itemView.setOnClickListener {
 
                     val bundle = Bundle()
-                    bundle.putString("products",item.SubCategory)
-                    bundle.putString("field","productSubCategory")
+                    bundle.putString("products",item.SubCategory.toString())
 
                     val sender = (FragmentComponentManager.findActivity(itemView.context) as Activity as FragmentActivity).supportFragmentManager
                     sender.setFragmentResult("fromHomePage",bundle)
@@ -61,15 +60,12 @@ class SubCategoryDisplayAdapter (var context: Context) : ListAdapter<SubCategory
             oldItem: SubCategoryModel,
             newItem: SubCategoryModel,
         ): Boolean {
-            return oldItem.SubCategory == newItem.SubCategory
+            return oldItem.categoryId == newItem.categoryId
         }
 
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(
-            oldItem: SubCategoryModel,
-            newItem: SubCategoryModel,
-        ): Boolean {
+        override fun areContentsTheSame(oldItem: SubCategoryModel, newItem: SubCategoryModel): Boolean {
             return oldItem == newItem
         }
 

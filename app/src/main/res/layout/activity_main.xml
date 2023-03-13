@@ -9,6 +9,7 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
@@ -117,9 +118,8 @@
             android:layout_gravity="start"
             app:headerLayout="@layout/drawer_header"
             android:fitsSystemWindows="true"
-            app:itemTextAppearance="?android:attr/textAppearanceMedium"
+            app:itemTextAppearance="?android:attr/textAppearance"
             app:menu="@menu/side_drawer_navigation">
 
         </com.google.android.material.navigation.NavigationView>
-
 </androidx.drawerlayout.widget.DrawerLayout>

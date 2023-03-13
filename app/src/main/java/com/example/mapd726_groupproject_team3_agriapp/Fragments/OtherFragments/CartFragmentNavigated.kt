@@ -1,4 +1,4 @@
-package com.example.mapd726_groupproject_team3_agriapp.Fragments
+package com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments
 
 import android.os.Bundle
 import android.util.Log
@@ -6,32 +6,33 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.CartAdapters.CartAdapter
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
+import com.example.mapd726_groupproject_team3_agriapp.R
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.ProductsViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentCartBinding
+import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentCartNavigatedBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CartFragment : Fragment() {
-
-    lateinit var binding : FragmentCartBinding
-     lateinit var cartProducts : List<CartModel>
+class CartFragmentNavigated : Fragment() {
 
     private val viewModel by viewModels<ProductsViewModel>()
+
+    private lateinit var binding: FragmentCartNavigatedBinding
+    private lateinit var cartProducts : List<CartModel>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentCartBinding.inflate(layoutInflater)
+        binding = FragmentCartNavigatedBinding.inflate(layoutInflater)
 
-        // GETTING ALL PRODUCTS FROM DATABASE
-
-        // viewModel.getCartProducts()
+        (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val cartAdapter = CartAdapter(requireContext(),viewModel)
         binding.cartProductsRecycler.adapter = cartAdapter
@@ -43,8 +44,6 @@ class CartFragment : Fragment() {
 
             calculateTotal(it)
         })
-
-
 
 
 
@@ -71,6 +70,8 @@ class CartFragment : Fragment() {
         binding.totalPayable.text = String.format("$ %.2f",totalPayable)
 
     }
+
+
 
 
 }

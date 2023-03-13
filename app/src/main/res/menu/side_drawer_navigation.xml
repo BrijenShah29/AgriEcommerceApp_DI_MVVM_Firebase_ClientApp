@@ -18,13 +18,22 @@
         android:icon="@drawable/vegetable_seeds_drawer"
         android:title=" VEGETABLE SEEDS"/>
 
-    <item android:id="@+id/cropProtection_drawer"
+    <item android:id="@+id/plantGrowth_drawer"
         android:icon="@drawable/crop_protection_drawer"
-        android:title=" CROP PROTECTION"/>
+        android:title=" PLANT GROWTH PROMOTERS"/>
 
-    <item android:id="@+id/cropNutrition_drawer"
+    <item android:id="@+id/fertilizers_drawer"
         android:icon="@drawable/crop_nutrition_drawer"
-        android:title=" CROP NUTRITION"/>
+        android:title=" FERTILIZERS"/>
+
+        <item android:id="@+id/potsNPlanters_drawer"
+            android:icon="@drawable/pot"
+            android:title=" POTS AND PLANTERS"/>
+
+        <item android:id="@+id/tools_drawer"
+            android:icon="@drawable/gardening"
+            android:title="ESSENTIAL TOOLS"/>
+
     </group>
 </menu>
 

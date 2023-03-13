@@ -61,13 +61,19 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
 
-        getProductsVegetables()
-
-        // GETTING ALL PRODUCTS FROM FIREBASE
+        // GETTING ALL PRODUCTS FROM FIREBASE TO ROOM
         // INSERTING ALL PRODUCTS INTO ROOM
-       viewModelProducts.firebaseProducts.observe(viewLifecycleOwner, Observer {
-           viewModelProducts.insertProducts(it)
-       })
+       // viewModelProducts.firebaseProducts.value?.let { viewModelProducts.insertProducts(it) }
+//       viewModelProducts.firebaseProducts.observe(viewLifecycleOwner, Observer {
+//           viewModelProducts.insertProducts(it)
+//       })
+
+       // viewModelProducts.firebaseSubCategories.value?.let { viewModelProducts.insertSubCategories(it) }
+//      viewModelProducts.firebaseSubCategories.observe(viewLifecycleOwner, Observer {
+//            viewModelProducts.insertSubCategories(it)
+//      })
+
+
 
 
 
@@ -84,7 +90,7 @@ class HomeFragment : Fragment() {
 
         val categoryAdapter = CategoryAdapter(requireContext())
         binding.categoryRecycler.adapter = categoryAdapter
-        binding.categoryRecycler.isNestedScrollingEnabled = false
+     //   binding.categoryRecycler.isNestedScrollingEnabled = false
         binding.categoryRecycler.setHasFixedSize(true)
         viewModel.getCategories("Categories",categoryList)
         viewModel.categories.observe(viewLifecycleOwner, Observer {
@@ -93,13 +99,12 @@ class HomeFragment : Fragment() {
 
 
 
-//GETTING SUB-CATEGORIES OF VEGETABLE SEEDS
+//GETTING SUB-CATEGORIES OF VEGETABLE SEEDS FROM ROOM DB
 
         val vegetableSubCategoriesAdapter = SubCategoryDisplayAdapter(requireContext())
         binding.subCategoryVegetableRecycler.adapter = vegetableSubCategoriesAdapter
-        binding.subCategoryVegetableRecycler.isNestedScrollingEnabled = false
+     //  binding.subCategoryVegetableRecycler.isNestedScrollingEnabled = false
         binding.subCategoryVegetableRecycler.setHasFixedSize(true)
-        viewModel.getVegetableSubCategories("SubCategories","category","Vegetable Seeds",vegetableSubCategoryList)
         viewModel.vegetableSubCategories.observe(viewLifecycleOwner, Observer {
             vegetableSubCategoriesAdapter.submitList(it)
         })
@@ -109,9 +114,8 @@ class HomeFragment : Fragment() {
 
         val fruitSubCategoriesAdapter = SubCategoryDisplayAdapter(requireContext())
         binding.subCategoryFruitRecycler.adapter = fruitSubCategoriesAdapter
-        binding.subCategoryFruitRecycler.isNestedScrollingEnabled = false
+    //   binding.subCategoryFruitRecycler.isNestedScrollingEnabled = false
         binding.subCategoryFruitRecycler.setHasFixedSize(true)
-        viewModel.getFruitSubCategories("SubCategories","category","Fruit Seeds",fruitSubCategoryList)
         viewModel.fruitSubCategories.observe(viewLifecycleOwner, Observer {
             fruitSubCategoriesAdapter.submitList(it)
         })
@@ -122,9 +126,8 @@ class HomeFragment : Fragment() {
 
         val cropProtectionSubCategoriesAdapter = SubCategoryDisplayAdapter(requireContext())
         binding.subCategoryCropProtectionRecycler.adapter = cropProtectionSubCategoriesAdapter
-        binding.subCategoryCropProtectionRecycler.isNestedScrollingEnabled = false
+    //   binding.subCategoryCropProtectionRecycler.isNestedScrollingEnabled = false
         binding.subCategoryCropProtectionRecycler.setHasFixedSize(true)
-        viewModel.getCropProtectionSubCategories("SubCategories","root","Crop Protection",cropProtectionSubCategoryList)
         viewModel.cropProtectionSubCategories.observe(viewLifecycleOwner, Observer {
             cropProtectionSubCategoriesAdapter.submitList(it)
         })
@@ -133,9 +136,8 @@ class HomeFragment : Fragment() {
 
         val cropNutritionSubCategoriesAdapter = SubCategoryDisplayAdapter(requireContext())
         binding.subCategoryCropNutritionRecycler.adapter = cropNutritionSubCategoriesAdapter
-        binding.subCategoryCropNutritionRecycler.isNestedScrollingEnabled = false
+    //   binding.subCategoryCropNutritionRecycler.isNestedScrollingEnabled = false
         binding.subCategoryCropNutritionRecycler.setHasFixedSize(true)
-        viewModel.getCropNutritionSubCategories("SubCategories","root","Crop Nutrition",cropNutritionSubCategoryList)
         viewModel.cropNutritionSubCategories.observe(viewLifecycleOwner, Observer {
             cropNutritionSubCategoriesAdapter.submitList(it)
         })
@@ -146,9 +148,8 @@ class HomeFragment : Fragment() {
 //  GETTING ALL VEGETABLE SEEDS PRODUCTS
         val  vegetableProductsAdapter =  ProductAdapter(requireContext())
         binding.VegetableProductsRecycler.adapter = vegetableProductsAdapter
-        binding.VegetableProductsRecycler.isNestedScrollingEnabled = false
+    //    binding.VegetableProductsRecycler.isNestedScrollingEnabled = false
         binding.VegetableProductsRecycler.setHasFixedSize(true)
-        viewModel.getVegetableProducts(vegetableProductList)
         viewModel.vegetableProducts.observe(viewLifecycleOwner, Observer {
             vegetableProductsAdapter.submitList(it)
         })
@@ -159,9 +160,8 @@ class HomeFragment : Fragment() {
 
         val fruitProductsAdapter = ProductAdapter(requireContext())
         binding.FruitProductsRecycler.adapter = fruitProductsAdapter
-        binding.FruitProductsRecycler.isNestedScrollingEnabled = false
+     //   binding.FruitProductsRecycler.isNestedScrollingEnabled = false
         binding.FruitProductsRecycler.setHasFixedSize(true)
-        viewModel.getFruitProducts("Products","productCategory","Fruit Seeds", fruitProductList )
         viewModel.fruitProducts.observe(viewLifecycleOwner, Observer {
             fruitProductsAdapter.submitList(it)
         })
@@ -171,9 +171,9 @@ class HomeFragment : Fragment() {
 
         val herbicideProductsAdapter = ProductAdapter(requireContext())
         binding.CropProtectionHerbicidesProductsRecycler.adapter = herbicideProductsAdapter
-        binding.CropProtectionHerbicidesProductsRecycler.isNestedScrollingEnabled = false
+     //   binding.CropProtectionHerbicidesProductsRecycler.isNestedScrollingEnabled = false
         binding.CropProtectionHerbicidesProductsRecycler.setHasFixedSize(true)
-        viewModel.getHerbicideProducts("Products","productCategory","Herbicides", herbicidesProductList)
+       // viewModel.getHerbicideProducts("Products","productCategory","Herbicides", herbicidesProductList)
         viewModel.herbicidesProducts.observe(viewLifecycleOwner, Observer {
             herbicideProductsAdapter.submitList(it)
         })
@@ -183,9 +183,9 @@ class HomeFragment : Fragment() {
 
         val fungicidesProductsAdapter = ProductAdapter(requireContext())
         binding.CropProtectionFungicidesProductsRecycler.adapter = fungicidesProductsAdapter
-        binding.CropProtectionFungicidesProductsRecycler.isNestedScrollingEnabled = false
+    //    binding.CropProtectionFungicidesProductsRecycler.isNestedScrollingEnabled = false
         binding.CropProtectionFungicidesProductsRecycler.setHasFixedSize(true)
-        viewModel.getFungicidesProducts("Products","productCategory","Fungicides", fungicidesProductList)
+
         viewModel.fungicidesProducts.observe(viewLifecycleOwner, Observer {
             fungicidesProductsAdapter.submitList(it)
         })
@@ -194,9 +194,8 @@ class HomeFragment : Fragment() {
 
         val pesticidesProductsAdapter = ProductAdapter(requireContext())
         binding.CropProtectionPesticidesProductsRecycler.adapter = pesticidesProductsAdapter
-        binding.CropProtectionPesticidesProductsRecycler.isNestedScrollingEnabled = false
+   //     binding.CropProtectionPesticidesProductsRecycler.isNestedScrollingEnabled = false
         binding.CropProtectionPesticidesProductsRecycler.setHasFixedSize(true)
-        viewModel.getPesticidesProducts("Products","productCategory","Pesticides", pesticidesProductList)
         viewModel.pesticidesProducts.observe(viewLifecycleOwner, Observer {
             pesticidesProductsAdapter.submitList(it)
         })
@@ -205,9 +204,8 @@ class HomeFragment : Fragment() {
 
         val fertilizerProductsAdapter = ProductAdapter(requireContext())
         binding.CropNutritionFertilizersProductsRecycler.adapter = fertilizerProductsAdapter
-        binding.CropNutritionFertilizersProductsRecycler.isNestedScrollingEnabled = false
+     //   binding.CropProtectionPesticidesProductsRecycler.isNestedScrollingEnabled = false
         binding.CropNutritionFertilizersProductsRecycler.setHasFixedSize(true)
-        viewModel.getFertilizersProducts("Products","productCategory","Fertilizers", fertilizerProductList)
         viewModel.fertilizersProducts.observe(viewLifecycleOwner, Observer {
             fertilizerProductsAdapter.submitList(it)
         })
@@ -216,9 +214,8 @@ class HomeFragment : Fragment() {
 
         val growthPromoterAdapter = ProductAdapter(requireContext())
         binding.CropNutritionGrowthPromotersProductsRecycler.adapter = growthPromoterAdapter
-        binding.CropNutritionGrowthPromotersProductsRecycler.isNestedScrollingEnabled = false
+     //   binding.CropNutritionGrowthPromotersProductsRecycler.isNestedScrollingEnabled = false
         binding.CropNutritionGrowthPromotersProductsRecycler.setHasFixedSize(true)
-        viewModel.getGrowthPromotersProducts("Products","productCategory","Plant Growth Promoters", growthPromoterProductList)
         viewModel.growthPromotersProducts.observe(viewLifecycleOwner, Observer {
             growthPromoterAdapter.submitList(it)
         })
@@ -227,9 +224,8 @@ class HomeFragment : Fragment() {
 
         val toolsAdapter = ProductAdapter(requireContext())
         binding.ToolsNEquipmentRecycler.adapter = toolsAdapter
-        binding.ToolsNEquipmentRecycler.isNestedScrollingEnabled = false
+      //  binding.ToolsNEquipmentRecycler.isNestedScrollingEnabled = false
         binding.ToolsNEquipmentRecycler.setHasFixedSize(true)
-         viewModel.getToolEquipmentsProducts("Products","productCategory","Tools", toolsProductList)
         viewModel.toolEquipmentsProducts.observe(viewLifecycleOwner, Observer {
             toolsAdapter.submitList(it)
         })
@@ -238,24 +234,19 @@ class HomeFragment : Fragment() {
 
         val potsNPlantersAdapter = ProductAdapter(requireContext())
         binding.PotsNPlantersRecycler.adapter = potsNPlantersAdapter
-        binding.PotsNPlantersRecycler.isNestedScrollingEnabled = false
+       // binding.PotsNPlantersRecycler.isNestedScrollingEnabled = false
         binding.PotsNPlantersRecycler.setHasFixedSize(true)
-        viewModel.getPotsPlantersProducts("Products","productCategory","Pots and Planters", potsAndPlantersProductList)
         viewModel.potsPlantersProducts.observe(viewLifecycleOwner, Observer {
             potsNPlantersAdapter.submitList(it)
         })
 
-
+    // GETTING ALL RECENTLY VISITED PRODUCTS
 
 
 
         return binding.root
     }
 
-
-    private fun getProductsVegetables() {
-
-    }
 
 
 }

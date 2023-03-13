@@ -36,6 +36,7 @@ class ProductAdapter(val context: Context): ListAdapter<ProductModel,ProductAdap
 
             Glide.with(context).load(item.productCoverImg)
                 .centerCrop()
+                .override(300)
                 .into(binding.imageView)
 
             if(item.onSale == true)
