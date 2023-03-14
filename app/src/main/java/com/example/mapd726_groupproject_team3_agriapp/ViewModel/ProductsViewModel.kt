@@ -3,6 +3,7 @@ package com.example.mapd726_groupproject_team3_agriapp.ViewModel
 import androidx.lifecycle.*
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.RecentlyVisitedModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.SubCategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.Repository.FirebaseRepository
 import com.example.mapd726_groupproject_team3_agriapp.Repository.ProductRepository
@@ -18,10 +19,22 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
 
     //GETTING PRODUCTS ON BASIS OF SELECTION OF SUB-CATEGORY (SUB-CATEGORY FRAGMENT)
 
+    //GETTING SINGLE PRODUCT FROM ROOM
+
+    var selectedSingleProduct : ProductModel? = null
+
+    fun getSingleProduct(id: String) {
+        viewModelScope.launch {
+            selectedSingleProduct = productRepository.getSingleProduct(id)
+        }
+
+    }
+
 
 // TO CHECK WEATHER THE PRODUCT EXISTS OR NOT
    var selectedProduct : CartModel? = null
-    fun isExists(id : String){
+    fun isExists(id : String)
+    {
         viewModelScope.launch(Dispatchers.IO) {
             selectedProduct = productRepository.isExist(id)
          }
@@ -41,6 +54,9 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
    // private var _cartProduct = MutableLiveData<List<CartModel>>()
     val cartProducts =  productRepository.getCartProducts().asLiveData()
 
+
+
+    // DELETING PRODUCT FROM CART
     fun deleteProduct(cartModel : CartModel) {
         viewModelScope.launch(Dispatchers.IO) {
             delay(1000)
@@ -94,7 +110,25 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
 
 
 
+    //TO GET ALL THE RECENTLY VISITED PRODUCTS
 
+    lateinit var recentlyVisitedProducts: LiveData<List<RecentlyVisitedModel>>
+
+
+    // TO ADD THE PRODUCT INTO RECENTLY VISITED PRODUCTS ROOM TABLE
+
+    fun insertRecentlyVisitedProducts(recentlyVisitedModel: RecentlyVisitedModel) {
+        viewModelScope.launch {
+            productRepository.insertRecentlyVisitedProducts(recentlyVisitedModel)
+        }
+    }
+
+    init {
+        viewModelScope.launch {
+
+            recentlyVisitedProducts =  productRepository.getRecentlyVisitedProducts().asLiveData()
+        }
+    }
 
 
 

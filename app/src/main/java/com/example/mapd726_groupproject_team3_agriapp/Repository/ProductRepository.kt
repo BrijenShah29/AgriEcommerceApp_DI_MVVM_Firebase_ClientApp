@@ -3,10 +3,7 @@ package com.example.mapd726_groupproject_team3_agriapp.Repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.SubCategoryModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.*
 import com.example.mapd726_groupproject_team3_agriapp.RoomDB.AgroDao
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -41,10 +38,20 @@ class ProductRepository @Inject constructor( val db : FirebaseFirestore, val agr
     // INSERTING CART PRODUCTS INTO ROOM
      suspend fun insertCartProducts(cartModel: CartModel) = agroDao.insertCartProducts(cartModel)
 
+    // INSERTING RECENTLY VISITED PRODUCTS INTO ROOM
+    suspend fun insertRecentlyVisitedProducts(recentlyVisitedModel: RecentlyVisitedModel) = agroDao.insertRecentlyVisitedProducts(recentlyVisitedModel)
+
 
     // GETTING CART PRODUCTS FROM ROOM
     fun getCartProducts()  = agroDao.getCartProducts()
 
+    // GETTING SINGLE PRODUCT IF EXISTS
+
+    suspend fun getSingleProduct(id: String) = agroDao.getSingleProduct(id)
+
+    //  GETTING RECENTLY VISITED PRODUCTS FROM ROOM
+
+    fun getRecentlyVisitedProducts() = agroDao.getRecentlyVisitedProducts()
 
     // DELETING CART PRODUCTS FROM ROOM
     suspend fun deleteProduct(cartModel: CartModel) = agroDao.deleteProduct(cartModel)

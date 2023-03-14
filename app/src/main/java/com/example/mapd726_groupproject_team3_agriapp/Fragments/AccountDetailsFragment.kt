@@ -1,4 +1,4 @@
-package com.example.mapd726_groupproject_team3_agriapp.loginFragments
+package com.example.mapd726_groupproject_team3_agriapp.Fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -13,7 +13,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AccountDetailsFragment : Fragment() {
 
+
     lateinit var binding : FragmentAccountDetailsBinding
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

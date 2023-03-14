@@ -2,6 +2,7 @@ package com.example.mapd726_groupproject_team3_agriapp.DI
 
 import com.example.mapd726_groupproject_team3_agriapp.Repository.FirebaseRepository
 import com.example.mapd726_groupproject_team3_agriapp.Repository.ProductRepository
+import com.example.mapd726_groupproject_team3_agriapp.Repository.UserRepository
 import com.example.mapd726_groupproject_team3_agriapp.RoomDB.AgroDao
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -30,5 +31,11 @@ object RepositoryModule {
     fun providesProductsRepository(db : FirebaseFirestore, agroDao : AgroDao) : ProductRepository {
         return ProductRepository(db,agroDao)
     }
+
+    @Provides
+    fun providesUserRepository(auth: FirebaseAuth, db : FirebaseFirestore, storage: FirebaseStorage, agroDao : AgroDao) : UserRepository {
+        return UserRepository(auth,db,storage,agroDao)
+    }
+
 }
 

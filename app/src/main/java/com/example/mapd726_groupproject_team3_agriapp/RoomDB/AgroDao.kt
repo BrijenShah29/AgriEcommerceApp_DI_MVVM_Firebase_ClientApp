@@ -1,9 +1,11 @@
 package com.example.mapd726_groupproject_team3_agriapp.RoomDB
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.RecentlyVisitedModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.SubCategoryModel
 import kotlinx.coroutines.flow.Flow
 
@@ -30,7 +32,7 @@ interface AgroDao {
 
     // TO INSERT RECENTLY VISITED PRODUCTS
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRecentlyVisitedProducts(productModel: ProductModel)
+    suspend fun insertRecentlyVisitedProducts(recentlyVisitedModel: RecentlyVisitedModel)
 
 
 
@@ -63,6 +65,9 @@ interface AgroDao {
     @Query("SELECT * FROM cartProductTable")
     fun getCartProducts() : Flow<List<CartModel>>
 
+    //TO GET SINGLE PRODUCT FROM PRODUCTS TABLE
+    @Query("SELECT * FROM products WHERE productId = :id")
+    suspend fun getSingleProduct(id: String) : ProductModel
 
     //TO GET PRODUCTS FROM SEARCH
     @Query("SELECT * FROM products WHERE productName LIKE :searchQuery OR productSubCategory LIKE :searchQuery")
@@ -83,6 +88,8 @@ interface AgroDao {
     suspend fun updateCart(quantity : Int,totalAmount : Double , productId : String)
 
 
-
+    // TO GET PRODUCTS FROM RECENTLY VISITED TABLE
+    @Query("SELECT * FROM RecentlyVisitedProductTable LIMIT 10")
+    fun getRecentlyVisitedProducts() : Flow<List<RecentlyVisitedModel>>
 }
 

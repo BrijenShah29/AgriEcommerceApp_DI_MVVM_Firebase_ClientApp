@@ -20,9 +20,7 @@ class HomeViewModel @Inject constructor(private val firebaseRepository: Firebase
 {
 
 //SIGNOUT USER FROM CURRENT LOGIN
-fun signOut() {
-    firebaseRepository.signOut()
-}
+
 
 //INSERTING ALL PRODUCTS INTO ROOM DB AT INITIALIZATION
 
@@ -131,6 +129,7 @@ init {
         growthPromotersProducts = productRepository.getProductsByCategory("Plant Growth Promoters").asLiveData()
         toolEquipmentsProducts = productRepository.getProductsByCategory("Tools").asLiveData()
         potsPlantersProducts = productRepository.getProductsByCategory("Pots and Planters").asLiveData()
+
     }
 
     viewModelScope.launch {

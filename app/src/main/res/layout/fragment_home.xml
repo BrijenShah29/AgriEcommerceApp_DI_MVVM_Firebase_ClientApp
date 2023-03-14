@@ -442,13 +442,13 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/previousVisitedProductsRecycler"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_110sdp"
+            android:layout_height="@dimen/_145sdp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/layout_category_item" />
         <Space
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_100sdp"/>
+            android:layout_height="@dimen/_70sdp"/>
 
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>

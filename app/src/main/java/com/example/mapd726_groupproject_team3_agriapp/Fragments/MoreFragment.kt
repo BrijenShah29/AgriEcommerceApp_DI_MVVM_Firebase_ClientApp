@@ -7,11 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.mapd726_groupproject_team3_agriapp.Activities.LoginActivity
+import com.example.mapd726_groupproject_team3_agriapp.Adapter.RecentlyVisitedProductsAdapter.RecentlyVisitedAdapter
 import com.example.mapd726_groupproject_team3_agriapp.MainActivity
 import com.example.mapd726_groupproject_team3_agriapp.R
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.HomeViewModel
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.ProductsViewModel
+import com.example.mapd726_groupproject_team3_agriapp.ViewModel.UserViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentMoreBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,7 +23,7 @@ class MoreFragment : Fragment() {
 
     lateinit var binding : FragmentMoreBinding
 
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewModel by viewModels<UserViewModel>()
     private val viewModelProducts by viewModels<ProductsViewModel>()
 
 
@@ -30,6 +33,16 @@ class MoreFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentMoreBinding.inflate(layoutInflater)
+
+        //SETTING UP RECENTLY VISITED PRODUCT RECYCLERVIEW
+        val adapter = RecentlyVisitedAdapter(requireContext(),viewModelProducts)
+        binding.productLastVisited.adapter = adapter
+        binding.productLastVisited.setHasFixedSize(true)
+        viewModelProducts.recentlyVisitedProducts.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+        })
+
+        // SIGN-OUT BUTTON ON CLICK FUNCTIONALITY
 
         binding.signOutButton.setOnClickListener {
             viewModel.signOut()

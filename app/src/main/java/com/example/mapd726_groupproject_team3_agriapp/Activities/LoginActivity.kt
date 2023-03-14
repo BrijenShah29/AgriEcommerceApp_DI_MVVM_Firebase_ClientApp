@@ -37,11 +37,7 @@ class LoginActivity : AppCompatActivity() {
                     }
                     R.id.otpFragment ->
                     {
-                        binding.appBar.title = "Enter OTP"
-                    }
-                    R.id.accountDetailsFragment ->
-                    {
-                        binding.appBar.title = "Enter New Account Info"
+
                     }
 
                     else -> {

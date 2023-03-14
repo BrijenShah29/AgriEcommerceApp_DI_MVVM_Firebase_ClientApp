@@ -2,6 +2,8 @@ package com.example.mapd726_groupproject_team3_agriapp.Fragments
 
 import android.app.Activity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.StrikethroughSpan
@@ -14,13 +16,16 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters.ImageSliderAdapter
+import com.example.mapd726_groupproject_team3_agriapp.Adapter.RecentlyVisitedProductsAdapter.RecentlyVisitedAdapter
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.RecentlyVisitedModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.Slider
 import com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.BottomSheetFragment
 import com.example.mapd726_groupproject_team3_agriapp.R
@@ -58,13 +63,28 @@ class DetailedProductFragment : Fragment() {
 
         setProductFromPreviousSource(product)
 
+        // Adding product to previously visited Table
+
+        viewModel.insertRecentlyVisitedProducts(RecentlyVisitedModel(product?.productName,product?.productCoverImg,product!!.productId,product?.productPrice,product?.discountRate,product?.onSale,product?.productSpecialPrice))
+
+        // SHOWING RECENTLY VISITED PRODUCTS
+        val adapter = RecentlyVisitedAdapter(requireContext(),viewModel)
+        binding.previousVisitedProductsRecycler.adapter = adapter
+        binding.previousVisitedProductsRecycler.setHasFixedSize(true)
+        viewModel.recentlyVisitedProducts.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it)
+
+        })
+
+
         // PRODUCT QUANTITY PLUS MINUS METHOD
 
         binding.addLessQuantityButton.setOnClickListener {
+            quantity = 1
             if(quantity!! <= 1)
             {
                 quantity = 1
-                binding.productCount.text == quantity.toString()
+                binding.productCount.text = quantity.toString()
 
             }
             else
@@ -156,17 +176,44 @@ class DetailedProductFragment : Fragment() {
 
     private fun cartAction(product: ProductModel?, it : View) {
 
+       // FIRST WE HAVE TO CHECK IF PRODUCT IS IN CART OR NOT.. IF IT IS IN CART, WE UPDATE IT ELSE WE ADD IT AS NEW ITEM
+
+
         viewModel.isExists(product?.productId!!)
+
+        Handler(Looper.myLooper()!!).postDelayed(Runnable {
 
         if(viewModel.selectedProduct!= null){
 
             // UPDATE QUANTITY and PRICE ONLY
+
+            val selectedProductQty = viewModel.selectedProduct?.productQuantity
+            quantity += selectedProductQty!!
+            if(quantity > 10){
+                quantity = 10
+                var totalAmount = product.productSpecialPrice!!.toDouble() * quantity.toDouble()
+                updateCart(product, totalAmount, it)
+            }
+            else
+            {
+                var totalAmount = product.productSpecialPrice!!.toDouble() * quantity.toDouble()
+                updateCart(product, totalAmount, it)
+            }
 
         } else {
 
         var totalAmount = product.productSpecialPrice!!.toDouble() * quantity.toDouble()
             addToCart(product, totalAmount, it)
         }
+
+    },300)
+
+    }
+
+    private fun updateCart(product: ProductModel, totalAmount: Double, it: View) {
+
+        viewModel.updateCart(quantity,totalAmount,product.productId)
+        Snackbar.make(it, "Cart Updated Successfully !!", Snackbar.LENGTH_SHORT).show()
 
     }
 
@@ -178,6 +225,7 @@ class DetailedProductFragment : Fragment() {
         }
 
         Snackbar.make(view,"Product Added to Cart Successfully !!", Snackbar.LENGTH_SHORT).show()
+        quantity = 1
       // val sender = (FragmentComponentManager.findActivity(requireContext()) as Activity as FragmentActivity).supportFragmentManager
 
 

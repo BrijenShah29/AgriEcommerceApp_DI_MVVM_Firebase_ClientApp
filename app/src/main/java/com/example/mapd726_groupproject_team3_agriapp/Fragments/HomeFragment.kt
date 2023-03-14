@@ -11,6 +11,7 @@ import com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters.C
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters.ImageSliderAdapter
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters.ProductAdapter
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters.HomePageSubCategoryAdapters.SubCategoryDisplayAdapter
+import com.example.mapd726_groupproject_team3_agriapp.Adapter.RecentlyVisitedProductsAdapter.RecentlyVisitedAdapter
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.Slider
@@ -241,6 +242,12 @@ class HomeFragment : Fragment() {
         })
 
     // GETTING ALL RECENTLY VISITED PRODUCTS
+        val recentlyVisitedProductAdapter = RecentlyVisitedAdapter(requireContext(),viewModelProducts)
+        binding.previousVisitedProductsRecycler.adapter = recentlyVisitedProductAdapter
+        binding.previousVisitedProductsRecycler.setHasFixedSize(true)
+        viewModelProducts.recentlyVisitedProducts.observe(viewLifecycleOwner,Observer{
+            recentlyVisitedProductAdapter.submitList(it)
+        })
 
 
 

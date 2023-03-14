@@ -111,11 +111,15 @@ init {
         return listCategories
     }
 
-    // USER SIGNOUT
-    fun signOut()
-    {
-        auth.signOut()
-    }
+
+    // SETTING USER DATA TO FIREBASE FIRE STORE
+
+
+
+
+
+
+
 
 }
 
