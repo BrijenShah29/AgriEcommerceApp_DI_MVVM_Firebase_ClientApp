@@ -9,12 +9,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
 import com.example.mapd726_groupproject_team3_agriapp.MainActivity
 import com.example.mapd726_groupproject_team3_agriapp.R
 import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant
+import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant.Companion.USER_GUEST
 import com.example.mapd726_groupproject_team3_agriapp.Utils.UserManager
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentLoginBinding
 import com.google.android.material.snackbar.Snackbar
@@ -50,7 +52,10 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
        binding =  FragmentLoginBinding.inflate(layoutInflater)
+
+
         auth = FirebaseAuth.getInstance()
+
 
         mProgressBar = binding.otpProgressBar
         mProgressBar.visibility = View.INVISIBLE
@@ -58,7 +63,7 @@ class LoginFragment : Fragment() {
         //SETTING UP GUEST LOGIN
         binding.guestUserButton.setOnClickListener{
 
-            userManager.saveUserName("Guest")
+            userManager.saveUserName(Constant.USER_GUEST)
             userManager.savePhoneNumber(Constant.USER_NUMBER)
 
             val intent = Intent(activity, MainActivity::class.java)
@@ -189,7 +194,7 @@ class LoginFragment : Fragment() {
         super.onStart()
         if(auth.currentUser!=null)
         {
-            userManager.saveUserName(Constant.REGISTERED_USER)
+            //userManager.saveUserName(Constant.REGISTERED_USER)
             userManager.savePhoneNumber(auth.currentUser?.phoneNumber.toString()) //STORING NUMBER TO SHARED PREFERENCES
             val intent = Intent(activity, MainActivity::class.java)
             startActivity(intent)

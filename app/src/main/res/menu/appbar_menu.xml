@@ -4,14 +4,15 @@
 
     <item
         android:id="@+id/search_appBar"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/search"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_search"
         android:title="Search" />
 
     <item
         android:id="@+id/cart_appBar"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/bag"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_bag"
+        app:actionLayout="@layout/cart_badge_item"
         android:title="Cart"/>
 
 

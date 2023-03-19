@@ -53,6 +53,10 @@ class ProductRepository @Inject constructor( val db : FirebaseFirestore, val agr
 
     fun getRecentlyVisitedProducts() = agroDao.getRecentlyVisitedProducts()
 
+    // DELETING RECENTLY VISITED PRODUCTS PREVIOUS VISITS
+
+    suspend fun removeOldRecentlyVisitedData() = agroDao.removeOldRecentlyVisitedData()
+
     // DELETING CART PRODUCTS FROM ROOM
     suspend fun deleteProduct(cartModel: CartModel) = agroDao.deleteProduct(cartModel)
 

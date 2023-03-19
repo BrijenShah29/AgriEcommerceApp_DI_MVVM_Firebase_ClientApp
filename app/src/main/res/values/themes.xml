@@ -11,6 +11,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#00000000</item>
+        <item name="android:colorForeground">@color/colorForeground</item>
         <!-- Customize your theme here. -->
         <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
 
@@ -50,6 +51,12 @@
         <item name="android:gravity">bottom</item>
         <item name="android:textSize">14sp</item>
         <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="AppTheme.PopupOverlay" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="textSize">@dimen/_8sdp</item>
+        <item name="allowStacking">true</item>
+        <item name="android:fontFamily">@font/baloo</item>
     </style>
 
 </resources>

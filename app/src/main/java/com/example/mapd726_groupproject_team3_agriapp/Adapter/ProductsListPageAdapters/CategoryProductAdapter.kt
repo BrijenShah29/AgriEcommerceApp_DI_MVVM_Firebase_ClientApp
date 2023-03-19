@@ -14,12 +14,14 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
 import com.example.mapd726_groupproject_team3_agriapp.Fragments.DetailedProductFragment
 import com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.BottomSheetFragment
+import com.example.mapd726_groupproject_team3_agriapp.R
 import com.example.mapd726_groupproject_team3_agriapp.databinding.ItemProductListingLayoutBinding
 import dagger.hilt.android.internal.managers.FragmentComponentManager
 
@@ -46,6 +48,17 @@ class CategoryProductAdapter(val context: Context) : ListAdapter<ProductModel,Ca
                 binding.imageSale.visibility = INVISIBLE
             }
 
+            //SETTING UP IMAGE ON CLICK LISTENER
+            binding.imageView.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putParcelable("product",item)
+                // bundle.putString("productID",item.productId)
+                val sender = (FragmentComponentManager.findActivity(itemView.context) as Activity as FragmentActivity).supportFragmentManager
+                sender.setFragmentResult("dataFromHome",bundle)
+                Navigation.findNavController(itemView).navigate(R.id.action_productsFragment_to_detailedProductFragment,bundle)
+            }
+
+            //SETTING UP QUICK ACTION BUTTON ON CLICK LISTENER
             binding.quickAction.setOnClickListener {
                 Log.d("Quick Action called",item.productName.toString())
 

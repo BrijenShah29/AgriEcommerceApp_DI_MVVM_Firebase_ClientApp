@@ -20,6 +20,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val appbar = binding.appBar
+        setSupportActionBar(appbar)
+
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.loginContainer)
         val navController = navHostFragment?.findNavController()
 
@@ -29,20 +32,12 @@ class LoginActivity : AppCompatActivity() {
                 destination: NavDestination,
                 arguments: Bundle?
             ) {
-                when(destination.id){
+               title = when(destination.id){
 
-                    R.id.loginFragment ->
-                    {
-
-                    }
-                    R.id.otpFragment ->
-                    {
-
-                    }
-
-                    else -> {
-
-                    }
+                    R.id.loginFragment -> "Login With OTP"
+                    R.id.otpFragment -> "Verify Your Number"
+                    R.id.registrationFragment ->"New User Info"
+                   else -> "Log In "
                 }
             }
 

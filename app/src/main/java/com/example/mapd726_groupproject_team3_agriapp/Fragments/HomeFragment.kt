@@ -247,6 +247,10 @@ class HomeFragment : Fragment() {
         binding.previousVisitedProductsRecycler.setHasFixedSize(true)
         viewModelProducts.recentlyVisitedProducts.observe(viewLifecycleOwner,Observer{
             recentlyVisitedProductAdapter.submitList(it)
+            if(!it.isNullOrEmpty())
+            {
+                viewModelProducts.removeOldRecentlyVisitedData()
+            }
         })
 
 

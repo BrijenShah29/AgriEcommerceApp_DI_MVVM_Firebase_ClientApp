@@ -31,6 +31,7 @@ class SubCategoryDisplayAdapter (var context: Context) : ListAdapter<SubCategory
                     val bundle = Bundle()
                     bundle.putString("products",item.SubCategory.toString())
 
+
                     val sender = (FragmentComponentManager.findActivity(itemView.context) as Activity as FragmentActivity).supportFragmentManager
                     sender.setFragmentResult("fromHomePage",bundle)
 

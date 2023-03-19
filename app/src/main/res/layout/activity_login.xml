@@ -11,33 +11,19 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:elevation="0dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/appBar"
-            style="@style/Widget.MaterialComponents.Toolbar.Primary"
             android:layout_width="match_parent"
-            android:background="@color/color_primary"
-            android:backgroundTint="@color/color_primary"
+            android:background="@color/white"
             android:elevation="0dp"
+            android:layout_gravity="center_vertical"
             android:stateListAnimator="@null"
             android:layout_height="?android:attr/actionBarSize"
             app:logoAdjustViewBounds="true"
             app:titleCentered="true">
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/appBarTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:clickable="false"
-                android:fontFamily="@font/roboto_medium"
-                android:gravity="center_vertical"
-                android:text="Login With OTP"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                android:textSize="@dimen/_12sdp" />
-
 
         </com.google.android.material.appbar.MaterialToolbar>
 

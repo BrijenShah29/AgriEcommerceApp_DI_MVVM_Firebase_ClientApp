@@ -4,39 +4,57 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v23/user_wishlist.xml" value="0.1975" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1285" />
         <entry key="app/src/main/res/drawable-v24/sale.xml" value="0.1475" />
         <entry key="app/src/main/res/drawable/add_img.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/back_button.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/badge_shape.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/bg_gradient.xml" value="0.1315" />
         <entry key="app/src/main/res/drawable/bg_overlay.xml" value="0.17" />
         <entry key="app/src/main/res/drawable/bg_textoverlay.xml" value="0.165" />
         <entry key="app/src/main/res/drawable/borderbutton.xml" value="0.1215" />
+        <entry key="app/src/main/res/drawable/cart_badge_item.xml" value="0.1155" />
         <entry key="app/src/main/res/drawable/dash.xml" value="0.1285" />
+        <entry key="app/src/main/res/drawable/discount_button1.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable/discount_button2.xml" value="0.1975" />
         <entry key="app/src/main/res/drawable/expand_less.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/favourite_checked.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/favourite_unchecked.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/fillbutton.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_bag.xml" value="0.1675" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_forward_ios_24.xml" value="0.1285" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_right_24.xml" value="0.1285" />
         <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.1475" />
         <entry key="app/src/main/res/drawable/ic_baseline_expand_more_24.xml" value="0.1495" />
         <entry key="app/src/main/res/drawable/ic_baseline_menu_24.xml" value="0.1475" />
         <entry key="app/src/main/res/drawable/ic_baseline_search_off_24.xml" value="0.103" />
+        <entry key="app/src/main/res/drawable/ic_forward_24_black.xml" value="0.1975" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1475" />
         <entry key="app/src/main/res/drawable/ic_otp.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_profile_blank.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable/ic_register_user.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable/ic_search.xml" value="0.1675" />
+        <entry key="app/src/main/res/drawable/ic_shoppingcart_checkout.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable/ic_withlove.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/minus_img.xml" value="0.113" />
         <entry key="app/src/main/res/drawable/rounded_dialog.xml" value="0.1625396728515625" />
         <entry key="app/src/main/res/drawable/selector_wishlist_item.xml" value="0.1595" />
         <entry key="app/src/main/res/drawable/splash_background.xml" value="0.1315" />
         <entry key="app/src/main/res/drawable/textlines.xml" value="0.1175" />
+        <entry key="app/src/main/res/drawable/upload_image_user.xml" value="0.1965" />
+        <entry key="app/src/main/res/drawable/user_guest_signin.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable/user_upload_image.xml" value="0.1965" />
+        <entry key="app/src/main/res/drawable/user_wishlist.xml" value="0.1975" />
+        <entry key="app/src/main/res/drawable/v904_nunny_017_b.xml" value="0.1955" />
         <entry key="app/src/main/res/layout/activity_category.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/activity_log_in.xml" value="0.24365942028985507" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_product_by_category.xml" value="0.12537993920972645" />
         <entry key="app/src/main/res/layout/activity_products.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/activity_sub_category.xml" value="0.21422101449275363" />
+        <entry key="app/src/main/res/layout/cart_badge_item.xml" value="0.49252624511718757" />
         <entry key="app/src/main/res/layout/cart_card.xml" value="0.34328358208955223" />
         <entry key="app/src/main/res/layout/drawer_header.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_about_us.xml" value="0.23020833333333332" />
@@ -46,14 +64,17 @@
         <entry key="app/src/main/res/layout/fragment_cart.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_cart_navigated.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/fragment_category.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_checkout.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_contact_us.xml" value="0.23020833333333332" />
         <entry key="app/src/main/res/layout/fragment_detailed_product.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.14203084832904883" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_more.xml" value="0.23020833333333332" />
-        <entry key="app/src/main/res/layout/fragment_otp.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_otp.xml" value="0.30240631103515625" />
         <entry key="app/src/main/res/layout/fragment_products.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.36408782958984387" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_shipping_details.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_sub_category.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_wishlist.xml" value="0.23020833333333332" />
@@ -66,8 +87,9 @@
         <entry key="app/src/main/res/layout/item_text_list_layout.xml" value="0.24540557861328127" />
         <entry key="app/src/main/res/layout/layout_category_item.xml" value="0.1539855072463768" />
         <entry key="app/src/main/res/layout/layout_product_item.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/progress_layout.xml" value="0.2269021739130435" />
         <entry key="app/src/main/res/layout/text_drop_down.xml" value="0.22916666666666666" />
-        <entry key="app/src/main/res/menu/appbar_menu.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/appbar_menu.xml" value="0.335" />
         <entry key="app/src/main/res/menu/bottom_navigation.xml" value="0.25359649658203126" />
         <entry key="app/src/main/res/menu/side_drawer_navigation.xml" value="0.335" />
       </map>

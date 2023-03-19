@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".loginFragments.RegistrationFragment">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_55sdp"
+        android:text="Profile Info"
+        android:textColor="@color/color_primary"
+        android:textSize="@dimen/_16sdp"
+        app:fontFamily="@font/roboto_condensed_bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:text="Please provide your name, Email and an optional profile Photo"
+        android:textColor="@color/dark_brown"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toTopOf="@+id/updateUserProfileImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/successMessage"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="Welcome Message"
+        android:textColor="@color/dark_brown"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:visibility="gone"
+        android:id="@+id/continueButton"
+        android:layout_marginTop="@dimen/_25sdp"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/fillbutton"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:padding="@dimen/_7sdp"
+        android:text="Continue"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/successMessage" />
+
+
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/updateUserProfileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_100sdp"
+        android:backgroundTint="@color/white"
+        android:scaleType="fitCenter"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:src="@drawable/user_upload_image"
+        app:layout_constraintBottom_toTopOf="@+id/numberLayoutCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/numberLayoutCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/firstNameLayoutCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LoginTextInputOuterFieldStyle"
+            android:layout_marginHorizontal="16dp"
+            android:clickable="false"
+            app:boxStrokeColor="@color/color_primary"
+            app:hintTextColor="@color/dark_brown">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/cellNumber"
+                style="@style/LoginTextInputInnerFieldStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:gravity="bottom"
+                android:hint="Number"
+                android:inputType="text"
+                android:textColorHint="@color/colorForeground"
+                app:fontFamily="@font/roboto_condensed_bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/firstNameLayoutCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/lastNameLayoutCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LoginTextInputOuterFieldStyle"
+            android:layout_marginHorizontal="16dp"
+            android:clickable="false"
+            app:boxStrokeColor="@color/color_primary"
+            app:hintTextColor="@color/dark_brown">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/firstName"
+                style="@style/LoginTextInputInnerFieldStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:gravity="bottom"
+                android:hint="First Name"
+                android:inputType="text"
+                android:textColorHint="@color/colorForeground"
+                app:fontFamily="@font/roboto_condensed_bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/lastNameLayoutCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/emailLayoutCard"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LoginTextInputOuterFieldStyle"
+            android:layout_marginHorizontal="16dp"
+            android:clickable="false"
+            app:boxStrokeColor="@color/color_primary"
+            app:hintTextColor="@color/dark_brown">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lastName"
+                style="@style/LoginTextInputInnerFieldStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:gravity="bottom"
+                android:hint="Last Name"
+                android:inputType="text"
+                android:textColorHint="@color/colorForeground"
+                app:fontFamily="@font/roboto_condensed_bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/emailLayoutCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/registerButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/LoginTextInputOuterFieldStyle"
+            android:layout_marginHorizontal="16dp"
+            android:clickable="false"
+            app:boxStrokeColor="@color/color_primary"
+            app:hintTextColor="@color/dark_brown">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/emailId"
+                style="@style/LoginTextInputInnerFieldStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:gravity="bottom"
+                android:hint="Email"
+                android:inputType="text"
+                android:textColorHint="@color/colorForeground"
+                app:fontFamily="@font/roboto_condensed_bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:src="@drawable/ic_withlove"
+        android:id="@+id/bottomImage"
+        android:layout_marginEnd="-10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/registerButton"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@drawable/fillbutton"
+        android:fontFamily="@font/roboto_condensed_bold"
+        android:padding="@dimen/_7sdp"
+        android:text="Finish Registration"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_16sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/bottomImage" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

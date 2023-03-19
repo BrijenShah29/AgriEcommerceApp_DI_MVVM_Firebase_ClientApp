@@ -10,9 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.R
+import com.example.mapd726_groupproject_team3_agriapp.Utils.UserManager
 import com.example.mapd726_groupproject_team3_agriapp.databinding.ItemRootcategoryLayoutBinding
 
-class RootCategoryAdapter(val context: Context, val list : ArrayList<CategoryModel>) : RecyclerView.Adapter<RootCategoryAdapter.rootCategoryViewHolder>() {
+class RootCategoryAdapter(
+    val context: Context,
+    val list: ArrayList<CategoryModel>,
+    val userManager: UserManager
+) : RecyclerView.Adapter<RootCategoryAdapter.rootCategoryViewHolder>() {
 
     inner class rootCategoryViewHolder(val binding : ItemRootcategoryLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -28,6 +33,7 @@ class RootCategoryAdapter(val context: Context, val list : ArrayList<CategoryMod
         Glide.with(context).load(list[position].Image).centerCrop().into(holder.binding.rootImage)
 
         holder.itemView.setOnClickListener {
+            userManager.saveSelectedUserCategory(list[position].Root)
             val bundle = Bundle()
 
             bundle.putString("cat",list[position].Root)

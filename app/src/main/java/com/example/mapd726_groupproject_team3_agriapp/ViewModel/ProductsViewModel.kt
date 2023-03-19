@@ -108,6 +108,13 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
         }
     }
 
+    fun removeOldRecentlyVisitedData(){
+        viewModelScope.launch(Dispatchers.IO) {
+
+            productRepository.removeOldRecentlyVisitedData()
+        }
+
+    }
 
 
     //TO GET ALL THE RECENTLY VISITED PRODUCTS
@@ -118,14 +125,13 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
     // TO ADD THE PRODUCT INTO RECENTLY VISITED PRODUCTS ROOM TABLE
 
     fun insertRecentlyVisitedProducts(recentlyVisitedModel: RecentlyVisitedModel) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             productRepository.insertRecentlyVisitedProducts(recentlyVisitedModel)
         }
     }
 
     init {
         viewModelScope.launch {
-
             recentlyVisitedProducts =  productRepository.getRecentlyVisitedProducts().asLiveData()
         }
     }

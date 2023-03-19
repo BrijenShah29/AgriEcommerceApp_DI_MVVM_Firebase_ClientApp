@@ -14,13 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters.ImageSliderAdapter
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.RecentlyVisitedProductsAdapter.RecentlyVisitedAdapter
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
@@ -31,11 +27,16 @@ import com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.B
 import com.example.mapd726_groupproject_team3_agriapp.R
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.ProductsViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentDetailedProductBinding
+import com.google.android.material.snackbar.BaseTransientBottomBar.ANIMATION_MODE_SLIDE
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.internal.managers.FragmentComponentManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.sql.Timestamp
+import java.util.*
+import kotlin.collections.ArrayList
+
 @AndroidEntryPoint
 class DetailedProductFragment : Fragment() {
 
@@ -65,7 +66,7 @@ class DetailedProductFragment : Fragment() {
 
         // Adding product to previously visited Table
 
-        viewModel.insertRecentlyVisitedProducts(RecentlyVisitedModel(product?.productName,product?.productCoverImg,product!!.productId,product?.productPrice,product?.discountRate,product?.onSale,product?.productSpecialPrice))
+        viewModel.insertRecentlyVisitedProducts(RecentlyVisitedModel(0,product?.productName,product?.productCoverImg,product!!.productId,product?.productPrice,product?.discountRate,product?.onSale,product?.productSpecialPrice))
 
         // SHOWING RECENTLY VISITED PRODUCTS
         val adapter = RecentlyVisitedAdapter(requireContext(),viewModel)
@@ -79,8 +80,9 @@ class DetailedProductFragment : Fragment() {
 
         // PRODUCT QUANTITY PLUS MINUS METHOD
 
+        quantity = 1
         binding.addLessQuantityButton.setOnClickListener {
-            quantity = 1
+
             if(quantity!! <= 1)
             {
                 quantity = 1
@@ -213,7 +215,9 @@ class DetailedProductFragment : Fragment() {
     private fun updateCart(product: ProductModel, totalAmount: Double, it: View) {
 
         viewModel.updateCart(quantity,totalAmount,product.productId)
-        Snackbar.make(it, "Cart Updated Successfully !!", Snackbar.LENGTH_SHORT).show()
+        val snack = Snackbar.make(it,"Cart Updated Successfully !!",Snackbar.LENGTH_SHORT)
+        snack.animationMode = ANIMATION_MODE_SLIDE
+        snack.show()
 
     }
 
@@ -224,7 +228,9 @@ class DetailedProductFragment : Fragment() {
             viewModel.insertCartProducts(data)
         }
 
-        Snackbar.make(view,"Product Added to Cart Successfully !!", Snackbar.LENGTH_SHORT).show()
+        val snack = Snackbar.make(view,"Product Added to Cart Successfully !!",Snackbar.LENGTH_SHORT)
+        snack.animationMode = ANIMATION_MODE_SLIDE
+        snack.show()
         quantity = 1
       // val sender = (FragmentComponentManager.findActivity(requireContext()) as Activity as FragmentActivity).supportFragmentManager
 

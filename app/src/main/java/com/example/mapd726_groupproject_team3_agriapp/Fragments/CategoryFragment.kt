@@ -9,18 +9,21 @@ import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.CategoryFragmentAdapters.RootCategoryAdapter
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
+import com.example.mapd726_groupproject_team3_agriapp.Utils.UserManager
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentCategoryBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import javax.inject.Inject
 
 
 class CategoryFragment : Fragment() {
 
     private lateinit var binding: FragmentCategoryBinding
 
+    @Inject
+    lateinit var userManager: UserManager
     private var rootCategoryList = ArrayList<CategoryModel>()
     private var subCategoryList = ArrayList<CategoryModel>()
-
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreateView(
@@ -31,6 +34,8 @@ class CategoryFragment : Fragment() {
 
         binding = FragmentCategoryBinding.inflate(layoutInflater)
 
+        // to resolve lateinit var error only
+        userManager = UserManager(requireContext())
         getRootCategoriesFromFirebase()
 
 
@@ -68,7 +73,7 @@ class CategoryFragment : Fragment() {
                 i += 1
             }
                 binding.categoryRecycler.adapter =
-                    RootCategoryAdapter(requireContext(), rootCategoryList)
+                    RootCategoryAdapter(requireContext(), rootCategoryList,userManager)
         }
 
     }

@@ -110,7 +110,11 @@ class RecentlyVisitedAdapter(val context: Context, val viewModel: ProductsViewMo
             oldItem: RecentlyVisitedModel,
             newItem: RecentlyVisitedModel,
         ): Boolean {
-            return oldItem.productId == newItem.productId
+            return oldItem.productId == newItem.productId &&
+                oldItem.id == newItem.id &&
+                oldItem.productName == newItem.productName &&
+                    oldItem.productSpecialPrice == newItem.productSpecialPrice
+
         }
 
         override fun areContentsTheSame(

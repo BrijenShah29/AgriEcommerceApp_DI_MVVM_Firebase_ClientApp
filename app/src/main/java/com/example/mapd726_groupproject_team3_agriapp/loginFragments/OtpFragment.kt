@@ -21,10 +21,14 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.example.mapd726_groupproject_team3_agriapp.MainActivity
 import com.example.mapd726_groupproject_team3_agriapp.R
+import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant.Companion.USER_NAME
 import com.example.mapd726_groupproject_team3_agriapp.Utils.UserManager
+import com.example.mapd726_groupproject_team3_agriapp.ViewModel.UserViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentOtpBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.FirebaseException
@@ -48,6 +52,8 @@ private lateinit var verificationCode : String
     lateinit var auth : FirebaseAuth
     val TAG = "OTP FRAGMENT"
 
+    val viewModel by viewModels<UserViewModel>()
+
     private lateinit var mProgressBar : ProgressBar
 
    // lateinit var  builder : AlertDialog.Builder
@@ -62,6 +68,7 @@ private lateinit var verificationCode : String
 
 
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
 
 
 
@@ -215,11 +222,49 @@ private lateinit var verificationCode : String
     }
 
     private fun sendToMainScreen(user: FirebaseUser?) {
-        mProgressBar.visibility = View.INVISIBLE
+
         userManager.savePhoneNumber(user?.phoneNumber.toString()) //STORING NUMBER TO SHARED PREFERENCES
-        val intent = Intent(activity, MainActivity::class.java)
-        startActivity(intent)
-        activity?.finish()
+        // CHECK IF USER ALREADY EXISTS IN FIREBASE
+
+            viewModel.getUSerDataFromFirebase("Users",userManager.getUserNumber().toString())
+            viewModel.firebaseUserData.observe(viewLifecycleOwner, Observer {
+                Handler(Looper.myLooper()!!).postDelayed(Runnable {
+                    if(it!=null) {
+                        if (it.customerId.isNotEmpty() || it.customerId.isNotBlank()) {
+
+
+                            // Store UserData into Room db for future use
+                            viewModel.insertUserDataIntoRoom(it)
+
+                            //userManager.savePhoneNumber(it.customerNumber)
+                            userManager.saveUserName(it.customerFirstName)
+                            userManager.saveCustomerImage(it.customerImage)
+                            userManager.saveCustomerId(it.customerId)
+
+                            mProgressBar.visibility = View.INVISIBLE
+                            // Login User into App
+                            val intent = Intent(activity, MainActivity::class.java)
+                            startActivity(intent)
+                            activity?.finish()
+                        }
+                    }
+                    else
+                    {
+                        mProgressBar.visibility = View.INVISIBLE
+                        //IF USER DOES NOT EXIST GO TO REGISTRATION PAGE
+                        Navigation.findNavController(requireView())
+                            .navigate(R.id.action_otpFragment_to_registrationFragment)
+
+                    }
+
+                },4000)
+
+
+            })
+
+//        val intent = Intent(activity, MainActivity::class.java)
+//        startActivity(intent)
+//        activity?.finish()
     }
 
 }

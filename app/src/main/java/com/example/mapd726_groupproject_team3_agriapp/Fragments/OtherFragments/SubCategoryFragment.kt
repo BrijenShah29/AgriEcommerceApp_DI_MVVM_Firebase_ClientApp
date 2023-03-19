@@ -14,9 +14,11 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.R
+import com.example.mapd726_groupproject_team3_agriapp.Utils.UserManager
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentSubCategoryBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import javax.inject.Inject
 
 
 class SubCategoryFragment : Fragment() {
@@ -24,6 +26,8 @@ class SubCategoryFragment : Fragment() {
     private lateinit var binding : FragmentSubCategoryBinding
     private var list = ArrayList<String>()
 
+    @Inject
+    lateinit var userManager: UserManager
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +36,9 @@ class SubCategoryFragment : Fragment() {
         // Inflate the layout for this fragment
 
         binding = FragmentSubCategoryBinding.inflate(layoutInflater)
+
+        // to resolve lateinit var error only
+        userManager = UserManager(requireContext())
 
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -64,7 +71,10 @@ class SubCategoryFragment : Fragment() {
     }
 
     private fun navigateToProductFragment(i: Int) {
+        // STORING SELECTED PRODUCT INTO SHARED FRAGMENT TO SHOW IN TITLE BAR
+        userManager.saveSelectedUserSubCategory(list[i].toString())
 
+        //CREATING BUNDLE AND PARSING DATA INTO NEXT FRAGMENT
         val bundle = Bundle()
         bundle.putString("products",list[i].toString())
         bundle.putString("field","productCategory")

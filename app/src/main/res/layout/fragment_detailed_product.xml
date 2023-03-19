@@ -96,7 +96,7 @@
                         android:layout_marginTop="@dimen/_5sdp"
                         android:fontFamily="@font/roboto_condensed_bold"
                         android:text="Random Brand Name"
-                        android:textColor="@color/black"
+                        android:textColor="@color/black_semi"
                         android:textSize="@dimen/_16sdp"
                         app:autoSizeMaxTextSize="@dimen/_22sdp"
                         app:autoSizeMinTextSize="@dimen/_18sdp"
@@ -150,7 +150,7 @@
                     android:fontFamily="@font/roboto_condensed_bold"
                     android:text="Quantity"
                     android:outlineProvider="none"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_semi"
                     android:textSize="@dimen/_16sdp" />
 
                 <LinearLayout
@@ -167,7 +167,7 @@
                         android:layout_height="23dp"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/minus_img"
-                        app:tint="@color/black" />
+                        app:tint="@color/colorForeground" />
 
                     <TextView
                         android:id="@+id/productCount"
@@ -178,7 +178,7 @@
                         android:fontFamily="@font/roboto_condensed_bold"
                         android:gravity="center_vertical"
                         android:text="1"
-                        android:textColor="@color/black"
+                        android:textColor="@color/colorForeground"
                         android:textSize="@dimen/_24sdp" />
 
                     <ImageButton
@@ -187,7 +187,7 @@
                         android:layout_height="23dp"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/add_img"
-                        app:tint="@color/black" />
+                        app:tint="@color/colorForeground" />
                 </LinearLayout>
 
 
@@ -213,7 +213,7 @@
                             android:layout_marginBottom="@dimen/_5sdp"
                             android:fontFamily="@font/roboto_condensed_bold"
                             android:text="Product Description"
-                            android:textColor="@color/black"
+                            android:textColor="@color/black_semi"
                             android:textSize="@dimen/_14sdp" />
 
                         <ImageView
@@ -228,6 +228,7 @@
 
                     <androidx.cardview.widget.CardView
                         android:elevation="0dp"
+                        android:layout_marginEnd="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -236,11 +237,11 @@
                             android:visibility="gone"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_marginEnd="@dimen/_10sdp"
                             android:layout_marginStart="@dimen/_5sdp"
                             android:fontFamily="@font/roboto_medium"
                             android:text="some Random Description"
-                            android:textColor="@color/black"
+                            android:textColor="@color/colorForeground"
                             android:elevation="0dp"
                             android:textSize="@dimen/_14sdp"
                             app:autoSizeTextType="uniform" />

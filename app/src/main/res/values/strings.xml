@@ -36,6 +36,8 @@
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="resend_otp"><u>Resend OTP</u></string>
+    <string name="thankyou">Thankyou</string>
+    <string name="confirmRegister">Please Click Continue To Proceed</string>
 
 
 </resources>

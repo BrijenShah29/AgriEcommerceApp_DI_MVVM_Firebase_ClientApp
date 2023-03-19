@@ -6,16 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".loginFragments.LoginFragment">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView"
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_350sdp"
-        android:padding="@dimen/_30sdp"
-        android:src="@drawable/ic_signin"
-        android:scaleType="fitCenter"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:text="Welcome To Agro Mart"
+        android:textColor="@color/color_primary"
+        android:textSize="@dimen/_16sdp"
+        app:fontFamily="@font/roboto_condensed_bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:text="Please provide your number for Login / Registration"
+        android:textColor="@color/dark_brown"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toTopOf="@+id/appCompatImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView"
+        android:layout_width="match_parent"
+        android:layout_marginTop="?android:actionBarSize"
+        android:layout_height="@dimen/_270sdp"
+        android:src="@drawable/ic_signin"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView"
@@ -62,7 +91,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:hint="Phone Number"
-                android:inputType="number"
+                android:inputType="phone"
                 android:maxLength="12"
                 android:textSize="@dimen/_12sdp" />
         </com.google.android.material.textfield.TextInputLayout>

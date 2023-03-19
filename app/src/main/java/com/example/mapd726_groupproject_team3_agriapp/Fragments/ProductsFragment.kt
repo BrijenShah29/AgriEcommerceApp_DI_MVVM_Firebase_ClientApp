@@ -42,12 +42,16 @@ class ProductsFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
+
         productAdapter = CategoryProductAdapter(requireContext())
         binding.categoryRecycler.adapter = productAdapter
         binding.categoryRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
 
         val productCategory = requireArguments().getString("products")
         val productSubCategory = requireArguments().getString("products")
+
+        //(requireActivity() as AppCompatActivity).supportActionBar?.setTitle(productSubCategory?.toString())
+
         val field = requireArguments().getString("field")
 
             viewModel.getSelectedCategoryProducts(productCategory!!)
@@ -62,17 +66,6 @@ class ProductsFragment : Fragment() {
                     showProductBySubCategory(productSubCategory)
                 }
             })
-
-
-
-
-
-
-
-
-
-
-
 
         return binding.root
     }

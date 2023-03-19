@@ -6,23 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".loginFragments.OtpFragment">
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/appCompatImageView"
+    <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_350sdp"
-        android:src="@drawable/ic_otp"
-        android:scaleType="fitCenter"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_55sdp"
+        android:text="Verify Your Phone Number"
+        android:textColor="@color/color_primary"
+        android:textSize="@dimen/_16sdp"
+        app:fontFamily="@font/roboto_condensed_bold"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:text="Please provide One Time Password received in SMS"
+        android:textColor="@color/dark_brown"
+        android:textSize="@dimen/_12sdp"
+        app:layout_constraintBottom_toTopOf="@+id/appCompatImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_250sdp"
+        android:src="@drawable/ic_otp"
+        android:scaleType="fitCenter"
+        android:layout_marginBottom="@dimen/_10sdp"
+        app:layout_constraintBottom_toTopOf="@id/textView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/appCompatTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:layout_marginTop="@dimen/_10sdp"
         android:text="The Verification OTP is sent on Mobile Number"
-        android:textColor="@color/black"
+        android:textColor="@color/dark_brown"
         android:textSize="@dimen/_14sdp"
         app:fontFamily="@font/roboto_condensed_bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,7 +81,7 @@
             android:layout_gravity="center"
             android:text="+1 123 345 6789 "
             android:fontFamily="@font/roboto_condensed_bold"
-            android:textColor="@color/black"
+            android:textColor="@color/dark_brown"
             android:textSize="@dimen/_16sdp"/>
 
 
@@ -102,7 +132,7 @@
         android:fontFamily="@font/roboto_condensed_bold"
         android:gravity="center"
         android:text="Didn't Receive the OTP?"
-        android:textColor="@color/black"
+        android:textColor="@color/dark_brown"
         android:textSize="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_15sdp"
         app:layout_constraintEnd_toEndOf="parent"

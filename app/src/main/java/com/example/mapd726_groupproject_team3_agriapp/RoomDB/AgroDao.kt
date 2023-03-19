@@ -3,10 +3,7 @@ package com.example.mapd726_groupproject_team3_agriapp.RoomDB
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.room.*
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.RecentlyVisitedModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.SubCategoryModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.*
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -43,6 +40,9 @@ interface AgroDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertWishlistProducts(productModel: ProductModel)
 
+    // TO INSERT USERDATA IF IT EXISTS
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertUserData(customerModel: CustomerModel)
 
 
 
@@ -73,9 +73,18 @@ interface AgroDao {
     @Query("SELECT * FROM products WHERE productName LIKE :searchQuery OR productSubCategory LIKE :searchQuery")
     fun searchDatabase(searchQuery : String) : Flow<List<ProductModel>>
 
+    //TO GET USER DATA FROM ROOM DB
+    @Query("SELECT * FROM CustomerDataTable WHERE customerId Like :customerId LIMIT 1")
+    suspend fun getUserData(customerId: String) : CustomerModel
+
     // TO DELETE PRODUCT FROM CART
     @Delete
    suspend fun deleteProduct(cartModel: CartModel)
+
+// TO DELETE ALL CUSTOMER DATA
+
+   // @Query("DELETE FROM CustomerDataTable")
+   // suspend fun deleteUserData(customerModel: CustomerModel)
 
 
    // TO CHECK IF PRODUCT ALREADY EXISTS IN DB
@@ -87,9 +96,13 @@ interface AgroDao {
     @Query("UPDATE cartProductTable SET productQuantity = :quantity, totalAmount =:totalAmount WHERE productId LIKE :productId")
     suspend fun updateCart(quantity : Int,totalAmount : Double , productId : String)
 
+    @Query("DELETE FROM RecentlyVisitedProductTable WHERE id NOT IN (SELECT id FROM RecentlyVisitedProductTable ORDER BY id DESC LIMIT 10)")
+    suspend fun removeOldRecentlyVisitedData()
 
     // TO GET PRODUCTS FROM RECENTLY VISITED TABLE
-    @Query("SELECT * FROM RecentlyVisitedProductTable LIMIT 10")
+    @Query("SELECT * FROM RecentlyVisitedProductTable ORDER BY id DESC LIMIT 10 ")
     fun getRecentlyVisitedProducts() : Flow<List<RecentlyVisitedModel>>
 }
+
+
 

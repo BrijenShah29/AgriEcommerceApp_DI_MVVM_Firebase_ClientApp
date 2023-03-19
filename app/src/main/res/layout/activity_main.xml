@@ -27,52 +27,28 @@
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/appBar"
-                style="@style/Widget.MaterialComponents.Toolbar.Primary"
+                style="@style/AppTheme.PopupOverlay"
                 android:layout_width="match_parent"
                 android:background="@color/cardview_light_background"
                 android:backgroundTint="@color/cardview_light_background"
                 android:elevation="0dp"
+                app:menu="@menu/appbar_menu"
+                app:titleTextColor="@color/dark_brown"
                 android:stateListAnimator="@null"
                 android:layout_height="?android:attr/actionBarSize"
                 app:logoAdjustViewBounds="true"
+                android:fontFamily="@font/baloo"
+                android:textSize="@dimen/_8sdp"
+                android:gravity="center_vertical"
                 app:navigationIcon="@drawable/ic_baseline_menu_24"
                 app:titleCentered="true">
 
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/appBarTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center"
-                    android:clickable="false"
-                    android:fontFamily="@font/baloo"
-                    android:gravity="center_vertical"
-                    android:text=""
-                    android:textAllCaps="true"
-                    android:textColor="@color/dark_brown"
-                    android:textSize="@dimen/_16sdp" />
-
-
-
                 <LinearLayout
-                    android:layout_width="@dimen/_70sdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:orientation="horizontal">
 
-                <ImageView
-                    android:layout_width="@dimen/_22sdp"
-                    android:layout_height="@dimen/_22sdp"
-                    android:src="@drawable/search"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:layout_marginEnd="@dimen/_10sdp"
-                    android:id="@+id/search_button"/>
-
-                    <ImageView
-                        android:id="@+id/cart_button"
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:layout_gravity="end"
-                        android:src="@drawable/bag" />
                 </LinearLayout>
 
             </com.google.android.material.appbar.MaterialToolbar>
