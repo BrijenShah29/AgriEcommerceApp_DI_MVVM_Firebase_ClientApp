@@ -28,4 +28,9 @@
         android:name="com.example.mapd726_groupproject_team3_agriapp.loginFragments.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" />
+    <fragment
+        android:id="@+id/blankFragment2"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.BlankFragment2"
+        android:label="fragment_blank2"
+        tools:layout="@layout/fragment_blank2" />
 </navigation>

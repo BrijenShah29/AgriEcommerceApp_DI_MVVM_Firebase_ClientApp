@@ -104,12 +104,12 @@
     </fragment>
     <fragment
         android:id="@+id/contactUsFragment"
-        android:name="com.example.mapd726_groupproject_team3_agriapp.ContactUsFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.ContactUsFragment"
         android:label="fragment_contact_us"
         tools:layout="@layout/fragment_contact_us" />
     <fragment
         android:id="@+id/aboutUsFragment"
-        android:name="com.example.mapd726_groupproject_team3_agriapp.AboutUsFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.AboutUsFragment"
         android:label="fragment_about_us"
         tools:layout="@layout/fragment_about_us" />
     <fragment
@@ -123,7 +123,16 @@
     </fragment>
     <fragment
         android:id="@+id/checkoutFragment"
-        android:name="com.example.mapd726_groupproject_team3_agriapp.CheckoutFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.Fragments.CheckoutFragment"
         android:label="fragment_checkout"
-        tools:layout="@layout/fragment_checkout" />
+        tools:layout="@layout/fragment_checkout" >
+        <action
+            android:id="@+id/action_checkoutFragment_to_orderConfirmationFragment"
+            app:destination="@id/orderConfirmationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderConfirmationFragment"
+        android:name="com.example.mapd726_groupproject_team3_agriapp.OrderConfirmationFragment"
+        android:label="fragment_order_confirmation"
+        tools:layout="@layout/fragment_order_confirmation" />
 </navigation>

@@ -1,8 +1,10 @@
 package com.example.mapd726_groupproject_team3_agriapp.RoomDB.TypeConvertor
 
 import androidx.room.TypeConverter
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.OrderedProductsModel
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
+import java.lang.reflect.Type
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
@@ -22,30 +24,40 @@ class TypeConvertors {
     }
 
     @TypeConverter
-    fun toDate(dateLong: Timestamp?): Date? {
-        return Date(dateLong!!.time)
+    fun fromDateToString(value: Date): String {
+        val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        return dateTimeFormat.format(value)
     }
 
     @TypeConverter
-    fun fromDate(date: Date?): Timestamp? {
-        return Timestamp(date?.time!!)
-    }
-
-
-    @TypeConverter
-    fun toDate(stringdate: String?): Date? {
-        return stringdate?.let { Date(it) }
+    fun toDateFromString(value: String) : Date {
+        val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss")
+        return dateTimeFormat.parse(value)
     }
 
     @TypeConverter
-    fun toTimestamp(date: Date?): String? {
-        val dateTimeFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-        return dateTimeFormat.format(date)
+    fun fromListToString(value : List<String>) : String{
+        return value.joinToString("#")
+    }
+    @TypeConverter
+    fun fromStringToList(value : String) : List<String>{
+        return value.split("#")
+
     }
 
-//    @TypeConverter
-//    fun fromTimestamp(value: Long?): Date? {
-//        return if (value == null) null else Date(value)
-//    }
+    @TypeConverter
+    fun stringToListServer(data: String?): List<OrderedProductsModel>{
+        if (data == null) {
+            return Collections.emptyList()
+        }
+        val listType: Type = object :
+            com.google.gson.reflect.TypeToken<List<OrderedProductsModel?>?>() {}.type
+        return Gson().fromJson<List<OrderedProductsModel>>(data, listType)
+    }
+
+    @TypeConverter
+    fun listServerToString(someObjects: List<OrderedProductsModel>): String? {
+        return Gson().toJson(someObjects)
+    }
 
 }

@@ -23,17 +23,9 @@ interface AgroDao {
     suspend fun insertSubCategories(subCategoryModel : List<SubCategoryModel>)
 
 
-
-
-
-
     // TO INSERT RECENTLY VISITED PRODUCTS
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertRecentlyVisitedProducts(recentlyVisitedModel: RecentlyVisitedModel)
-
-
-
-
 
 
     // TO INSERT LIKED PRODUCTS
@@ -44,6 +36,8 @@ interface AgroDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertUserData(customerModel: CustomerModel)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertOrder(orderModel: OrderModel)
 
 
     @Query("SELECT * FROM products")
@@ -76,6 +70,12 @@ interface AgroDao {
     //TO GET USER DATA FROM ROOM DB
     @Query("SELECT * FROM CustomerDataTable WHERE customerId Like :customerId LIMIT 1")
     suspend fun getUserData(customerId: String) : CustomerModel
+
+
+    //TO GET ORDERS
+    @Query("SELECT * FROM orderTable ORDER BY orderedDate DESC")
+    fun getOrders() : Flow<List<OrderModel>>
+
 
     // TO DELETE PRODUCT FROM CART
     @Delete

@@ -23,7 +23,7 @@
         android:id="@+id/shippingTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Shipping Address"
+        android:text="Verify / Edit Shipping Address"
         android:layout_marginTop="?android:actionBarSize"
         android:layout_marginStart="@dimen/_10sdp"
         android:textSize="@dimen/_14sdp"
@@ -249,6 +249,7 @@
                 style="@style/LoginTextInputInnerFieldStyle"
                 android:hint="City"
                 android:gravity="center_vertical"
+                android:textAllCaps="false"
                 android:inputType="textPostalAddress" />
         </com.google.android.material.textfield.TextInputLayout>
     </androidx.cardview.widget.CardView>
@@ -400,7 +401,7 @@
         android:background="@drawable/fillbutton"
         android:fontFamily="@font/roboto_condensed_bold"
         android:padding="@dimen/_7sdp"
-        android:text="Continue Shipping"
+        android:text="Continue Checkout"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="@dimen/_18sdp"

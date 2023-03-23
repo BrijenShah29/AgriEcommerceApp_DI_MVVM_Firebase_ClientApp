@@ -195,7 +195,7 @@ class RegistrationFragment : Fragment() {
         binding.successMessage.visibility = View.VISIBLE
         binding.continueButton.visibility = View.VISIBLE
 
-        binding.successMessage.text = R.string.thankyou.toString()+userFirstName.toString()+R.string.confirmRegister.toString()
+        binding.successMessage.text = getString(R.string.thankYou, userFirstName)
         setupUserProfileForApp(key)
         dialog.dismiss()
     }

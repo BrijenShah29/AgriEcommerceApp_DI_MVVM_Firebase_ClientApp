@@ -28,6 +28,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.SearchFragment
 import com.example.mapd726_groupproject_team3_agriapp.Fragments.ProductsFragment
 import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant
@@ -77,12 +78,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 0 -> {
                     navController.popBackStack()
                 }
-//               1 -> {
-//                    navController.navigate(R.id.categoryFragment)
-//                }
-//                2-> {
-//                   navController.navigate(R.id.moreFragment)
-//               }
+                1 -> {}
+                2-> {}
 //                3-> {
 //                    navController.navigate(R.id.wishlistFragment)
 //               }
@@ -111,7 +108,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //        binding.searchButton.setOnClickListener {
 //            Toast.makeText(this, "Icon clicked", Toast.LENGTH_SHORT).show()
 //            //navigateToSearchFragment()
-//          // val currentFragment = navController.currentDestination
+ //         val currentFragment = navController.currentDestination
 //           // val fragmentManager = supportFragmentManager
 //
 //           navController.navigate(R.id.searchFragment)
@@ -314,8 +311,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         userName = userManager.getUserName().toString()
         userNumber = userManager.getUserNumber().toString()
+        userImage = userManager?.getUserProfileImage().toString()
 
         headerTitle.text = userName
+        Glide.with(this).load(userImage).apply(RequestOptions.centerCropTransform()).into(headerImage)
 
         if(userNumber == Constant.USER_NUMBER){
             headerNumber.visibility = View.INVISIBLE

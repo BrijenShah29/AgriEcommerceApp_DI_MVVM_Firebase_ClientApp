@@ -52,10 +52,6 @@ class ProductAdapter(val context: Context): ListAdapter<ProductModel,ProductAdap
                 binding.imageSale.visibility = View.INVISIBLE
             }
 
-
-
-
-
             }
 
         }
@@ -87,8 +83,6 @@ class ProductAdapter(val context: Context): ListAdapter<ProductModel,ProductAdap
             Navigation.findNavController(holder.itemView).navigate(R.id.action_homeFragment_to_detailedProductFragment,bundle)
 
             // Add to Room Database for Previous Product history
-
-
 
         }
 

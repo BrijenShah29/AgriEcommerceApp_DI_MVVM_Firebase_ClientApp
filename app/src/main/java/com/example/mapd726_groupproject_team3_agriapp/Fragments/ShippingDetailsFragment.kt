@@ -284,6 +284,11 @@ class ShippingDetailsFragment : Fragment() {
         bundle.putDouble("cartTotalTax",cartTotalTax)
         bundle.putDouble("CartTotalPayable",cartTotalPayable)
         bundle.putInt("totalQuantity",totalQuantity)
+        bundle.putString("shippingEmail",binding.emailAddressTxt.text.toString())
+        bundle.putString("ShippingNumber",binding.userNumber.text.toString())
+        bundle.putString("shippingCustomerName",String.format("%s %s",binding.firstName.text.toString(),binding.lastName.text.toString()))
+        bundle.putString("ShippingAddress",String.format(" %s , %s , %s , %s , %s",binding.addressTxt.text.toString(),binding.cityTxt.text.toString(),binding.province.text.toString(),binding.zipcode.text.toString(),binding.countryName.text.toString()))
+
 
         val sender = (FragmentComponentManager.findActivity(requireContext()) as Activity as FragmentActivity).supportFragmentManager
         //val sender = (requireContext() as FragmentActivity).supportFragmentManager
@@ -291,8 +296,7 @@ class ShippingDetailsFragment : Fragment() {
 
         dialog.dismiss()
 
-        Navigation.findNavController(binding.root)
-            .navigate(R.id.action_shippingDetailsFragment_to_checkoutFragment,bundle)
+        Navigation.findNavController(binding.root).navigate(R.id.action_shippingDetailsFragment_to_checkoutFragment,bundle)
 
 
 

@@ -15,6 +15,14 @@ dependencyResolutionManagement {
 
         jcenter()
         maven { url "https://jitpack.io" }
+
+        maven {
+            url "https://cardinalcommerceprod.jfrog.io/artifactory/android"
+            credentials {
+                username paypalUsername
+                password paypalPassword
+            }
+        }
     }
 }
 rootProject.name = "MAPD726_GroupProject_Team3_AgriApp"
