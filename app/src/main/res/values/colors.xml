@@ -21,5 +21,8 @@
     <color name="black_overlay">#66000000</color>
     <color name="black_semi">#252424</color>
     <color name="colorForeground">#4C4C4C</color>
+    <color name="cream">#FFFDD0</color>
+    <color name="button">#2EBF34</color>
+    <color name="bg2">#183b03</color>
 
 </resources>

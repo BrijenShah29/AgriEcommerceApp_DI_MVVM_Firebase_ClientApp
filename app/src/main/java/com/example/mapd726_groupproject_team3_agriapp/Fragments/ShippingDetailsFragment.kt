@@ -82,12 +82,16 @@ class ShippingDetailsFragment : Fragment() {
         {
             binding.signInButton.visibility = View.VISIBLE
             binding.guestTxt.visibility = View.VISIBLE
+            binding.userNumber.isEnabled = true
+            binding.notifNewsAndOfferCheckbox.visibility = View.GONE
         }
         else
         {
             binding.signInButton.visibility = View.GONE
             binding.guestTxt.visibility = View.GONE
+            binding.userNumber.isEnabled = false
             viewModel.getUserData(userManager.getUserId().toString())
+            binding.notifNewsAndOfferCheckbox.visibility = View.VISIBLE
             viewModel.storedUserDataFromRoom.observe(viewLifecycleOwner, Observer {
                 dialog.show()
 
@@ -255,13 +259,53 @@ class ShippingDetailsFragment : Fragment() {
 
                 }
             }
+            else
+            {
+                if(userName == Constant.USER_GUEST){
+
+                    val alert = AlertDialog.Builder(requireContext()).setMessage("Thank you for your Order ! Would you like to sign up first for great User Experience ?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes") { dialogInterface, id ->
+                            dialog.dismiss()
+
+                            // Navigate user to Login Screen
+                            // remove backtrack
+                            Navigation.findNavController(binding.root).navigate(R.id.loginFragment)
+
+                        }
+                        .setNegativeButton("No") { Interface, id ->
+                            // Dismiss the dialog
+                            dialog.show()
+
+                            CoroutineScope(Dispatchers.IO).launch {
+                                status = viewModel.saveUserDataToFirebase("Users",
+                                    userManager.getUserNumber().toString(),
+                                    userData)
+
+                                delay(2500)
+                                if (status == true) {
+                                    viewModel.insertUserDataIntoRoom(userData)
+                                    dialog.dismiss()
+                                    Snackbar.make(requireView(),
+                                        "Profile Has been Updated successfully",
+                                        Snackbar.LENGTH_SHORT).show()
+                                } else {
+                                    Toast.makeText(requireContext(),
+                                        "Something went wrong while updating your Profile..",
+                                        Toast.LENGTH_SHORT).show()
+                                }
+
+                            }
+                            dialog.dismiss()
+
+                        }
+                    alert.create().show()
+
+
+                }
+            }
 
             redirectUserToCheckoutPage()
-
-
-
-
-
 
         }
 
@@ -305,7 +349,7 @@ class ShippingDetailsFragment : Fragment() {
     }
 
     private fun storeUserNumberToSendOffersAsText() {
-        TODO("Not yet implemented")
+
     }
 
 }

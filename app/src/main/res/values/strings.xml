@@ -37,6 +37,13 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="resend_otp"><u>Resend OTP</u></string>
     <string name="thankYou">Thank you %1$s, Please Click Continue To Proceed</string>
+    <string name="orderMessage">The order confirmation email with details of your order and a link to track its progress has been sent to your email address.</string>
+    <string name="order_status">Order Status : %1$s</string>
+    <string name="order_date">Order Date : %1$s</string>
+    <string name="orderid">Order - %1$s</string>
+    <string name="my_text"><u>Our Vision...</u></string>
+    <string name="mission"><u>Our Mission...</u></string>
+    <string name="contact"><u>Contact Us</u></string>
 
 
 </resources>

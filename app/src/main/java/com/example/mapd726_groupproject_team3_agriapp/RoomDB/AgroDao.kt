@@ -1,7 +1,5 @@
 package com.example.mapd726_groupproject_team3_agriapp.RoomDB
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.*
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.*
 import kotlinx.coroutines.flow.Flow
@@ -38,6 +36,8 @@ interface AgroDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrder(orderModel: OrderModel)
+
+
 
 
     @Query("SELECT * FROM products")
@@ -86,6 +86,10 @@ interface AgroDao {
    // @Query("DELETE FROM CustomerDataTable")
    // suspend fun deleteUserData(customerModel: CustomerModel)
 
+   // EMPTY THE CART TABLE AFTER SUCCESSFUL PAYMENT
+   @Query("DELETE FROM cartProductTable")
+   suspend fun deleteProductsFromCart()
+
 
    // TO CHECK IF PRODUCT ALREADY EXISTS IN DB
     @Query("SELECT * FROM cartProductTable WHERE productId = :id")
@@ -102,6 +106,8 @@ interface AgroDao {
     // TO GET PRODUCTS FROM RECENTLY VISITED TABLE
     @Query("SELECT * FROM RecentlyVisitedProductTable ORDER BY id DESC LIMIT 10 ")
     fun getRecentlyVisitedProducts() : Flow<List<RecentlyVisitedModel>>
+
+
 }
 
 

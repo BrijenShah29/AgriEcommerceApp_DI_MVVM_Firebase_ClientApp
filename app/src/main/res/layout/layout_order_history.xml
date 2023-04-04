@@ -1,0 +1,75 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/order_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Order ID: #123456"/>
+    <TextView
+        android:id="@+id/deliveryAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines ="2"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:text="Demo user"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="8dp">
+
+        <TextView
+            android:id="@+id/order_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Order Date: 2023-04-03 10:00 AM"/>
+
+        <TextView
+            android:id="@+id/order_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Order Status: Shipped"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/totalOrderVisibilityButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ccp_ic_arrow_drop_down"
+        android:backgroundTint="@null"
+        android:background="@color/dark_brown"
+        android:layout_marginTop="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/order_items"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/layout_ordered_products_history" />
+
+    <TextView
+        android:id="@+id/order_total"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+         android:text="Total: $50.00"/>
+
+    <Button
+        android:id="@+id/cancelOrderButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel Order"
+        android:drawableStart="@drawable/close"
+        android:textAllCaps="false"
+        android:fontFamily="@font/roboto_medium"
+        android:enabled="false"/>
+
+</LinearLayout>

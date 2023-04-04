@@ -70,6 +70,7 @@ class ProductRepository @Inject constructor( val db : FirebaseFirestore, val agr
     //UPDATING THE CART PRODUCTS FROM CART PAGE
     suspend fun updateCart(quantity : Int,totalAmount : Double , productId : String) = agroDao.updateCart(quantity,totalAmount,productId)
 
-
+    // DELETE ALL CART ITEMS AFTER SUCCESSFUL PAYMENT FROM CUSTOMER
+    suspend fun emptyTheCart() = agroDao.deleteProductsFromCart()
 
 }

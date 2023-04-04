@@ -5,10 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.mapd726_groupproject_team3_agriapp.DI.FirebaseModule
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.Slider
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.SubCategoryModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.*
 import com.example.mapd726_groupproject_team3_agriapp.RoomDB.AgroDao
 import com.google.android.gms.tasks.Task
 
@@ -16,21 +13,20 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.jetbrains.annotations.NotNull
 import javax.inject.Inject
 
 class FirebaseRepository @Inject constructor(val auth : FirebaseAuth, val db : FirebaseFirestore, val storage : FirebaseStorage, val agroDao: AgroDao) {
 
 init {
+
 
     // GETTING PRODUCTS FROM FIREBASE AND FIRING INSERT QUERY IN INIT
     val productsList = ArrayList<ProductModel>()
@@ -41,7 +37,7 @@ init {
         }
         if(productsList.size > 1 || productsList.isNotEmpty()){
 
-            GlobalScope.launch(Dispatchers.IO) {
+            CoroutineScope(Dispatchers.IO).launch {
                 delay(2000)
                 agroDao.insertProducts(productsList)
             }
@@ -59,7 +55,7 @@ init {
         }
         if(subCategoryList.size > 1 || subCategoryList.isNotEmpty()){
 
-            GlobalScope.launch(Dispatchers.IO) {
+            CoroutineScope(Dispatchers.IO).launch {
                 delay(2000)
                 agroDao.insertSubCategories(subCategoryList)
             }
@@ -116,9 +112,39 @@ init {
 
 
 
+    // FETCHING USER ORDERS FROM DATABASE
 
+    private val orders = MutableLiveData<ArrayList<OrderModel>>()
+    private val listOrders : LiveData<ArrayList<OrderModel>>
+        get() = orders
+    fun getOrdersForCurrentUsers(customerId:String) : LiveData<ArrayList<OrderModel>> {
+        val orderList = ArrayList<OrderModel>()
+        db.collection("customer").whereEqualTo("customerId",customerId).get().addOnSuccessListener {
+            orderList.clear()
+            for(doc in it.documents){
+                val firebaseData = doc.toObject(OrderModel::class.java)
+                if (firebaseData != null) {
+                    orderList.add(firebaseData)
+                }
+            }
+            orders.value = orderList
+        }
+        return listOrders
+    }
 
-
+    private val _cancelOrder = MutableLiveData<String>()
+    private val cancelOrder : LiveData<String>
+        get() =_cancelOrder
+    fun cancelOrder(orderId: String): LiveData<String> {
+        val data = HashMap<String,Any>()
+        data["status"] = "Cancelled"
+        db.collection("Orders").document(orderId).update(data).addOnSuccessListener {
+            _cancelOrder.value = "Success"
+        }.addOnFailureListener {
+            _cancelOrder.value = "Failed"
+        }
+        return cancelOrder
+    }
 
 
 }

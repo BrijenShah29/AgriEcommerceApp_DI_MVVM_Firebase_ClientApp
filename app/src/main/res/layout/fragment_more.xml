@@ -97,7 +97,6 @@
                         android:layout_width="@dimen/_70sdp"
                         android:layout_height="@dimen/_60sdp"
                         android:layout_margin="@dimen/_10sdp"
-                        android:clickable="false"
                         android:src="@drawable/user_empty" />
 
                     <LinearLayout
@@ -127,6 +126,7 @@
 
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/editUserFirstName"
+                            android:visibility="gone"
                             style="@style/LoginTextInputInnerFieldStyle"
                             android:layout_width="@dimen/_180sdp"
                             android:layout_height="@dimen/_30sdp"
@@ -138,6 +138,7 @@
 
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/editUserLastName"
+                            android:visibility="gone"
                             style="@style/LoginTextInputInnerFieldStyle"
                             android:layout_width="@dimen/_180sdp"
                             android:layout_height="@dimen/_30sdp"
@@ -266,6 +267,7 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/faq"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -282,7 +284,7 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-
+                    android:id="@+id/tnc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -299,6 +301,7 @@
                     android:textSize="@dimen/_12sdp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/privacyPolicy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -352,16 +355,13 @@
                 android:id="@+id/productLastVisited"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_145sdp"
-                android:layout_marginBottom="?android:actionBarSize"
+                android:layout_marginBottom="@dimen/_70sdp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:listitem="@layout/layout_product_item" />
-<Space
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/_30sdp"/>
         </LinearLayout>
 
     </ScrollView>

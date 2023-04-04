@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.example.mapd726_groupproject_team3_agriapp"
@@ -126,6 +126,8 @@ dependencies {
 
     implementation 'com.github.kittinunf.fuel:fuel:2.3.1'
     implementation 'com.github.kittinunf.fuel:fuel-json:2.3.1'
+
+    implementation 'com.airbnb.android:lottie:5.2.0'
 
 
 

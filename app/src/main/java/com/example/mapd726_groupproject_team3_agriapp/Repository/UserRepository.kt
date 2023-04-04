@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CustomerModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.OrderModel
 import com.example.mapd726_groupproject_team3_agriapp.RoomDB.AgroDao
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -39,14 +40,13 @@ class UserRepository @Inject constructor(val auth : FirebaseAuth, val db : Fireb
 
     //GETTING USER DATA FROM FIREBASE
     suspend fun getUserDataFromFirebase(collectionPath: String,userNumber: String):LiveData<CustomerModel>{
-
-
         db.collection(collectionPath).document(userNumber).get().addOnSuccessListener {
                 _firebaseData.value = it.toObject(CustomerModel::class.java)
             }
         delay(2000)
         return firebaseData
     }
+
 
     // To Store Fetched User Data into RoomDB
     suspend fun insertUserDataIntoRoom(customerModel: CustomerModel) = agroDao.insertUserData(customerModel)
@@ -82,5 +82,22 @@ class UserRepository @Inject constructor(val auth : FirebaseAuth, val db : Fireb
     {
         auth.signOut()
     }
+
+    // INSERT USER ORDER INTO ROOM
+
+    suspend fun insertOrder(orderModel: OrderModel) = agroDao.insertOrder(orderModel)
+
+
+    // INSERTING UPDATES OF USER PROFILE
+    fun updateUserProfileInfo(firstName: String, lastName: String, userProfile: String?,userNumber: String)
+    {
+        val data = HashMap<String,Any>()
+        data.put("customerFirstName",firstName)
+        data.put("customerLastName",lastName)
+        data.put("customerImage",userProfile!!)
+
+        db.collection("Users").document(userNumber).update(data)
+    }
+
 
 }

@@ -14,8 +14,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.mapd726_groupproject_team3_agriapp.Activities.LoginActivity
@@ -28,8 +31,10 @@ import com.example.mapd726_groupproject_team3_agriapp.ViewModel.HomeViewModel
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.ProductsViewModel
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.UserViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentMoreBinding
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.storage.FirebaseStorage
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -56,7 +61,6 @@ class MoreFragment : Fragment() {
             coverImage = it.data!!.data
             binding.userImage.setImageURI(coverImage)
             binding.userImage.visibility = View.VISIBLE
-            binding.userImage.scaleType = ImageView.ScaleType.CENTER_INSIDE
         }
     }
 
@@ -94,6 +98,7 @@ class MoreFragment : Fragment() {
 
             binding.userName.text = userManager.getUserName().toString()
             binding.userNumber.text = userManager.getUserNumber().toString()
+            binding.userImage.isEnabled = true
 
             Glide.with(this).load(userManager.getUserProfileImage().toString()).apply(RequestOptions.centerCropTransform()).into(binding.userImage)
 
@@ -103,10 +108,22 @@ class MoreFragment : Fragment() {
         // SIGN-OUT BUTTON ON CLICK FUNCTIONALITY
 
         binding.LogOutButton.setOnClickListener {
-            viewModel.signOut()
-            val intent = Intent(activity, LoginActivity::class.java)
-            startActivity(intent)
-            activity?.finish()
+            val alert = AlertDialog.Builder(requireContext()).setMessage("Are you sure about Logout?")
+                .setCancelable(false)
+                .setPositiveButton("Yes"){dialog,id ->
+                    viewModel.signOut()
+                    val intent = Intent(activity, LoginActivity::class.java)
+                    startActivity(intent)
+                    activity?.finish()
+
+                }
+                .setNegativeButton("No") { dialog, id ->
+                    // Dismiss the dialog
+                    dialog.dismiss()
+                }
+
+            alert.create().show()
+
 
         }
         // GUEST USER SIGN IN ON CLICK
@@ -119,7 +136,7 @@ class MoreFragment : Fragment() {
         binding.userNameNumberLayout.setOnClickListener {
             binding.editUserFirstName.visibility = VISIBLE
             binding.editUserLastName.visibility = VISIBLE
-            binding.editUserNumber.visibility = VISIBLE
+            binding.editUserNumber.visibility = GONE
             binding.userName.visibility = GONE
             binding.userNumber.visibility = GONE
             binding.userImage.isClickable = true
@@ -140,11 +157,34 @@ class MoreFragment : Fragment() {
             binding.editUserNumber.visibility = GONE
             binding.userName.visibility = VISIBLE
             binding.userNumber.visibility = VISIBLE
-            binding.userName.text = userManager.getUserName().toString() +" $binding.editUserLastName.text"
+            binding.userName.setText( userManager.getUserName().toString() + binding.editUserLastName.text)
             binding.userNumber.text = userManager.getUserNumber()
             binding.userImage.isEnabled = false
 
-           // uploadProfileImageToFirebase()
+           // uploadProfileImage to Storage
+            if(coverImage != null) {
+                val fileName = userManager.getUserNumber().toString() + ".jpg"
+
+                val refStorage = FirebaseStorage.getInstance().reference.child("Users/$fileName")
+                refStorage.putFile(coverImage!!)
+                    .addOnSuccessListener {
+                        it.storage.downloadUrl.addOnSuccessListener { image ->
+                            coverImageUrl = image.toString()
+                        }
+                            .addOnFailureListener {
+                                Log.d("failed", "failed to upload the profile")
+                                Toast.makeText(requireContext(),
+                                    "Something Went Wrong While Uploading your Image",
+                                    Toast.LENGTH_SHORT).show()
+                            }
+                    }
+            }
+
+            // upload Retrieved profile image url and other data
+            CoroutineScope(Dispatchers.IO).launch {
+                delay(3000)
+                viewModel.updateUserProfileInfo(binding.editUserFirstName.text.toString(),binding.editUserLastName.text.toString(),coverImageUrl,userManager.getUserNumber()!!)
+            }
 
         }
 
@@ -154,9 +194,34 @@ class MoreFragment : Fragment() {
             launchGalleryActivity.launch(intent)
         }
 
+        binding.YourOrdersButton.setOnClickListener {
+            findNavController().navigate(R.id.action_moreFragment_to_ordersFragment)
+        }
 
+        binding.ManageAddressesButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Redirecting Manage Addresses", Toast.LENGTH_SHORT).show()
+        }
 
+        binding.contactUsButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Redirecting to Contact us page", Toast.LENGTH_SHORT).show()
+        }
 
+        binding.aboutUsButton.setOnClickListener {
+            Toast.makeText(requireContext(), "Redirecting to about us page", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.rateUsButton.setOnClickListener {
+            Toast.makeText(requireContext(), "We're still in development Phase..", Toast.LENGTH_SHORT).show()
+        }
+        binding.faq.setOnClickListener {
+            Toast.makeText(requireContext(), "We're still in development Phase..", Toast.LENGTH_SHORT).show()
+        }
+        binding.tnc.setOnClickListener {
+            Toast.makeText(requireContext(), "We're still in development Phase..", Toast.LENGTH_SHORT).show()
+        }
+        binding.privacyPolicy.setOnClickListener {
+            Toast.makeText(requireContext(), "We're still in development Phase..", Toast.LENGTH_SHORT).show()
+        }
 
         return binding.root
     }
@@ -189,7 +254,7 @@ class MoreFragment : Fragment() {
     }
 
     private fun uploadProfileDataToFirebase() {
-        TODO("Not yet implemented")
+
     }
 
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CustomerModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.OrderModel
 import com.example.mapd726_groupproject_team3_agriapp.Repository.FirebaseRepository
 import com.example.mapd726_groupproject_team3_agriapp.Repository.ProductRepository
 import com.example.mapd726_groupproject_team3_agriapp.Repository.UserRepository
@@ -16,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class UserViewModel @Inject constructor(val firebaseRepository: FirebaseRepository, val productRepository: ProductRepository, val userRepository: UserRepository) : ViewModel()
+class  UserViewModel @Inject constructor(val firebaseRepository: FirebaseRepository, val productRepository: ProductRepository, val userRepository: UserRepository) : ViewModel()
 {
 
     // USER DATA STORE TO FIRE STORE
@@ -70,6 +71,45 @@ class UserViewModel @Inject constructor(val firebaseRepository: FirebaseReposito
         userRepository.signOut()
     }
 
+    // STORING USER ORDER AFTER SUCCESSFUL ORDER PAYMENT
+
+    fun addOrdersIntoRoomDB(orderModel: OrderModel){
+
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.insertOrder(orderModel)
+        }
+    }
+
+    // FETCHING USER ORDERS FROM FIREBASE
+
+    private var _fetchUserOrders = MutableLiveData<ArrayList<OrderModel>>()
+    val fetchUserOrders : LiveData<ArrayList<OrderModel>>
+        get() = _fetchUserOrders
+    fun fetchUserOrders(userId : String){
+        viewModelScope.launch(Dispatchers.IO) {
+            _fetchUserOrders.value = firebaseRepository.getOrdersForCurrentUsers(userId).value
+        }
+    }
+
+    // Cancelling Order from user side if item is not shipped
+
+    private var _cancelOrder = MutableLiveData<String>()
+    val cancelOrder : LiveData<String>
+        get()  = _cancelOrder
+
+    fun cancelOrder(orderId:String){
+        viewModelScope.launch(Dispatchers.IO) {
+            _cancelOrder.value = firebaseRepository.cancelOrder(orderId).value
+        }
+    }
+
+    fun updateUserProfileInfo(firstName: String, lastName: String, userProfile: String?,userNumber: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.updateUserProfileInfo(firstName, lastName, userProfile,userNumber)
+        }
+
+
+    }
 
 
 }

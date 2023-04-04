@@ -21,7 +21,7 @@ data class OrderModel(
     val customerId : String ="",
     @NonNull
     val paymentStatus : String = "",
-    val orderedDate : Date?,
+    val orderedDate : Long?,
     @NonNull
     val orderAmount : String? = "",
     val shipmentStatus : String? ="",

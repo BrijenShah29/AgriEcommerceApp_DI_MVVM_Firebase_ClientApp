@@ -1,10 +1,7 @@
 package com.example.mapd726_groupproject_team3_agriapp.ViewModel
 
 import androidx.lifecycle.*
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.RecentlyVisitedModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.SubCategoryModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.*
 import com.example.mapd726_groupproject_team3_agriapp.Repository.FirebaseRepository
 import com.example.mapd726_groupproject_team3_agriapp.Repository.ProductRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -108,12 +105,27 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
         }
     }
 
+    // REMOVING RECENTLY VISITED PRODUCTS AFTER EXCEEDING LIMIT OF 10
     fun removeOldRecentlyVisitedData(){
         viewModelScope.launch(Dispatchers.IO) {
 
             productRepository.removeOldRecentlyVisitedData()
         }
 
+    }
+
+
+    // ADDING SUCCESSFUL ORDERS INTO DAO
+
+
+
+
+    // EMPTY THE CART AFTER SUCCESSFUL PAYMENT FROM CUSTOMER
+    fun emptyTheCart()
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            productRepository.emptyTheCart()
+        }
     }
 
 
@@ -134,6 +146,7 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
         viewModelScope.launch {
             recentlyVisitedProducts =  productRepository.getRecentlyVisitedProducts().asLiveData()
         }
+
     }
 
 

@@ -3,13 +3,386 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AboutUsFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    tools:context=".Fragments.UserProfileFragments.AboutUsFragment">
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="@dimen/_24sdp"
-        android:text="This is About us Fragment" />
+        android:background="@color/cream"
+        android:fillViewport="true">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/libre_baskerville_bold"
+                android:gravity="center"
+                android:lineSpacingExtra="3dp"
+                android:text="The power to farm in your hands..."
+                android:textSize="30dp" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:fontFamily="@font/libre_caslon_text"
+                android:gravity="center"
+                android:lineSpacingExtra="2dp"
+                android:text="From seeds to fertilizer, we've got you covered. Our Agri Shopping app connects farmers with trusted suppliers and manufacturers, offering a vast selection of high-quality, affordable products that meet your every need"
+                android:textSize="20dp" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="198dp"
+                android:src="@drawable/img"/>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/libre_caslon_text"
+                android:lineSpacingExtra="3dp"
+                android:text="Empowering farmers, one order at a time. Our Agri Shopping app is designed to help farmers maximize their efficiency and profitability, with a comprehensive selection of top-quality supplies and equipment, all backed by our commitment to outstanding customer service."
+                android:textSize="18dp" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/my_text"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="left"
+                android:textSize="30dp"
+                android:fontFamily="@font/libre_caslon_text"
+                />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Our vision for our agriculture e-shop application is to revolutionize the way farmers shop for supplies and products. We believe that every farmer should have access to the tools and resources they need to grow their business, regardless of location or size. Our app is designed to empower farmers by connecting them with trusted suppliers and manufacturers, offering a vast selection of high-quality, affordable products, all in one convenient place."
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lineSpacingExtra="3dp"
+                android:textSize="18dp"
+                android:fontFamily="@font/libre_caslon_text"
+                />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="140dp"
+                android:src="@drawable/img3" />
+
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mission"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="left"
+                android:textSize="30dp"
+                android:fontFamily="@font/libre_caslon_text"
+                />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="15dp"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Our mission for our Agri Shop Application is to provide farmers with a user-friendly, reliable, and comprehensive platform for sourcing the products they need to succeed. We strive to simplify the process of ordering and receiving essential supplies, making it easier and more affordable for farmers to access the tools and resources they need to grow their business."
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lineSpacingExtra="3dp"
+                android:textSize="18dp"
+                android:fontFamily="@font/libre_caslon_text"
+                />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="We are committed to supporting sustainable farming practices, and our mission is to connect farmers with suppliers and manufacturers who share our values. We prioritize transparency, and our app is designed to provide farmers with clear and accurate information about the products they are purchasing, including pricing, origin, and other important details."
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lineSpacingExtra="3dp"
+                android:textSize="18dp"
+                android:fontFamily="@font/libre_caslon_text"
+                />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ultimately, our mission is to make the process of purchasing supplies and products as seamless and stress-free as possible, so that farmers can focus on what they do best - growing their crops and their businesses."
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lineSpacingExtra="3dp"
+                android:textSize="18dp"
+                android:fontFamily="@font/libre_caslon_text"
+                />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="255dp"
+                android:src="@drawable/img2" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:fontFamily="@font/libre_caslon_text"
+                />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="We're here to help you with any questions or concerns you may have about our IT application. You can reach us via any of the following methods:"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lineSpacingExtra="3dp"
+                android:textSize="18dp"
+                android:fontFamily="@font/libre_caslon_text"
+                />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="right"
+                >
+                <TextView
+                    android:layout_column="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• Phone"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:lineSpacingExtra="3dp"
+                    android:textSize="18dp"
+
+                    />
+                <TextView
+                    android:layout_column="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• Email"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:lineSpacingExtra="3dp"
+                    android:textSize="18dp"
+
+                    />
+                <TextView
+                    android:layout_column="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• Live Chat"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:lineSpacingExtra="3dp"
+                    android:textSize="18dp"
+
+                    />
+                <TextView
+                    android:layout_column="4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• FAQ"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:lineSpacingExtra="3dp"
+                    android:textSize="18dp"
+
+                    />
+            </TableLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Our support team is available to assist you during the following hours:"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:lineSpacingExtra="3dp"
+                android:textSize="18dp"
+
+                android:fontFamily="@font/libre_caslon_text"
+                />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_column="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• Monday-Friday: 8am-8pm EST"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:lineSpacingExtra="3dp"
+                    android:textSize="18dp"
+
+                    />
+                <TextView
+                    android:layout_column="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• Saturday: 9am-5pm EST"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:lineSpacingExtra="5dp"
+                    android:textSize="18dp"
+
+                    />
+                <TextView
+                    android:layout_column="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="• Sunday: 10am-4pm EST"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:lineSpacingExtra="5dp"
+                    android:textSize="18dp"
+
+                    />
+            </TableLayout>
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                />
+
+            <Button
+                android:id="@+id/contact_us"
+                android:layout_marginLeft="70dp"
+                android:layout_marginRight="70dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:text="Contact Us"
+                android:gravity="center"
+                android:backgroundTint="@color/bg2"
+                />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="We value your feedback and suggestions, and we're always looking for ways to improve our app. If you have any comments or ideas, please feel free to share them with us."
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:lineSpacingExtra="3dp"
+                android:gravity="center"
+                android:textSize="16dp"
+
+                android:fontFamily="@font/libre_caslon_text"
+                />
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="10dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thank you for choosing our IT application. We look forward to hearing from you!"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:lineSpacingExtra="3dp"
+                android:gravity="center"
+                android:textSize="16dp"
+
+                android:fontFamily="@font/libre_caslon_text"
+                />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                />
+        </TableLayout>
+    </ScrollView>
+
 
 </FrameLayout>

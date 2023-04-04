@@ -1,14 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderConfirmationFragment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.OtherFragments.OrderConfirmationFragment">
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/roundAnimation"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_70sdp"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="150dp"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/success" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/appCompatTextView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:gravity="center"
+        android:text="Thank you for your Order!"
+        android:textColor="@color/black_semi"
+        android:textSize="@dimen/_22sdp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/roundAnimation" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/orderMessage"
+        android:textColor="@color/dark_brown"
+        android:textSize="@dimen/_14sdp"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/_10sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderStatus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/order_status"
+            android:textColor="@color/dark_brown"
+            android:maxLines="1"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/_10sdp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/orderDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:text="@string/order_date"
+            android:textColor="@color/dark_brown"
+            android:textSize="@dimen/_14sdp"
+            android:gravity="center"
+            android:maxLines="1"
+            android:layout_marginTop="@dimen/_10sdp"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" SHIPPING ADDRESS"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:drawableStart="@drawable/home_orderconfirm"
+            android:textColor="@color/black_semi"/>
+
+        <TextView
+            android:id="@+id/receiverName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:textStyle="bold"
+            android:textColor="@color/black_semi"
+            android:gravity="start"
+            android:text="customerName"
+            android:layout_marginBottom="@dimen/_5sdp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/shippingAddress"
+            android:text="Random Shipping Address"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/black_semi"
+            android:layout_marginBottom="@dimen/_20sdp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:id="@+id/shippingNumber"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/black_semi"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            app:drawableStartCompat="@drawable/ic_phone" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" SHIPPING METHOD"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:drawableStart="@drawable/box_shipping"
+            android:textColor="@color/black_semi"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Flat Rate - Fixed "
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/black_semi"
+            android:layout_marginBottom="@dimen/_20sdp"/>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" ORDERED ITEMS "
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/roboto_medium"
+            android:textSize="@dimen/_14sdp"
+            android:textColor="@color/black_semi"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:textStyle="bold"
+            android:drawableStart="@drawable/item"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/orderid"
+            android:id="@+id/orderId"
+            android:layout_marginStart="@dimen/_50sdp"
+            android:layout_marginEnd="@dimen/_50sdp"
+            android:fontFamily="@font/roboto_medium"
+            android:textColor="@color/black_semi"
+            android:layout_marginBottom="@dimen/_20sdp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/orderedProductsRecycler"
+            android:layout_width="@dimen/_220sdp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:listitem="@layout/item_checkout_products_layout"/>
+
+
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/continueButton"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginBottom="?android:actionBarSize"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/fillbutton"
+            android:fontFamily="@font/roboto_condensed_bold"
+            android:padding="@dimen/_7sdp"
+            android:text="Continue Shopping"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
