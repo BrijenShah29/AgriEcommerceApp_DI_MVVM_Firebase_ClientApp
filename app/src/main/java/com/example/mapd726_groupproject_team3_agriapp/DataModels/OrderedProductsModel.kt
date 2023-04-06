@@ -7,7 +7,7 @@ import androidx.room.PrimaryKey
 data class OrderedProductsModel(
     @PrimaryKey
     @NonNull
-    var productId : String,
+    var productId : String = "",
     var orderedProductName : String? ="",
     var orderedProductQuantity : String ? = "1",
     var productSellingPrice : String ? = "",

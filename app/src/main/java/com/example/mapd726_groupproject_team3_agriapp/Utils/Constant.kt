@@ -1,6 +1,7 @@
 package com.example.mapd726_groupproject_team3_agriapp.Utils
 
 import android.content.Context
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.WishlistModel
 
 interface Constant {
     companion object {
@@ -36,9 +37,8 @@ interface Constant {
         const val USER_PROVINCE = "USER_PROVINCE"
         const val USER_CITY = "USER_CITY"
 
-
-        const val PAYPAL_CLIENT_ID ="AXhQao40QnnNSvRnkwSIFrfTEzY5UtozLvQzikJ4kJY5LVYTmkIhfEfjsoEQbtfNv2a93ezwtSrFMyRu"
-        const val PAYPAL_SECRET = "EEh0a3BsKwJTExhHfs0a4ZTBedtq9AhY4CmS58BXiviLCt0-FyB6pj4CERGQ9fUT_XtZzPmy6jDIyBu_"
+        var wishlist : ArrayList<WishlistModel> = ArrayList()
+        var wishlistProductId : ArrayList<String> = ArrayList()
 
 
     }

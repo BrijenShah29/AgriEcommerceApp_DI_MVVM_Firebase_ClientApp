@@ -119,15 +119,17 @@ init {
         get() = orders
     fun getOrdersForCurrentUsers(customerId:String) : LiveData<ArrayList<OrderModel>> {
         val orderList = ArrayList<OrderModel>()
-        db.collection("customer").whereEqualTo("customerId",customerId).get().addOnSuccessListener {
-            orderList.clear()
+        orderList.clear()
+        db.collection("Orders").whereEqualTo("customerId",customerId).get().addOnSuccessListener {
             for(doc in it.documents){
                 val firebaseData = doc.toObject(OrderModel::class.java)
                 if (firebaseData != null) {
                     orderList.add(firebaseData)
+                    Log.d("OrdersFirebase",firebaseData.customerId!!)
                 }
+                orders.value = orderList
             }
-            orders.value = orderList
+
         }
         return listOrders
     }
@@ -137,7 +139,7 @@ init {
         get() =_cancelOrder
     fun cancelOrder(orderId: String): LiveData<String> {
         val data = HashMap<String,Any>()
-        data["status"] = "Cancelled"
+        data["shipmentStatus"] = "Cancelled"
         db.collection("Orders").document(orderId).update(data).addOnSuccessListener {
             _cancelOrder.value = "Success"
         }.addOnFailureListener {
@@ -145,6 +147,21 @@ init {
         }
         return cancelOrder
     }
+
+    private val _wishlistUpdate = MutableLiveData<String>()
+    private val wishlistUpdate : LiveData<String>
+        get() =_wishlistUpdate
+    fun updateWishlist(customerId: String, wishlist : ArrayList<String>): LiveData<String> {
+        val data = HashMap<String,Any>()
+        data["wishList"] = wishlist//arraylist of wishlist
+        db.collection("Users").document(customerId).update(data).addOnSuccessListener {
+            _wishlistUpdate.value = "Success"
+        }.addOnFailureListener {
+            _wishlistUpdate.value = "Failed"
+        }
+        return wishlistUpdate
+    }
+
 
 
 }

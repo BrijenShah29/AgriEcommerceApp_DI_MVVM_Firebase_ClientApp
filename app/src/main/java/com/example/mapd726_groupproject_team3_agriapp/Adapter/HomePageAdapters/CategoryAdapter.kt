@@ -32,6 +32,7 @@ class CategoryAdapter(var context: Context) :
 
             txtBox.text = item.Category
             Glide.with(context).load(item.Image)
+                .placeholder(context.getDrawable(R.drawable.user))
                 .centerCrop()
                 .override(300)
                 .into(img)

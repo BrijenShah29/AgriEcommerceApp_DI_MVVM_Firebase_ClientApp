@@ -11,27 +11,28 @@ import android.view.LayoutInflater
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
-import com.example.mapd726_groupproject_team3_agriapp.Fragments.DetailedProductFragment
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.WishlistModel
 import com.example.mapd726_groupproject_team3_agriapp.Fragments.OtherFragments.BottomSheetFragment
 import com.example.mapd726_groupproject_team3_agriapp.R
+import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant
+import com.example.mapd726_groupproject_team3_agriapp.ViewModel.UserViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.ItemProductListingLayoutBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.internal.managers.FragmentComponentManager
 
-class CategoryProductAdapter(val context: Context) : ListAdapter<ProductModel,CategoryProductAdapter.CategoryProductViewHolder>(DiffUtil()){
+class CategoryProductAdapter(val context: Context, val userViewModel: UserViewModel) : ListAdapter<ProductModel,CategoryProductAdapter.CategoryProductViewHolder>(DiffUtil()){
 
     inner class CategoryProductViewHolder(val binding: ItemProductListingLayoutBinding): RecyclerView.ViewHolder(binding.root)
     {
-        fun bind(context: Context, item: ProductModel) {
+        fun bind(context: Context, item: ProductModel, userViewModel: UserViewModel) {
 
-            Glide.with(context).load(item.productCoverImg).centerCrop().into(binding.imageView)
+            Glide.with(context).load(item.productCoverImg).placeholder(context.getDrawable(R.drawable.user)).centerCrop().into(binding.imageView)
             binding.productTitle.text = item.productName
             binding.salePrice.text = "$ " + item.productSpecialPrice
 
@@ -75,18 +76,39 @@ class CategoryProductAdapter(val context: Context) : ListAdapter<ProductModel,Ca
                 // SENDING BUNDLE TO BOTTOM SHEET FRAGMENT
                 bottomSheetFragment.arguments = bundle
                 bottomSheetFragment.show(sender,bottomSheetFragment.tag)
-
             }
 
-
             binding.wishlistCheckbox.setOnCheckedChangeListener { compoundButton, b ->
+                val data = WishlistModel(
+                    item.productName,
+                    item.productDescription,
+                    item.productCoverImg,
+                    item.productCategory,
+                    item.productSubCategory,
+                    item.productId,
+                    item.productPrice!!,
+                    item.discountRate,
+                    item.stock,
+                    item.onSale,
+                    item.productSpecialPrice,
+                    item.productScale,
+                    item.productImages)
+
                 if(compoundButton.isChecked)
                 {
-                    Log.d("added to Wishlist",item.productName.toString())
+                    // add to room db wishlist , sync with server on onStart
+                    Constant.wishlist.add(data)
+                    Constant.wishlistProductId.add(data.productId)
+                    userViewModel.addProductIntoWishlist(data)
+
+                    Snackbar.make(itemView,"Product has been added to your Wishlist",Snackbar.LENGTH_SHORT).show()
                 }
                 else
                 {
-                    Log.d("removed from Wishlist",item.productName.toString())
+                    Constant.wishlist.remove(data)
+                    Constant.wishlistProductId.remove(data.productId)
+                    userViewModel.removeProductIntoWishlist(item.productId)
+                    Snackbar.make(itemView,"Product has been removed from your Wishlist",Snackbar.LENGTH_SHORT).show()
                 }
             }
         }
@@ -99,11 +121,8 @@ class CategoryProductAdapter(val context: Context) : ListAdapter<ProductModel,Ca
     }
 
     override fun onBindViewHolder(holder: CategoryProductViewHolder, position: Int) {
-
         val item  = getItem(position)
-        holder.bind(context,item)
-
-
+        holder.bind(context,item,userViewModel)
     }
 
     class DiffUtil : androidx.recyclerview.widget.DiffUtil.ItemCallback<ProductModel>(){

@@ -39,16 +39,12 @@ class CheckoutProductAdapter(val context : Context) : ListAdapter<CartModel,Chec
         val item = getItem(position)
         holder.bind(item, context)
     }
-
-
     class DiffUtilCheckoutAdapter() : DiffUtil.ItemCallback<CartModel>(){
 
         override fun areItemsTheSame(oldItem: CartModel, newItem: CartModel): Boolean {
             return oldItem.productId == newItem.productId &&
                     oldItem.productQuantity == newItem.productQuantity
         }
-
-
         override fun areContentsTheSame(oldItem: CartModel, newItem: CartModel): Boolean {
            return oldItem == newItem
         }

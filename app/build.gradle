@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.mapd726_groupproject_team3_agriapp"

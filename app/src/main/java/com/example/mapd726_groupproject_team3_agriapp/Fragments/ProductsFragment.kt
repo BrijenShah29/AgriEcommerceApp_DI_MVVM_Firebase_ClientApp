@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.ProductsListPageAdapters.CategoryProductAdapter
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.HomeViewModel
+import com.example.mapd726_groupproject_team3_agriapp.ViewModel.UserViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentProductsBinding
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -26,6 +27,8 @@ class ProductsFragment : Fragment() {
     private lateinit var binding : FragmentProductsBinding
 
     private val viewModel by viewModels<HomeViewModel>()
+
+    private val userViewModel by viewModels<UserViewModel>()
 
     private lateinit var productAdapter : CategoryProductAdapter
 
@@ -43,7 +46,7 @@ class ProductsFragment : Fragment() {
 
 
 
-        productAdapter = CategoryProductAdapter(requireContext())
+        productAdapter = CategoryProductAdapter(requireContext(),userViewModel)
         binding.categoryRecycler.adapter = productAdapter
         binding.categoryRecycler.layoutManager = GridLayoutManager(requireContext(), 2)
 

@@ -83,7 +83,6 @@ class RegistrationFragment : Fragment() {
             launchGalleryActivity.launch(intent)
         }
 
-
         binding.registerButton.setOnClickListener {
 
             if (!Pattern.matches("[a-zA-Z]+", binding.firstName.text.toString())) {
@@ -166,7 +165,7 @@ class RegistrationFragment : Fragment() {
             coverImageUrl
         )
         CoroutineScope(Dispatchers.Main).launch{
-            val status = viewModel.saveUserDataToFirebase("Users",userNumber.toString(),data)
+            val status = viewModel.saveUserDataToFirebase("Users",data)
             delay(2500)
             if(status)
             {
@@ -192,6 +191,7 @@ class RegistrationFragment : Fragment() {
         binding.updateUserProfileImage.visibility = View.GONE
         binding.registerButton.visibility = View.GONE
         binding.textView4.visibility = View.GONE
+        binding.profileInfoBanner.visibility = View.GONE
         binding.successMessage.visibility = View.VISIBLE
         binding.continueButton.visibility = View.VISIBLE
 

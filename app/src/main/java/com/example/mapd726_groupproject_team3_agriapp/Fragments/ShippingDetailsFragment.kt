@@ -16,6 +16,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CustomerModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
@@ -55,12 +56,7 @@ class ShippingDetailsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        userManager = UserManager(requireContext())
-        userName = userManager.getUserName()
-        userPreferredStreetAddress = userManager.getPreferredUserAddress()
-        userPreferredZipCode = userManager.getPreferredUserZipcode()
-        userPreferredProvince = userManager.getPreferredUserProvince()
-        userPreferredCity = userManager.getPreferredUserCity()
+
 
     }
 
@@ -76,7 +72,11 @@ class ShippingDetailsFragment : Fragment() {
         dialog.setContentView(R.layout.progress_layout)
         dialog.setCancelable(false)
 
-
+        userName = userManager.getUserName()
+        userPreferredStreetAddress = userManager.getPreferredUserAddress()
+        userPreferredZipCode = userManager.getPreferredUserZipcode()
+        userPreferredProvince = userManager.getPreferredUserProvince()
+        userPreferredCity = userManager.getPreferredUserCity()
 
         if(userName == Constant.USER_GUEST)
         {
@@ -134,7 +134,9 @@ class ShippingDetailsFragment : Fragment() {
                     // No data found of user in Room or in Server
                     isDataFoundInServer = false
                     dialog.dismiss()
-
+                    binding.firstName.setText(userName)
+                    binding.userNumber.setText(userManager.getUserNumber())
+                    userId = userManager.getUserId().toString()
                 }
                 },2000)
             })
@@ -232,7 +234,6 @@ class ShippingDetailsFragment : Fragment() {
 
                         CoroutineScope(Dispatchers.IO).launch {
                             status = viewModel.saveUserDataToFirebase("Users",
-                                userManager.getUserNumber().toString(),
                                 userData)
 
                             delay(2500)
@@ -242,6 +243,8 @@ class ShippingDetailsFragment : Fragment() {
                                 Snackbar.make(requireView(),
                                     "Profile Has been Updated successfully",
                                     Snackbar.LENGTH_SHORT).show()
+                                    redirectUserToCheckoutPage()
+                                    dialog.show()
                             } else {
                                 Toast.makeText(requireContext(),
                                     "Something went wrong while updating your Profile..",
@@ -253,10 +256,9 @@ class ShippingDetailsFragment : Fragment() {
                     .setNegativeButton("No") { dialog, id ->
                         // Dismiss the dialog
                         dialog.dismiss()
+                        redirectUserToCheckoutPage()
                     }
                 alert.create().show()
-
-
                 }
             }
             else
@@ -279,16 +281,17 @@ class ShippingDetailsFragment : Fragment() {
 
                             CoroutineScope(Dispatchers.IO).launch {
                                 status = viewModel.saveUserDataToFirebase("Users",
-                                    userManager.getUserNumber().toString(),
                                     userData)
 
-                                delay(2500)
+                                delay(2000)
                                 if (status == true) {
                                     viewModel.insertUserDataIntoRoom(userData)
                                     dialog.dismiss()
                                     Snackbar.make(requireView(),
                                         "Profile Has been Updated successfully",
                                         Snackbar.LENGTH_SHORT).show()
+                                    redirectUserToCheckoutPage()
+                                    dialog.show()
                                 } else {
                                     Toast.makeText(requireContext(),
                                         "Something went wrong while updating your Profile..",
@@ -300,12 +303,12 @@ class ShippingDetailsFragment : Fragment() {
 
                         }
                     alert.create().show()
-
-
                 }
             }
-
-            redirectUserToCheckoutPage()
+            dialog.show()
+            Handler(Looper.myLooper()!!).postDelayed(Runnable {
+                redirectUserToCheckoutPage()
+            },2500)
 
         }
 
@@ -341,11 +344,6 @@ class ShippingDetailsFragment : Fragment() {
         dialog.dismiss()
 
         Navigation.findNavController(binding.root).navigate(R.id.action_shippingDetailsFragment_to_checkoutFragment,bundle)
-
-
-
-
-
     }
 
     private fun storeUserNumberToSendOffersAsText() {

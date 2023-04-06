@@ -111,6 +111,8 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:fontFamily="@font/roboto_medium"
                             android:padding="@dimen/_5sdp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:text="Brijen Shah"
                             android:textSize="@dimen/_14sdp" />
 
@@ -121,8 +123,22 @@
                             android:layout_marginTop="@dimen/_10sdp"
                             android:fontFamily="@font/roboto_medium"
                             android:padding="@dimen/_5sdp"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:text="+12348795566"
                             android:textSize="@dimen/_14sdp" />
+
+                        <Button
+                            android:id="@+id/editButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:fontFamily="@font/roboto_medium"
+                            android:text="Edit"
+                            android:layout_gravity="center"
+                            android:textAllCaps="false"/>
+
+
 
                         <androidx.appcompat.widget.AppCompatEditText
                             android:id="@+id/editUserFirstName"
@@ -131,6 +147,7 @@
                             android:layout_width="@dimen/_180sdp"
                             android:layout_height="@dimen/_30sdp"
                             android:layout_marginTop="@dimen/_10sdp"
+                            android:hint="First Name"
                             android:fontFamily="@font/roboto_medium"
                             android:padding="@dimen/_5sdp"
                             android:text=""
@@ -146,21 +163,9 @@
                             android:fontFamily="@font/roboto_medium"
                             android:padding="@dimen/_5sdp"
                             android:text=""
+                            android:hint="Last Name"
                             android:textSize="@dimen/_14sdp"
                             />
-
-                        <androidx.appcompat.widget.AppCompatEditText
-                            android:id="@+id/editUserNumber"
-                            style="@style/LoginTextInputInnerFieldStyle"
-                            android:layout_width="@dimen/_180sdp"
-                            android:layout_height="@dimen/_30sdp"
-                            android:layout_marginTop="@dimen/_10sdp"
-                            android:fontFamily="@font/roboto_medium"
-                            android:padding="@dimen/_5sdp"
-                            android:text="+12348795566"
-                            android:textSize="@dimen/_14sdp"
-                            android:visibility="gone" />
-
                         <Button
                             android:id="@+id/saveChanges"
                             android:layout_width="match_parent"

@@ -1,4 +1,4 @@
-package com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters
+package com.example.mapd726_groupproject_team3_agriapp.Adapter.WishlistAdapter
 
 import android.app.Activity
 import android.content.Context
@@ -9,26 +9,22 @@ import android.text.style.StrikethroughSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
-import com.example.mapd726_groupproject_team3_agriapp.Fragments.HomeFragment
 import com.example.mapd726_groupproject_team3_agriapp.R
 import com.example.mapd726_groupproject_team3_agriapp.databinding.LayoutProductItemBinding
 import dagger.hilt.android.internal.managers.FragmentComponentManager
 
-class ProductAdapter(val context: Context): ListAdapter<ProductModel,ProductAdapter.ProductViewHolder>(
+class WishlistAdapter(val context: Context): ListAdapter<ProductModel, WishlistAdapter.WishlistViewHolder>(
     diffUtil()) {
 
 
-    inner class ProductViewHolder(val binding: LayoutProductItemBinding) :
+    inner class WishlistViewHolder(val binding: LayoutProductItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ProductModel, context: Context) {
             binding.productTitle.text = item.productName
@@ -53,35 +49,35 @@ class ProductAdapter(val context: Context): ListAdapter<ProductModel,ProductAdap
                 binding.imageSale.visibility = View.INVISIBLE
             }
 
-            }
-
         }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WishlistViewHolder {
 
         val binding = LayoutProductItemBinding.inflate(LayoutInflater.from(context), parent, false)
-        return ProductViewHolder(binding)
+        return WishlistViewHolder(binding)
 
     }
 
 
-    override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: WishlistViewHolder, position: Int) {
         val item = getItem(position)
 
         holder.bind(item, context)
 
-       holder.itemView.setOnClickListener {
+        holder.itemView.setOnClickListener {
 
             //Redirect to the product detail fragment
 
             val bundle = Bundle()
             bundle.putParcelable("product",item)
-           // bundle.putString("productID",item.productId)
+            // bundle.putString("productID",item.productId)
             val sender = (FragmentComponentManager.findActivity(holder.itemView.context) as Activity as FragmentActivity).supportFragmentManager
             sender.setFragmentResult("dataFromHome",bundle)
 
 
-            Navigation.findNavController(holder.itemView).navigate(R.id.action_homeFragment_to_detailedProductFragment,bundle)
+            Navigation.findNavController(holder.itemView).navigate(R.id.detailedProductFragment,bundle)
 
             // Add to Room Database for Previous Product history
 
@@ -93,7 +89,7 @@ class ProductAdapter(val context: Context): ListAdapter<ProductModel,ProductAdap
     class diffUtil() : DiffUtil.ItemCallback<ProductModel>() {
 
         override fun areItemsTheSame(oldItem: ProductModel, newItem: ProductModel): Boolean {
-          return  oldItem.productId == newItem.productId
+            return  oldItem.productId == newItem.productId
         }
 
 

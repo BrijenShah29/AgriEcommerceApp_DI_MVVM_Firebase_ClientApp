@@ -6,16 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.OrderedProductsModel
+import com.example.mapd726_groupproject_team3_agriapp.R
 import com.example.mapd726_groupproject_team3_agriapp.databinding.LayoutOrderedProductsHistoryBinding
 
-class OrderHistoryChildAdapter(val context : Context, private val childList: List<OrderedProductsModel>) : RecyclerView.Adapter<OrderHistoryChildAdapter.OrderHistoryChildViewHolder>() {
+class OrderHistoryChildAdapter(val context : Context, private val childList: ArrayList<OrderedProductsModel>) : RecyclerView.Adapter<OrderHistoryChildAdapter.OrderHistoryChildViewHolder>() {
 
     class OrderHistoryChildViewHolder(val binding: LayoutOrderedProductsHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(context: Context, childModel: OrderedProductsModel) {
             binding.productNameTextView.text = childModel.orderedProductName
             binding.quantityTextView.text = childModel.orderedProductQuantity
-            Glide.with(context).load(childModel.productImage).centerCrop().into(binding.productImageView)
+            Glide.with(context).load(childModel.productImage).placeholder(context.getDrawable(R.drawable.user)).centerCrop().into(binding.productImageView)
         }
     }
 

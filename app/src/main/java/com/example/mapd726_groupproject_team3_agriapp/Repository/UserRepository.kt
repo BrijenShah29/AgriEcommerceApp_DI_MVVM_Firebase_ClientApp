@@ -4,10 +4,9 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asLiveData
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.CustomerModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.OrderModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.*
 import com.example.mapd726_groupproject_team3_agriapp.RoomDB.AgroDao
+import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.toObject
@@ -21,9 +20,9 @@ class UserRepository @Inject constructor(val auth : FirebaseAuth, val db : Fireb
 
 
     // SAVING USER DATA TO FIREBASE
-    suspend fun saveUserDataToFirebase(collectionPath: String,userNumber : String,data : CustomerModel): Boolean {
+    suspend fun saveUserDataToFirebase(collectionPath: String,data : CustomerModel): Boolean {
         var status : Boolean? = null
-        db.collection(collectionPath).document(userNumber).set(data).addOnSuccessListener {
+        db.collection(collectionPath).document(data.customerId).set(data).addOnSuccessListener {
             status = true
         }
             .addOnFailureListener{
@@ -40,8 +39,11 @@ class UserRepository @Inject constructor(val auth : FirebaseAuth, val db : Fireb
 
     //GETTING USER DATA FROM FIREBASE
     suspend fun getUserDataFromFirebase(collectionPath: String,userNumber: String):LiveData<CustomerModel>{
-        db.collection(collectionPath).document(userNumber).get().addOnSuccessListener {
-                _firebaseData.value = it.toObject(CustomerModel::class.java)
+        db.collection(collectionPath).whereEqualTo("customerNumber",userNumber).get().addOnSuccessListener {
+            for (doc in it.documents)
+            {
+                _firebaseData.value = doc.toObject(CustomerModel::class.java)
+            }
             }
         delay(2000)
         return firebaseData
@@ -89,14 +91,33 @@ class UserRepository @Inject constructor(val auth : FirebaseAuth, val db : Fireb
 
 
     // INSERTING UPDATES OF USER PROFILE
-    fun updateUserProfileInfo(firstName: String, lastName: String, userProfile: String?,userNumber: String)
+    fun updateUserProfileInfo(firstName: String, lastName: String, userProfile: String?,userId: String)
     {
         val data = HashMap<String,Any>()
         data.put("customerFirstName",firstName)
         data.put("customerLastName",lastName)
         data.put("customerImage",userProfile!!)
 
-        db.collection("Users").document(userNumber).update(data)
+        db.collection("Users").document(userId).update(data)
+    }
+
+    suspend fun addWishlistProduct(item: WishlistModel) = agroDao.insertWishlistProducts(item)
+    suspend fun removeWishlistProduct(item: String) = agroDao.removeWishlistProduct(item)
+    fun getWishlistProducts() = agroDao.getWishlistProducts()
+    fun updateWishlistInServer(customerId: String) {
+        val data = HashMap<String,Any>()
+        data.put("wishList",Constant.wishlistProductId)
+        db.collection("Users").document(customerId).update(data)
+    }
+
+    fun fetchWishlistFromServer(customerId: String){
+        db.collection("Users").document(customerId).get().addOnSuccessListener {snapshot->
+            if(snapshot.exists())
+            {
+
+            }
+        }
+
     }
 
 

@@ -28,7 +28,7 @@ interface AgroDao {
 
     // TO INSERT LIKED PRODUCTS
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertWishlistProducts(productModel: ProductModel)
+    suspend fun insertWishlistProducts(wishlistModel: WishlistModel)
 
     // TO INSERT USERDATA IF IT EXISTS
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -36,8 +36,6 @@ interface AgroDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrder(orderModel: OrderModel)
-
-
 
 
     @Query("SELECT * FROM products")
@@ -58,6 +56,11 @@ interface AgroDao {
     // TO GET ALL CART PRODUCTS
     @Query("SELECT * FROM cartProductTable")
     fun getCartProducts() : Flow<List<CartModel>>
+
+
+    //TO GET ALL WISHLIST PRODUCTS
+    @Query("SELECT * FROM wishlistTable")
+    fun getWishlistProducts() : Flow<List<WishlistModel>>
 
     //TO GET SINGLE PRODUCT FROM PRODUCTS TABLE
     @Query("SELECT * FROM products WHERE productId = :id")
@@ -106,6 +109,10 @@ interface AgroDao {
     // TO GET PRODUCTS FROM RECENTLY VISITED TABLE
     @Query("SELECT * FROM RecentlyVisitedProductTable ORDER BY id DESC LIMIT 10 ")
     fun getRecentlyVisitedProducts() : Flow<List<RecentlyVisitedModel>>
+
+    @Query("DELETE FROM wishlistTable WHERE productId = :productId")
+    suspend fun removeWishlistProduct(productId: String)
+
 
 
 }

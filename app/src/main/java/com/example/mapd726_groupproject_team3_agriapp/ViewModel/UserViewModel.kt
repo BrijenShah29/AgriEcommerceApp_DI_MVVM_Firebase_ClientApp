@@ -1,11 +1,10 @@
 package com.example.mapd726_groupproject_team3_agriapp.ViewModel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CustomerModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.OrderModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.WishlistModel
 import com.example.mapd726_groupproject_team3_agriapp.Repository.FirebaseRepository
 import com.example.mapd726_groupproject_team3_agriapp.Repository.ProductRepository
 import com.example.mapd726_groupproject_team3_agriapp.Repository.UserRepository
@@ -23,12 +22,12 @@ class  UserViewModel @Inject constructor(val firebaseRepository: FirebaseReposit
     // USER DATA STORE TO FIRE STORE
 
     var status : Boolean? = null;
-    suspend fun saveUserDataToFirebase(collectionPath: String, userNumber: String, data: CustomerModel): Boolean {
+    suspend fun saveUserDataToFirebase(collectionPath: String, data: CustomerModel): Boolean {
 
         viewModelScope.launch(Dispatchers.IO) {
-            status = userRepository.saveUserDataToFirebase(collectionPath, userNumber, data)
+            status = userRepository.saveUserDataToFirebase(collectionPath, data)
          }
-        delay(2000)
+        delay(1000)
          return status!!
     }
 
@@ -86,8 +85,8 @@ class  UserViewModel @Inject constructor(val firebaseRepository: FirebaseReposit
     val fetchUserOrders : LiveData<ArrayList<OrderModel>>
         get() = _fetchUserOrders
     fun fetchUserOrders(userId : String){
-        viewModelScope.launch(Dispatchers.IO) {
-            _fetchUserOrders.value = firebaseRepository.getOrdersForCurrentUsers(userId).value
+        viewModelScope.launch {
+            _fetchUserOrders= firebaseRepository.getOrdersForCurrentUsers(userId) as MutableLiveData<ArrayList<OrderModel>>
         }
     }
 
@@ -98,16 +97,44 @@ class  UserViewModel @Inject constructor(val firebaseRepository: FirebaseReposit
         get()  = _cancelOrder
 
     fun cancelOrder(orderId:String){
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             _cancelOrder.value = firebaseRepository.cancelOrder(orderId).value
         }
     }
 
-    fun updateUserProfileInfo(firstName: String, lastName: String, userProfile: String?,userNumber: String) {
+    fun updateUserProfileInfo(firstName: String, lastName: String, userProfile: String?,userId: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            userRepository.updateUserProfileInfo(firstName, lastName, userProfile,userNumber)
+            userRepository.updateUserProfileInfo(firstName, lastName, userProfile,userId)
+        }
+    }
+
+    fun updateWishlistInServer(customerId: String){
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.updateWishlistInServer(customerId)
+        }
+    }
+    fun addProductIntoWishlist(item: WishlistModel) {
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.addWishlistProduct(item)
         }
 
+    }
+
+    fun removeProductIntoWishlist(data: String)
+    {
+        viewModelScope.launch(Dispatchers.IO) {
+            userRepository.removeWishlistProduct(data)
+        }
+
+    }
+
+    lateinit var wishlistProducts : LiveData<List<WishlistModel>>
+    fun getProductsOfWishlist() {
+        viewModelScope.launch {
+            wishlistProducts = userRepository.getWishlistProducts().asLiveData()
+        }
+    }
+    init {
 
     }
 

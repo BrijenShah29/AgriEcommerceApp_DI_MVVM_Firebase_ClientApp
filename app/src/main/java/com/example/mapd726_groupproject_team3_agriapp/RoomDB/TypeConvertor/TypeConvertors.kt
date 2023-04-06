@@ -8,6 +8,7 @@ import java.lang.reflect.Type
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class TypeConvertors {
 
@@ -46,17 +47,14 @@ class TypeConvertors {
     }
 
     @TypeConverter
-    fun stringToListServer(data: String?): List<OrderedProductsModel>{
-        if (data == null) {
-            return Collections.emptyList()
-        }
+    fun stringToListServer(data: String?): ArrayList<OrderedProductsModel>{
         val listType: Type = object :
-            com.google.gson.reflect.TypeToken<List<OrderedProductsModel?>?>() {}.type
-        return Gson().fromJson<List<OrderedProductsModel>>(data, listType)
+            com.google.gson.reflect.TypeToken<ArrayList<OrderedProductsModel?>?>() {}.type
+        return Gson().fromJson<ArrayList<OrderedProductsModel>>(data, listType)
     }
 
     @TypeConverter
-    fun listServerToString(someObjects: List<OrderedProductsModel>): String? {
+    fun listServerToString(someObjects: ArrayList<OrderedProductsModel>): String? {
         return Gson().toJson(someObjects)
     }
 

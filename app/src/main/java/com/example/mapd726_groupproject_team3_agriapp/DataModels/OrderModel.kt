@@ -14,15 +14,11 @@ import kotlin.collections.ArrayList
 @Entity(tableName = "OrderTable",indices = [Index(value = ["orderId"], unique = true)])
 data class OrderModel(
     @PrimaryKey
-    @NonNull
     @ColumnInfo(name = "orderId")
-    val orderId : String= "",
-    @NonNull
-    val customerId : String ="",
-    @NonNull
-    val paymentStatus : String = "",
-    val orderedDate : Long?,
-    @NonNull
+    val orderId : String = "",
+    val customerId : String? ="",
+    val paymentStatus : String? = "",
+    val orderedDate : Long? = 0,
     val orderAmount : String? = "",
     val shipmentStatus : String? ="",
     val shippingDate : String? = "",
@@ -31,5 +27,5 @@ data class OrderModel(
     val shipmentReceiverEmail : String?="",
     val customerPhoneNumber : String? ="",
     val customerName : String?="",
-    val orderedProducts : List<OrderedProductsModel>
+    val orderedProducts : ArrayList<OrderedProductsModel>? = ArrayList()
 )

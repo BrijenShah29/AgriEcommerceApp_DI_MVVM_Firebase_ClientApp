@@ -19,12 +19,21 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
     //GETTING SINGLE PRODUCT FROM ROOM
 
     var selectedSingleProduct : ProductModel? = null
-
     fun getSingleProduct(id: String) {
         viewModelScope.launch {
             selectedSingleProduct = productRepository.getSingleProduct(id)
         }
+    }
 
+    var _wishlistSingleProduct = MutableLiveData<ProductModel>()
+
+    val wishlistSingleProduct : LiveData<ProductModel>
+        get()  = _wishlistSingleProduct
+
+    fun getSingleWishlistProduct(id: String) {
+        viewModelScope.launch(Dispatchers.Main) {
+            _wishlistSingleProduct.value = productRepository.getSingleProduct(id)
+        }
     }
 
 

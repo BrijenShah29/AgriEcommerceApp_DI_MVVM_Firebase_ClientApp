@@ -41,7 +41,7 @@ class ImageSliderAdapter(private val context: Context, private val slider: Array
     override fun onBindViewHolder(viewHolder: SliderAdapterVH, position: Int) {
         val sliderItem = mSliderItems!![position]
         Glide.with(context)
-            .load(sliderItem.img).override(400)
+            .load(sliderItem.img).placeholder(context.getDrawable(R.drawable.user)).override(400)
             .fitCenter()
             .into(viewHolder.imageViewBackground)
 

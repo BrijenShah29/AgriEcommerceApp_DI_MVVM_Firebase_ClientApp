@@ -1,6 +1,7 @@
 package com.example.mapd726_groupproject_team3_agriapp.Fragments
 
 import android.app.Activity
+import android.app.Dialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -61,7 +62,7 @@ class CheckoutFragment : Fragment() {
     private val viewModelUsers by viewModels<UserViewModel>()
 
     lateinit var cartList : ArrayList<CartModel>
-    private lateinit var orderedProductsList : MutableList<OrderedProductsModel>
+    private lateinit var orderedProductsList : ArrayList<OrderedProductsModel>
     var cartTotal : Double? = 0.0
     var cartTotalTax : Double ? = 0.0
     var cartTotalPayable : Double? = 0.0
@@ -79,6 +80,7 @@ class CheckoutFragment : Fragment() {
     lateinit var paymentSheet: PaymentSheet
     lateinit var customerConfig: PaymentSheet.CustomerConfiguration
     lateinit var paymentIntentClientSecret: String
+
 
     private lateinit var mProgressBar : ProgressBar
 

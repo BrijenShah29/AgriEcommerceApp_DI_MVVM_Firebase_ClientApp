@@ -5,13 +5,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.OrderModel
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.UserViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.LayoutOrderHistoryBinding
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -22,25 +20,26 @@ import java.util.*
 class OrderHistoryParentAdapter(
     val context: Context,
     private val parentList: List<OrderModel>,
-    val viewModel: UserViewModel
+    val viewModel: UserViewModel,
+    val userId: String
 ) : RecyclerView.Adapter<OrderHistoryParentAdapter.OrderHistoryParentViewHolder>() {
 
     inner class OrderHistoryParentViewHolder(val binding : LayoutOrderHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(context: Context, parentModel: OrderModel, itemView: View)
         {
-            binding.orderId.text = parentModel.orderId.toString()
-            binding.orderTotal.text = parentModel.orderAmount.toString()
+            binding.orderId.text = "Order ID : "+ parentModel.orderId.toString()
+            binding.orderTotal.text = "Total Payment Received : "+ parentModel.orderAmount.toString()
             // Date is pending
             val dateFormat = SimpleDateFormat("MM-dd-yyyy hh:mm", Locale.getDefault())
             if(parentModel.orderedDate!=null){
                 val date = dateFormat.format(Date(parentModel.orderedDate))
-                binding.orderDate.text = date
+                binding.orderDate.text = "Ordered On : $date"
             }
 
-            binding.orderStatus.text = parentModel.shipmentStatus
+            binding.orderStatus.text = "Status : " + parentModel.shipmentStatus
 
-            binding.deliveryAddress.text = parentModel.shipmentAddress
+            binding.deliveryAddress.text = "Delivery Address : " + parentModel.shipmentAddress
 
             binding.totalOrderVisibilityButton.setOnClickListener {
                 if(binding.orderItems.visibility == View.VISIBLE)
@@ -63,7 +62,7 @@ class OrderHistoryParentAdapter(
                 }
             }
             // Set up child RecyclerView
-            binding.orderItems.adapter = OrderHistoryChildAdapter(this@OrderHistoryParentAdapter.context,parentModel.orderedProducts)
+            binding.orderItems.adapter = OrderHistoryChildAdapter(this@OrderHistoryParentAdapter.context,parentModel.orderedProducts!!)
             binding.orderItems.layoutManager = LinearLayoutManager(this.itemView.context, LinearLayoutManager.HORIZONTAL, false)
 
 
@@ -72,20 +71,12 @@ class OrderHistoryParentAdapter(
                     .setCancelable(false)
                     .setPositiveButton("Yes") {dialog,id ->
                         viewModel.cancelOrder(parentModel.orderId)
-                        CoroutineScope(Dispatchers.IO).launch {
-                            delay(3000)
-                            when (viewModel.cancelOrder.value) {
-                                "Success" -> {
-                                    Snackbar.make(itemView,"Order has been Cancelled successfully.",Snackbar.LENGTH_SHORT).show()
-                                }
-                                "Failed" -> {
-                                    Snackbar.make(itemView,"Order can no be cancelled. Please try again.",Snackbar.LENGTH_LONG).show()
-                                }
-                                else -> {
-                                    Toast.makeText( context, "Something went wrong.Please try again !!", Toast.LENGTH_SHORT).show()
-                                }
-                            }
+                        CoroutineScope(Dispatchers.Main).launch {
+                            delay(300)
+                            viewModel.fetchUserOrders(userId)
                         }
+
+
                     }
                     .setNegativeButton("No") { dialog, id ->
                         dialog.dismiss()

@@ -12,12 +12,11 @@ import com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters.I
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters.ProductAdapter
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters.HomePageSubCategoryAdapters.SubCategoryDisplayAdapter
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.RecentlyVisitedProductsAdapter.RecentlyVisitedAdapter
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.Slider
-import com.example.mapd726_groupproject_team3_agriapp.DataModels.SubCategoryModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.*
+import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.HomeViewModel
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.ProductsViewModel
+import com.example.mapd726_groupproject_team3_agriapp.ViewModel.UserViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentHomeBinding
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,29 +27,30 @@ class HomeFragment : Fragment() {
     private lateinit var binding : FragmentHomeBinding
     private var categoryList = ArrayList<CategoryModel>()
 
-    private var productList = ArrayList<ProductModel>()
-    private var vegetableProductList = ArrayList<ProductModel>()
-    private var fruitProductList = ArrayList<ProductModel>()
-    private var herbicidesProductList = ArrayList<ProductModel>()
-    private var pesticidesProductList = ArrayList<ProductModel>()
-    private var fungicidesProductList = ArrayList<ProductModel>()
-    private var fertilizerProductList = ArrayList<ProductModel>()
-    private var growthPromoterProductList = ArrayList<ProductModel>()
-    private var toolsProductList = ArrayList<ProductModel>()
-    private var potsAndPlantersProductList = ArrayList<ProductModel>()
+//    private var productList = ArrayList<ProductModel>()
+//    private var vegetableProductList = ArrayList<ProductModel>()
+//    private var fruitProductList = ArrayList<ProductModel>()
+//    private var herbicidesProductList = ArrayList<ProductModel>()
+//    private var pesticidesProductList = ArrayList<ProductModel>()
+//    private var fungicidesProductList = ArrayList<ProductModel>()
+//    private var fertilizerProductList = ArrayList<ProductModel>()
+//    private var growthPromoterProductList = ArrayList<ProductModel>()
+//    private var toolsProductList = ArrayList<ProductModel>()
+//    private var potsAndPlantersProductList = ArrayList<ProductModel>()
 
 
     private var imageList = ArrayList<Slider>()
-    private var vegetableSubCategoryList = ArrayList<SubCategoryModel>()
-    private var fruitSubCategoryList = ArrayList<SubCategoryModel>()
-    private var cropProtectionSubCategoryList = ArrayList<SubCategoryModel>()
-    private var cropNutritionSubCategoryList = ArrayList<SubCategoryModel>()
-
+//    private var vegetableSubCategoryList = ArrayList<SubCategoryModel>()
+//    private var fruitSubCategoryList = ArrayList<SubCategoryModel>()
+//    private var cropProtectionSubCategoryList = ArrayList<SubCategoryModel>()
+//    private var cropNutritionSubCategoryList = ArrayList<SubCategoryModel>()
+//
 
 
 
     private val viewModel by viewModels<HomeViewModel>()
     private val viewModelProducts by viewModels<ProductsViewModel>()
+    private val userViewModel by viewModels<UserViewModel>()
 
 
     override fun onCreateView(
@@ -253,8 +253,38 @@ class HomeFragment : Fragment() {
             }
         })
 
+        // GETTING ALL WISHLIST PRODUCTS
+        if(Constant.wishlistProductId.isNotEmpty())
+        {
+            for(data in Constant.wishlistProductId)
+            {
+                // fetch individual products from products Table and parse into Wishlists
+                viewModelProducts.getSingleWishlistProduct(data)
+                viewModelProducts.wishlistSingleProduct.observe(viewLifecycleOwner, Observer { products->
+                    val wishlistData = WishlistModel(
+                        products.productName,
+                        products.productDescription,
+                        products.productCoverImg,
+                        products.productCategory,
+                        products.productSubCategory!!,
+                        products.productId,
+                        products.productPrice,
+                        products.discountRate,
+                        products.stock!!,
+                        products.onSale!!,
+                        products.productSpecialPrice,
+                        products.productScale,
+                        products.productImages
+                    )
+                    Constant.wishlist.add(wishlistData)
+                    // add these products into RoomDB
+                    userViewModel.addProductIntoWishlist(wishlistData)
+                })
 
 
+
+            }
+        }
         return binding.root
     }
 

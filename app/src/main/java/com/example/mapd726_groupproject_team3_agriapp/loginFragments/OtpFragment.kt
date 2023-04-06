@@ -24,8 +24,10 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.example.mapd726_groupproject_team3_agriapp.MainActivity
 import com.example.mapd726_groupproject_team3_agriapp.R
+import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant
 import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant.Companion.USER_NAME
 import com.example.mapd726_groupproject_team3_agriapp.Utils.UserManager
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.UserViewModel
@@ -240,6 +242,15 @@ private lateinit var verificationCode : String
                             userManager.saveUserName(it.customerFirstName)
                             userManager.saveCustomerImage(it.customerImage)
                             userManager.saveCustomerId(it.customerId)
+                            userManager.savePreferredCity(it.city)
+                            userManager.savePreferredStreetAddress(it.streetAddress)
+                            userManager.savePreferredProvince(it.province)
+                            userManager.savePreferredZipcode(it.zipCode)
+                            Constant.wishlistProductId.clear()
+                            for(data in it.wishList)
+                            {
+                                Constant.wishlistProductId.add(data)
+                            }
 
                             mProgressBar.visibility = View.INVISIBLE
                             // Login User into App
@@ -250,16 +261,14 @@ private lateinit var verificationCode : String
                     }
                     else
                     {
-                        mProgressBar.visibility = View.INVISIBLE
-                        //IF USER DOES NOT EXIST GO TO REGISTRATION PAGE
-                        Navigation.findNavController(requireView())
-                            .navigate(R.id.action_otpFragment_to_registrationFragment)
-
+                        Handler(Looper.myLooper()!!).postDelayed(Runnable {
+                            mProgressBar.visibility = View.INVISIBLE
+                            //IF USER DOES NOT EXIST GO TO REGISTRATION PAGE
+                            findNavController().navigate(R.id.action_otpFragment_to_registrationFragment)
+                         },1500)
                     }
 
-                },4000)
-
-
+                },4500)
             })
 
 //        val intent = Intent(activity, MainActivity::class.java)

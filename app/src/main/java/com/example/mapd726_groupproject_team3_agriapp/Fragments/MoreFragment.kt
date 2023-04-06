@@ -100,7 +100,7 @@ class MoreFragment : Fragment() {
             binding.userNumber.text = userManager.getUserNumber().toString()
             binding.userImage.isEnabled = true
 
-            Glide.with(this).load(userManager.getUserProfileImage().toString()).apply(RequestOptions.centerCropTransform()).into(binding.userImage)
+            Glide.with(this).load(userManager.getUserProfileImage().toString()).placeholder(requireContext().getDrawable(R.drawable.user)).apply(RequestOptions.centerCropTransform()).into(binding.userImage)
 
 
         }
@@ -133,20 +133,19 @@ class MoreFragment : Fragment() {
             startActivity(intent)
         }
 
-        binding.userNameNumberLayout.setOnClickListener {
+        binding.editButton.setOnClickListener {
             binding.editUserFirstName.visibility = VISIBLE
             binding.editUserLastName.visibility = VISIBLE
-            binding.editUserNumber.visibility = GONE
             binding.userName.visibility = GONE
             binding.userNumber.visibility = GONE
             binding.userImage.isClickable = true
             binding.userImage.isEnabled = true
             binding.saveChanges.visibility = VISIBLE
+            binding.editButton.visibility = GONE
 
         }
 
         binding.saveChanges.setOnClickListener {
-            userManager.savePhoneNumber(binding.editUserNumber.text.toString())
             userManager.saveUserName(binding.editUserFirstName.text.toString())
 
            // userManager.saveCustomerImage(binding.)
@@ -154,12 +153,12 @@ class MoreFragment : Fragment() {
             binding.saveChanges.visibility = GONE
             binding.editUserFirstName.visibility = GONE
             binding.editUserLastName.visibility = GONE
-            binding.editUserNumber.visibility = GONE
             binding.userName.visibility = VISIBLE
             binding.userNumber.visibility = VISIBLE
             binding.userName.setText( userManager.getUserName().toString() + binding.editUserLastName.text)
             binding.userNumber.text = userManager.getUserNumber()
             binding.userImage.isEnabled = false
+            binding.editButton.visibility = GONE
 
            // uploadProfileImage to Storage
             if(coverImage != null) {
@@ -170,6 +169,8 @@ class MoreFragment : Fragment() {
                     .addOnSuccessListener {
                         it.storage.downloadUrl.addOnSuccessListener { image ->
                             coverImageUrl = image.toString()
+                            Glide.with(this).load(coverImageUrl).placeholder(requireContext().getDrawable(R.drawable.user)).apply(RequestOptions.centerCropTransform()).into(binding.userImage)
+                            userManager.saveCustomerImage(coverImageUrl)
                         }
                             .addOnFailureListener {
                                 Log.d("failed", "failed to upload the profile")
@@ -183,7 +184,7 @@ class MoreFragment : Fragment() {
             // upload Retrieved profile image url and other data
             CoroutineScope(Dispatchers.IO).launch {
                 delay(3000)
-                viewModel.updateUserProfileInfo(binding.editUserFirstName.text.toString(),binding.editUserLastName.text.toString(),coverImageUrl,userManager.getUserNumber()!!)
+                viewModel.updateUserProfileInfo(binding.editUserFirstName.text.toString(),binding.editUserLastName.text.toString(),coverImageUrl,userManager.getUserId()!!)
             }
 
         }
@@ -203,11 +204,11 @@ class MoreFragment : Fragment() {
         }
 
         binding.contactUsButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Redirecting to Contact us page", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.contactUsFragment)
         }
 
         binding.aboutUsButton.setOnClickListener {
-            Toast.makeText(requireContext(), "Redirecting to about us page", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(R.id.aboutUsFragment)
         }
 
         binding.rateUsButton.setOnClickListener {
