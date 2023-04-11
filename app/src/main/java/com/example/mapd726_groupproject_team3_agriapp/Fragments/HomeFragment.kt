@@ -14,18 +14,22 @@ import com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters.H
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.RecentlyVisitedProductsAdapter.RecentlyVisitedAdapter
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.*
 import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant
+import com.example.mapd726_groupproject_team3_agriapp.Utils.UserManager
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.HomeViewModel
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.ProductsViewModel
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.UserViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentHomeBinding
 import com.smarteist.autoimageslider.IndicatorView.animation.type.IndicatorAnimationType
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
     private lateinit var binding : FragmentHomeBinding
     private var categoryList = ArrayList<CategoryModel>()
+    @Inject
+    lateinit var userManager : UserManager
 
 //    private var productList = ArrayList<ProductModel>()
 //    private var vegetableProductList = ArrayList<ProductModel>()
@@ -89,7 +93,7 @@ class HomeFragment : Fragment() {
 
 // GETTING CATEGORIES FROM FIREBASE
 
-        val categoryAdapter = CategoryAdapter(requireContext())
+        val categoryAdapter = CategoryAdapter(requireContext(),userManager)
         binding.categoryRecycler.adapter = categoryAdapter
      //   binding.categoryRecycler.isNestedScrollingEnabled = false
         binding.categoryRecycler.setHasFixedSize(true)

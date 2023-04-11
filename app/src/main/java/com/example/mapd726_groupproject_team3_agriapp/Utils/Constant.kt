@@ -40,6 +40,9 @@ interface Constant {
         var wishlist : ArrayList<WishlistModel> = ArrayList()
         var wishlistProductId : ArrayList<String> = ArrayList()
 
+        const val PREFERRED_CATEGORY = "PREFERRED_CATEGORY"
+        const val PREFERRED_CATEGORY_FILE ="PREFERRED_CATEGORY_FILE"
+
 
     }
 }

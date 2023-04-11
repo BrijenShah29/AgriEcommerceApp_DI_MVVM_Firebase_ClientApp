@@ -12,7 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.ProductsListPageAdapters.CategoryProductAdapter
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
+import com.example.mapd726_groupproject_team3_agriapp.DataModels.YouMayLikeModel
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.HomeViewModel
+import com.example.mapd726_groupproject_team3_agriapp.ViewModel.ProductsViewModel
 import com.example.mapd726_groupproject_team3_agriapp.ViewModel.UserViewModel
 import com.example.mapd726_groupproject_team3_agriapp.databinding.FragmentProductsBinding
 import com.google.firebase.firestore.ktx.firestore
@@ -30,6 +32,10 @@ class ProductsFragment : Fragment() {
 
     private val userViewModel by viewModels<UserViewModel>()
 
+    private val productViewModel by viewModels<ProductsViewModel>()
+
+    lateinit var youMayLikeProducts : ArrayList<YouMayLikeModel>
+
     private lateinit var productAdapter : CategoryProductAdapter
 
     override fun onCreateView(
@@ -45,6 +51,7 @@ class ProductsFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
+        youMayLikeProducts = ArrayList<YouMayLikeModel>()
 
         productAdapter = CategoryProductAdapter(requireContext(),userViewModel)
         binding.categoryRecycler.adapter = productAdapter
@@ -63,14 +70,26 @@ class ProductsFragment : Fragment() {
                 Log.d("Fetched products new", it.toString())
                 if(it.isNotEmpty()){
                     productAdapter.submitList(it)
+                    val youMayLikeProducts : ArrayList<YouMayLikeModel> = ArrayList<YouMayLikeModel>()
+                    for(data in it){
+                        addProductsIntoLikableList(data)
+                    }
+                    productViewModel.insertYouMayLikeProducts(youMayLikeProducts)
                 }
                 else
                 {
                     showProductBySubCategory(productSubCategory)
+                    productAdapter.submitList(it)
                 }
             })
 
         return binding.root
+    }
+
+    private fun addProductsIntoLikableList(data: ProductModel) {
+        val youMayLikeProduct = YouMayLikeModel(
+            0,data.productName,data.productCoverImg,data.productId,data.productPrice,data.discountRate,data.onSale,data.productSpecialPrice)
+        youMayLikeProducts.add(youMayLikeProduct)
     }
 
     private fun showProductBySubCategory(productSubCategory: String?) {
@@ -81,6 +100,14 @@ class ProductsFragment : Fragment() {
             viewModel.selectedSubCategoryProducts.observe(viewLifecycleOwner, Observer {
                 Log.d("Fetched products new", it.toString())
                 productAdapter.submitList(it)
+                if(it.isNotEmpty()){
+                    productAdapter.submitList(it)
+                    val youMayLikeProducts : ArrayList<YouMayLikeModel> = ArrayList<YouMayLikeModel>()
+                    for(data in it){
+                        addProductsIntoLikableList(data)
+                    }
+                    productViewModel.insertYouMayLikeProducts(youMayLikeProducts)
+                }
             })
         }
     }

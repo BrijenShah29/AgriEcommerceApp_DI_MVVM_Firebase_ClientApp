@@ -18,6 +18,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.HomePageAdapters.ImageSliderAdapter
+import com.example.mapd726_groupproject_team3_agriapp.Adapter.ProductsYouMayLikeAdapter.ProductsYouMayLikeAdapter
 import com.example.mapd726_groupproject_team3_agriapp.Adapter.RecentlyVisitedProductsAdapter.RecentlyVisitedAdapter
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CartModel
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.ProductModel
@@ -33,8 +34,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.internal.managers.FragmentComponentManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.sql.Timestamp
-import java.util.*
 import kotlin.collections.ArrayList
 
 @AndroidEntryPoint
@@ -74,6 +73,18 @@ class DetailedProductFragment : Fragment() {
         binding.previousVisitedProductsRecycler.setHasFixedSize(true)
         viewModel.recentlyVisitedProducts.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it)
+
+        })
+
+            // SHOWING PRODUCTS YOU MAY LIKE
+
+        val youMayLikeAdapter = ProductsYouMayLikeAdapter(requireContext(),viewModel)
+        binding.youMayLikeRecycler.adapter = youMayLikeAdapter
+        binding.youMayLikeRecycler.setHasFixedSize(true)
+       // viewModel.removeOldRecentlyVisitedData()
+        viewModel.youMayLikeProducts.observe(viewLifecycleOwner, Observer {
+            binding.youMayLikeRecycler.visibility = View.VISIBLE
+            youMayLikeAdapter.submitList(it)
 
         })
 

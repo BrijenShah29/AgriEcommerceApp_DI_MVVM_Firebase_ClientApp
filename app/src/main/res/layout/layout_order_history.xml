@@ -53,6 +53,7 @@
         android:id="@+id/order_items"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         tools:listitem="@layout/layout_ordered_products_history" />
 
     <TextView
@@ -71,5 +72,8 @@
         android:textAllCaps="false"
         android:fontFamily="@font/roboto_medium"
         android:enabled="false"/>
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/black" />
 </LinearLayout>

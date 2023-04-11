@@ -14,6 +14,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CustomerModel
 import com.example.mapd726_groupproject_team3_agriapp.MainActivity
 import com.example.mapd726_groupproject_team3_agriapp.R
@@ -164,21 +165,24 @@ class RegistrationFragment : Fragment() {
             "",
             coverImageUrl
         )
-        CoroutineScope(Dispatchers.Main).launch{
-            val status = viewModel.saveUserDataToFirebase("Users",data)
-            delay(2500)
-            if(status)
-            {
-                showContinueProcess(key)
 
-            }
-            else
-            {
-                Log.d("failed","failed to upload the profile")
-                Toast.makeText(requireContext(), "Something Went wrong While Creating Profile", Toast.LENGTH_SHORT).show()
-            }
+           viewModel.saveUserDataToFirebase("Users",data)
 
-        }
+            viewModel.status.observe(viewLifecycleOwner, Observer {status ->
+                CoroutineScope(Dispatchers.Main).launch {
+                    delay(2500)
+                    if (status) {
+                        showContinueProcess(key)
+                    } else {
+                        Log.d("failed", "failed to upload the profile")
+                        Toast.makeText(
+                            requireContext(),
+                            "Something Went wrong While Creating Profile",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+                })
 
     }
 

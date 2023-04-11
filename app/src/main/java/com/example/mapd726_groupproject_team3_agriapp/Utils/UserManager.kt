@@ -1,6 +1,8 @@
 package com.example.mapd726_groupproject_team3_agriapp.Utils
 
 import android.content.Context
+import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant.Companion.PREFERRED_CATEGORY
+import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant.Companion.PREFERRED_CATEGORY_FILE
 import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant.Companion.SELECTED_CATEGORY
 import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant.Companion.SELECTED_CATEGORY_FILE
 import com.example.mapd726_groupproject_team3_agriapp.Utils.Constant.Companion.SELECTED_SUB_CATEGORY
@@ -37,7 +39,7 @@ class UserManager @Inject constructor(@ApplicationContext context: Context)
     private var prefsUserZipCode = context.getSharedPreferences(USER_ZIPCODE_FILE,Context.MODE_PRIVATE)
     private var prefsUserProvince = context.getSharedPreferences(USER_PROVINCE_FILE,Context.MODE_PRIVATE)
     private var prefsUserCity = context.getSharedPreferences(USER_CITY_FILE,Context.MODE_PRIVATE)
-
+    private var prefPreferredCategory = context.getSharedPreferences(PREFERRED_CATEGORY_FILE,Context.MODE_PRIVATE)
 
 
     fun saveUserName(username : String?){
@@ -100,6 +102,14 @@ class UserManager @Inject constructor(@ApplicationContext context: Context)
         editor.apply()
     }
 
+    fun savePreferredCategory(prefCategory : String?){
+        val editor =prefPreferredCategory.edit()
+        editor.putString(PREFERRED_CATEGORY,prefCategory)
+        editor.apply()
+    }
+
+
+
 
 
     fun getUserName() : String? {
@@ -145,6 +155,11 @@ class UserManager @Inject constructor(@ApplicationContext context: Context)
     fun getPreferredUserCity() : String?
     {
         return prefsUserCity.getString(USER_CITY,null)
+    }
+
+    fun getPreferredCategory() : String?
+    {
+        return prefPreferredCategory.getString(PREFERRED_CATEGORY,"ALL")
     }
 
 

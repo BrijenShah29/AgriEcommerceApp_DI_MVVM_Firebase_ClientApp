@@ -37,6 +37,8 @@ interface AgroDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertOrder(orderModel: OrderModel)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertYouMayLikeProducts(youMayLikeModel: List<YouMayLikeModel>)
 
     @Query("SELECT * FROM products")
     fun getProducts() : Flow<List<ProductModel>>
@@ -110,8 +112,14 @@ interface AgroDao {
     @Query("SELECT * FROM RecentlyVisitedProductTable ORDER BY id DESC LIMIT 10 ")
     fun getRecentlyVisitedProducts() : Flow<List<RecentlyVisitedModel>>
 
+    @Query("SELECT * FROM YouMayLikeProductTable ORDER BY productId DESC LIMIT 10")
+    fun getYouMayLikeProducts() : Flow<List<YouMayLikeModel>>
+
     @Query("DELETE FROM wishlistTable WHERE productId = :productId")
     suspend fun removeWishlistProduct(productId: String)
+
+    @Query("DELETE FROM RecentlyVisitedProductTable WHERE id NOT IN (SELECT id FROM YouMayLikeProductTable ORDER BY id DESC LIMIT 10)")
+    suspend fun removeYouMayLikeProducts()
 
 
 

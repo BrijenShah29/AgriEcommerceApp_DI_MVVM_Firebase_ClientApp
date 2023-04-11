@@ -21,14 +21,16 @@ class  UserViewModel @Inject constructor(val firebaseRepository: FirebaseReposit
 
     // USER DATA STORE TO FIRE STORE
 
-    var status : Boolean? = null;
-    suspend fun saveUserDataToFirebase(collectionPath: String, data: CustomerModel): Boolean {
+    var _status = MutableLiveData<Boolean>()
+    val status : LiveData<Boolean>
+        get() = _status
 
-        viewModelScope.launch(Dispatchers.IO) {
-            status = userRepository.saveUserDataToFirebase(collectionPath, data)
+        fun saveUserDataToFirebase(collectionPath: String, data: CustomerModel): LiveData<Boolean> {
+
+        viewModelScope.launch {
+            _status.value = userRepository.saveUserDataToFirebase(collectionPath, data)
          }
-        delay(1000)
-         return status!!
+         return status
     }
 
     // GETTING USER DATA FROM FIREBASE

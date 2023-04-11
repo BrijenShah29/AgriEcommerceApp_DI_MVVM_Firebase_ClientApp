@@ -142,6 +142,8 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
 
     lateinit var recentlyVisitedProducts: LiveData<List<RecentlyVisitedModel>>
 
+    lateinit var youMayLikeProducts : LiveData<List<YouMayLikeModel>>
+
 
     // TO ADD THE PRODUCT INTO RECENTLY VISITED PRODUCTS ROOM TABLE
 
@@ -151,9 +153,17 @@ class ProductsViewModel @Inject constructor(private val firebaseRepository: Fire
         }
     }
 
+    //TO ADD PRODUCTS YOU MAY LIKE
+    fun insertYouMayLikeProducts(youMayLikeModel: List<YouMayLikeModel>) {
+        viewModelScope.launch(Dispatchers.IO) {
+            productRepository.insertYouMayLikeProducts(youMayLikeModel)
+        }
+    }
+
     init {
         viewModelScope.launch {
             recentlyVisitedProducts =  productRepository.getRecentlyVisitedProducts().asLiveData()
+            youMayLikeProducts = productRepository.getYouMayLikeProducts().asLiveData()
         }
 
     }

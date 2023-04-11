@@ -54,48 +54,46 @@ class WishlistFragment : Fragment() {
             binding.guestUserViewLayout.visibility = View.VISIBLE
             binding.wishlistProducts.visibility = View.GONE
         }
-        else
-        {
+        else {
             binding.guestUserViewLayout.visibility = View.GONE
             binding.wishlistProducts.visibility = View.VISIBLE
             viewModel.getProductsOfWishlist()
-        }
 
-        // SETTING UP SIGN IN BUTTON FUNCTIONALITY
-        binding.signInbutton.setOnClickListener {
-            viewModel.signOut()
-            val intent = Intent(activity, LoginActivity::class.java)
-            startActivity(intent)
-        }
-        val adapter = WishlistAdapter(requireContext())
-        binding.wishlistProducts.adapter = adapter
-        binding.wishlistProducts.layoutManager = GridLayoutManager(requireContext(),2)
-        viewModel.wishlistProducts.observe(viewLifecycleOwner, Observer {
-         productList.clear()
-            if(it.isNotEmpty())
-            {
-                for(data in it)
-                {
-                    val product = ProductModel(
-                        data.productName,
-                        data.productDescription,
-                        data.productCoverImg,
-                        data.productCategory,
-                        data.productSubCategory,
-                        data.productId,
-                        data.productPrice,
-                        data.discountRate,
-                        data.stock,
-                        data.onSale,
-                        data.productSpecialPrice,
-                        data.productScale,
-                        data.productImages
-                    )
-                    productList.add(product)
-                }
+
+            // SETTING UP SIGN IN BUTTON FUNCTIONALITY
+            binding.signInbutton.setOnClickListener {
+                viewModel.signOut()
+                val intent = Intent(activity, LoginActivity::class.java)
+                startActivity(intent)
             }
-            adapter.submitList(productList)
-        })
+            val adapter = WishlistAdapter(requireContext())
+            binding.wishlistProducts.adapter = adapter
+            binding.wishlistProducts.layoutManager = GridLayoutManager(requireContext(), 2)
+            viewModel.wishlistProducts.observe(viewLifecycleOwner, Observer {
+                productList.clear()
+                if (it.isNotEmpty()) {
+                    for (data in it) {
+                        val product = ProductModel(
+                            data.productName,
+                            data.productDescription,
+                            data.productCoverImg,
+                            data.productCategory,
+                            data.productSubCategory,
+                            data.productId,
+                            data.productPrice,
+                            data.discountRate,
+                            data.stock,
+                            data.onSale,
+                            data.productSpecialPrice,
+                            data.productScale,
+                            data.productImages
+                        )
+                        productList.add(product)
+                    }
+                }
+                adapter.submitList(productList)
+            })
+        }
 
         return binding.root
     }

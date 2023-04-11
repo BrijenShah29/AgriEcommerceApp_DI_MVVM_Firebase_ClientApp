@@ -89,10 +89,7 @@ private lateinit var verificationCode : String
 
         mProgressBar = binding.otpProgressBar
         mProgressBar.visibility = View.INVISIBLE
-//         builder = AlertDialog.Builder(requireContext())
-//            .setTitle("Loading")
-//            .setMessage("Please Wait")
-//            .setCancelable(false)
+
 
 
         // HIDING OTP RESENT FUNCTIONALITY FOR 60 SECONDS AT START
@@ -176,7 +173,6 @@ private lateinit var verificationCode : String
         override fun onVerificationFailed(e: FirebaseException) {
             // This callback is invoked in an invalid request for verification is made,
             // for instance if the the phone number format is not valid.
-            //  Log.w(TAG, "onVerificationFailed", e)
 
             if (e is FirebaseAuthInvalidCredentialsException) {
                 // Invalid request
@@ -271,9 +267,6 @@ private lateinit var verificationCode : String
                 },4500)
             })
 
-//        val intent = Intent(activity, MainActivity::class.java)
-//        startActivity(intent)
-//        activity?.finish()
     }
 
 }

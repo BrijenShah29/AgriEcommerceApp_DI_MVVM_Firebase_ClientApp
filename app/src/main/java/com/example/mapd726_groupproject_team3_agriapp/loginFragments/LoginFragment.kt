@@ -98,13 +98,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun verifyUserAuth(fullNumber: String?) {
-//  showing progress bar
-//        builder = AlertDialog.Builder(requireContext())
-//            .setTitle("Loading")
-//            .setMessage("Please Wait")
-//            .setCancelable(false)
-//            builder.show()
-
 
         val options = PhoneAuthOptions.newBuilder(auth)
             .setPhoneNumber("+$fullNumber")

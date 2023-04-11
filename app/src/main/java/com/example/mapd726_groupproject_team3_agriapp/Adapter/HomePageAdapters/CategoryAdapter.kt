@@ -15,13 +15,13 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.mapd726_groupproject_team3_agriapp.DataModels.CategoryModel
 import com.example.mapd726_groupproject_team3_agriapp.R
+import com.example.mapd726_groupproject_team3_agriapp.Utils.UserManager
 import dagger.hilt.android.internal.managers.FragmentComponentManager
 
 
-class CategoryAdapter(var context: Context) :
+class CategoryAdapter(var context: Context, val userManager: UserManager) :
     ListAdapter<CategoryModel, CategoryAdapter.CategoryViewHolder>(diffutil()) {
 
     inner class CategoryViewHolder(view : View) : RecyclerView.ViewHolder(view){
@@ -37,7 +37,7 @@ class CategoryAdapter(var context: Context) :
                 .override(300)
                 .into(img)
 
-
+            userManager.savePreferredCategory(item.Category)
 
 
         }

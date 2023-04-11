@@ -41,6 +41,8 @@ class ProductRepository @Inject constructor( val db : FirebaseFirestore, val agr
     // INSERTING RECENTLY VISITED PRODUCTS INTO ROOM
     suspend fun insertRecentlyVisitedProducts(recentlyVisitedModel: RecentlyVisitedModel) = agroDao.insertRecentlyVisitedProducts(recentlyVisitedModel)
 
+    // INSERTING YOU MAY LIKE PRODUCTS
+    suspend fun insertYouMayLikeProducts(youMayLikeModel: List<YouMayLikeModel>) = agroDao.insertYouMayLikeProducts(youMayLikeModel)
 
     // GETTING CART PRODUCTS FROM ROOM
     fun getCartProducts()  = agroDao.getCartProducts()
@@ -72,5 +74,8 @@ class ProductRepository @Inject constructor( val db : FirebaseFirestore, val agr
 
     // DELETE ALL CART ITEMS AFTER SUCCESSFUL PAYMENT FROM CUSTOMER
     suspend fun emptyTheCart() = agroDao.deleteProductsFromCart()
+    fun getYouMayLikeProducts() = agroDao.getYouMayLikeProducts()
+
+    suspend fun removeYouMayLikeProducts() = agroDao.removeYouMayLikeProducts()
 
 }

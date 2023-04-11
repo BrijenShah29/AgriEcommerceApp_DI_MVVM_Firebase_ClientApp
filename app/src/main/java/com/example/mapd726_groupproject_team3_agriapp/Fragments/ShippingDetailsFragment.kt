@@ -46,7 +46,7 @@ class ShippingDetailsFragment : Fragment() {
     var userPreferredProvince : String? = null
     var userPreferredCity : String? = null
     var isDataFoundInServer : Boolean? = null
-    var userId : String? = null
+    var userId : String? = ""
     private lateinit var dialog: Dialog
     private var status : Boolean ? = null
 
@@ -140,14 +140,11 @@ class ShippingDetailsFragment : Fragment() {
                 }
                 },2000)
             })
+        }
 
-            binding.ctnShippingButton.setOnClickListener {
+        binding.ctnShippingButton.setOnClickListener {
 
-                    validateUserInput()
-
-            }
-
-
+            validateUserInput()
 
         }
 
@@ -230,35 +227,38 @@ class ShippingDetailsFragment : Fragment() {
                 val alert = AlertDialog.Builder(requireContext()).setMessage("Thank you for your First Order ! Would you like to store these details to your Profile ?")
                     .setCancelable(false)
                     .setPositiveButton("Yes") { dialogInterface, id ->
-                        dialog.show()
+                        viewModel.saveUserDataToFirebase("Users", userData)
 
-                        CoroutineScope(Dispatchers.IO).launch {
-                            status = viewModel.saveUserDataToFirebase("Users",
-                                userData)
-
+                        CoroutineScope(Dispatchers.Main).launch {
                             delay(2500)
-                            if (status == true) {
-                                viewModel.insertUserDataIntoRoom(userData)
-                                dialog.dismiss()
-                                Snackbar.make(requireView(),
-                                    "Profile Has been Updated successfully",
-                                    Snackbar.LENGTH_SHORT).show()
-                                    redirectUserToCheckoutPage()
-                                    dialog.show()
-                            } else {
-                                Toast.makeText(requireContext(),
-                                    "Something went wrong while updating your Profile..",
-                                    Toast.LENGTH_SHORT).show()
-                            }
+                            viewModel.status.observe(viewLifecycleOwner, Observer { status ->
+                                    if (status == true) {
+                                        viewModel.insertUserDataIntoRoom(userData)
+                                        dialog.dismiss()
+                                        Snackbar.make(
+                                            requireView(),
+                                            "Profile Has been Updated successfully",
+                                            Snackbar.LENGTH_SHORT
+                                        ).show()
+                                        redirectUserToCheckoutPage()
+                                        dialog.show()
+                                    } else {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Something went wrong while updating your Profile..",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
 
-                        }
+                                })
+                            }
                     }
                     .setNegativeButton("No") { dialog, id ->
                         // Dismiss the dialog
                         dialog.dismiss()
                         redirectUserToCheckoutPage()
                     }
-                alert.create().show()
+                alert.create()
                 }
             }
             else
@@ -279,36 +279,41 @@ class ShippingDetailsFragment : Fragment() {
                             // Dismiss the dialog
                             dialog.show()
 
-                            CoroutineScope(Dispatchers.IO).launch {
-                                status = viewModel.saveUserDataToFirebase("Users",
-                                    userData)
+                              viewModel.saveUserDataToFirebase("Users",userData)
 
-                                delay(2000)
-                                if (status == true) {
-                                    viewModel.insertUserDataIntoRoom(userData)
-                                    dialog.dismiss()
-                                    Snackbar.make(requireView(),
-                                        "Profile Has been Updated successfully",
-                                        Snackbar.LENGTH_SHORT).show()
-                                    redirectUserToCheckoutPage()
-                                    dialog.show()
-                                } else {
-                                    Toast.makeText(requireContext(),
-                                        "Something went wrong while updating your Profile..",
-                                        Toast.LENGTH_SHORT).show()
-                                }
+                                viewModel.status.observe(viewLifecycleOwner, Observer { status ->
+                                    CoroutineScope(Dispatchers.Main).launch {
+                                        delay(2000)
+                                        if (status == true) {
+                                            viewModel.insertUserDataIntoRoom(userData)
+                                            dialog.dismiss()
+                                            Snackbar.make(
+                                                requireView(),
+                                                "Profile Has been Updated successfully",
+                                                Snackbar.LENGTH_SHORT
+                                            ).show()
+                                            redirectUserToCheckoutPage()
+                                            dialog.show()
+                                        } else {
+                                            Toast.makeText(
+                                                requireContext(),
+                                                "Something went wrong while updating your Profile..",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                        }
+                                    }
 
-                            }
+                                    })
                             dialog.dismiss()
 
                         }
-                    alert.create().show()
+                    alert.create()
                 }
             }
             dialog.show()
             Handler(Looper.myLooper()!!).postDelayed(Runnable {
                 redirectUserToCheckoutPage()
-            },2500)
+            },4500)
 
         }
 
@@ -338,7 +343,6 @@ class ShippingDetailsFragment : Fragment() {
 
 
         val sender = (FragmentComponentManager.findActivity(requireContext()) as Activity as FragmentActivity).supportFragmentManager
-        //val sender = (requireContext() as FragmentActivity).supportFragmentManager
         sender.setFragmentResult("cartData",bundle)
 
         dialog.dismiss()
