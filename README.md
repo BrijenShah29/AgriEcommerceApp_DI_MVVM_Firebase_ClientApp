@@ -1,6 +1,6 @@
 # Agricultural Products E-Commerce Android Application
 
-This E-Commerce Android Application consists of Firebase Firestore Database, Firebase Authentication, Firebase Storage, Dagger Hilt Dependency Injection, Flow, Live Data, Room Database for Local caching, MVVM Architecture, ListRecyclerView, Navigations, Coroutines, Fragments , Stripe Payment API Integration, Network Handling and Glide dependacy.
+This E-Commerce Android Application consists of Firebase Firestore Database, Firebase Authentication, Firebase Storage, Dagger Hilt Dependency Injection, Flows, Live Data, Room Database for Local caching, MVVM Architecture, ListRecyclerViews, Navigations, Coroutines, Fragments , Stripe Payment API Integration, Network Handling and Glide dependacy.
 
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/43b5ccc8-7b9c-4736-b5b0-cace14f9df34">
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/0cb66803-becb-41cc-9c6f-c6689559fbda">
@@ -10,8 +10,8 @@ This E-Commerce Android Application consists of Firebase Firestore Database, Fir
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/8847e73f-10c8-4e9a-b716-bdacb991e678">
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/2dedaad5-c8b1-425c-8b41-e2a817b61118">
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/4aac2743-3419-4a1f-9198-21221a1d8bf6">
-<img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/41b5dd22-9766-42e3-a727-4a7b2982f97d">
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/592ecccb-2d5a-433c-8ff8-8a4af9c1db22">
+<img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/41b5dd22-9766-42e3-a727-4a7b2982f97d">
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/e5ec6dca-afe8-4191-bdc2-70e6d3cf5d7a">
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/4c656e5a-1d08-437a-a507-a4983d445de8">
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/1e3108b8-f782-4178-80b2-403147c3190c">
