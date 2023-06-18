@@ -1,4 +1,4 @@
-# AgriEcommerceApp With DI_MVVM & Firebase as Client Side App
+# AgriEcommerceApp With DI_MVVM & Firebase as Client-Side App
 
 This application consists of Firebase Firestore Database, Firebase Authentication, Firebase Storage, Dagger Hilt Dependency Injection, Flow, Live Data, Room Database, MVVM Architecture, ListRecyclerView, Navigation, Coroutines and Glide. 
 
@@ -7,3 +7,5 @@ This application consists of Firebase Firestore Database, Firebase Authenticatio
 <img width="250" alt="image" src="https://user-images.githubusercontent.com/114451935/233237174-ec81e0cd-d1b5-4210-8254-e639d876abcc.png"> <img width="250" alt="image" src="https://user-images.githubusercontent.com/114451935/233237408-6b2d3eab-64f8-4b7d-9162-269cb874276e.png"> 
 <img width="250" alt="image" src="https://user-images.githubusercontent.com/114451935/233237207-017dcd37-9e29-42ef-81aa-c7f2b86215f0.png"> <img width="250" alt="image" src="https://user-images.githubusercontent.com/114451935/233237229-587663c4-e879-46db-a7b3-9a048d947212.png"> 
 <img width="250" alt="image" src="https://user-images.githubusercontent.com/114451935/233237313-7beb5d8f-842d-4e46-be4c-54dda9e274ae.png"> <img width="250" alt="image" src="https://user-images.githubusercontent.com/114451935/233237378-64b73966-d44e-4797-8c49-13469337ada2.png">
+
+[![Watch the video](https://img.youtube.com/vi/sV1wKZQzRwg/hqdefault.jpg)](https://youtu.be/sV1wKZQzRwg)
