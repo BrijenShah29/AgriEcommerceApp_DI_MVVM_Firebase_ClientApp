@@ -1,6 +1,6 @@
 # Agricultural Products E-Commerce Android Application
 
-This E-Commerce Android Application consists of Firebase Firestore Database, Firebase Authentication, Firebase Storage, Dagger Hilt Dependency Injection, Flows, Live Data, Room Database for Local caching, MVVM Architecture, ListRecyclerViews, Navigations, Coroutines, Fragments , Stripe Payment API Integration, Network Handling and Glide dependacy.
+This E-Commerce Android Application consists of Firebase Firestore Database, Firebase Authentication, Firebase Storage, Dagger Hilt Dependency Injection, Flows, Live Data, Room Database for Local caching, MVVM Architecture, ListRecyclerViews, Navigations, Coroutines, Fragments, Stripe Payment API Integration, Network Handling, and Glide dependency.
 
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/43b5ccc8-7b9c-4736-b5b0-cace14f9df34">
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/0cb66803-becb-41cc-9c6f-c6689559fbda">
@@ -24,3 +24,7 @@ This E-Commerce Android Application consists of Firebase Firestore Database, Fir
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/231f84b1-3fbe-4124-bdf9-7ab684a289bf">
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/8e7a0f8a-ffa9-4262-84e4-cbd5da8e0a70">
 <img width="250" alt="image" src="https://github.com/BrijenShah29/AgriEcommerceApp_DI_MVVM_Firebase_ClientApp/assets/114451935/42ddd7fa-96db-4b2b-b3a2-39ee98c55472">
+
+Video Presentation Link : 
+
+[![Watch the video](https://static.vecteezy.com/system/resources/thumbnails/018/930/572/small/youtube-logo-youtube-icon-transparent-free-png.png)](https://youtu.be/sV1wKZQzRwg)
